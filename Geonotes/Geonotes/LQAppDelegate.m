@@ -54,6 +54,7 @@
     UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] init];
     UINavigationController *geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
     geonotesNavController.navigationBar.tintColor = [UIColor blackColor];
+    geonotesViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
     
     UIViewController *layersViewController = [[LQLayersViewController alloc] init];
     UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
