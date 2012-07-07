@@ -35,7 +35,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUILabel" id="1041680294">
+					<object class="IBUILabel" id="852387299">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{54, 83}, {212, 43}}</string>
@@ -44,7 +44,7 @@
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="942366676">
+							<object class="NSColorSpace" key="NSCustomColorSpace" id="636137245">
 								<int key="NSID">2</int>
 							</object>
 						</object>
@@ -80,7 +80,7 @@
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="942366676"/>
+					<reference key="NSCustomColorSpace" ref="636137245"/>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -109,7 +109,7 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1041680294"/>
+							<reference ref="852387299"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -126,7 +126,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
-						<reference key="object" ref="1041680294"/>
+						<reference key="object" ref="852387299"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>

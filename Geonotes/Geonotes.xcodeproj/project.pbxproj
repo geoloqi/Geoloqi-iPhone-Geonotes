@@ -54,6 +54,8 @@
 		0FDE2A7A15A8C49B00FB78A7 /* LQSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQSettingsViewController.h; sourceTree = "<group>"; };
 		0FDE2A7B15A8C49B00FB78A7 /* LQSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQSettingsViewController.m; sourceTree = "<group>"; };
 		0FDE2A7C15A8C49B00FB78A7 /* LQSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQSettingsViewController.xib; sourceTree = "<group>"; };
+		0FDE2A8015A8C58500FB78A7 /* STableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STableViewController.h; sourceTree = "<group>"; };
+		0FDE2A8115A8C58500FB78A7 /* STableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				0FDE2A5715A8C27000FB78A7 /* LQAppDelegate.h */,
 				0FDE2A5815A8C27000FB78A7 /* LQAppDelegate.m */,
 				0FDE2A7915A8C45600FB78A7 /* Tabs */,
+				0FDE2A7F15A8C56800FB78A7 /* Classes */,
 				0FDE2A7315A8C34400FB78A7 /* Graphics */,
 				0FDE2A4F15A8C27000FB78A7 /* Supporting Files */,
 			);
@@ -134,20 +137,61 @@
 		0FDE2A7915A8C45600FB78A7 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				0FDE2A8215A8C59000FB78A7 /* Activity */,
+				0FDE2A8315A8C59400FB78A7 /* Geonotes */,
+				0FDE2A8415A8C59B00FB78A7 /* Layers */,
+				0FDE2A8515A8C5A100FB78A7 /* Settings */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		0FDE2A7F15A8C56800FB78A7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE2A8015A8C58500FB78A7 /* STableViewController.h */,
+				0FDE2A8115A8C58500FB78A7 /* STableViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		0FDE2A8215A8C59000FB78A7 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
 				0FDE2A6815A8C27000FB78A7 /* LQActivityViewController.xib */,
 				0FDE2A5A15A8C27000FB78A7 /* LQActivityViewController.h */,
 				0FDE2A5B15A8C27000FB78A7 /* LQActivityViewController.m */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
+		0FDE2A8315A8C59400FB78A7 /* Geonotes */ = {
+			isa = PBXGroup;
+			children = (
 				0FDE2A6B15A8C27000FB78A7 /* LQGeonotesViewController.xib */,
 				0FDE2A6115A8C27000FB78A7 /* LQGeonotesViewController.h */,
 				0FDE2A6215A8C27000FB78A7 /* LQGeonotesViewController.m */,
+			);
+			name = Geonotes;
+			sourceTree = "<group>";
+		};
+		0FDE2A8415A8C59B00FB78A7 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
 				0FDE2A7615A8C45000FB78A7 /* LQLayersViewController.xib */,
 				0FDE2A7415A8C45000FB78A7 /* LQLayersViewController.h */,
 				0FDE2A7515A8C45000FB78A7 /* LQLayersViewController.m */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
+		0FDE2A8515A8C5A100FB78A7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
 				0FDE2A7C15A8C49B00FB78A7 /* LQSettingsViewController.xib */,
 				0FDE2A7A15A8C49B00FB78A7 /* LQSettingsViewController.h */,
 				0FDE2A7B15A8C49B00FB78A7 /* LQSettingsViewController.m */,
 			);
-			name = Tabs;
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
