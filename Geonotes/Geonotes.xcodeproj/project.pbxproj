@@ -14,11 +14,7 @@
 		0FDE2A5515A8C27000FB78A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A5415A8C27000FB78A7 /* main.m */; };
 		0FDE2A5915A8C27000FB78A7 /* LQAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A5815A8C27000FB78A7 /* LQAppDelegate.m */; };
 		0FDE2A5C15A8C27000FB78A7 /* LQActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A5B15A8C27000FB78A7 /* LQActivityViewController.m */; };
-		0FDE2A5E15A8C27000FB78A7 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A5D15A8C27000FB78A7 /* first.png */; };
-		0FDE2A6015A8C27000FB78A7 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A5F15A8C27000FB78A7 /* first@2x.png */; };
 		0FDE2A6315A8C27000FB78A7 /* LQGeonotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A6215A8C27000FB78A7 /* LQGeonotesViewController.m */; };
-		0FDE2A6515A8C27000FB78A7 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A6415A8C27000FB78A7 /* second.png */; };
-		0FDE2A6715A8C27000FB78A7 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A6615A8C27000FB78A7 /* second@2x.png */; };
 		0FDE2A6A15A8C27000FB78A7 /* LQActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A6815A8C27000FB78A7 /* LQActivityViewController.xib */; };
 		0FDE2A6D15A8C27000FB78A7 /* LQGeonotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A6B15A8C27000FB78A7 /* LQGeonotesViewController.xib */; };
 		0FDE2A7715A8C45000FB78A7 /* LQLayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A7515A8C45000FB78A7 /* LQLayersViewController.m */; };
@@ -33,6 +29,12 @@
 		0FDE2A9915A8CB7F00FB78A7 /* LQTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9715A8CAE200FB78A7 /* LQTableHeaderView.m */; };
 		0FDE2A9A15A8CB8400FB78A7 /* LQTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9415A8CAE200FB78A7 /* LQTableFooterView.m */; };
 		0FDE2A9B15A8CB8900FB78A7 /* STableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A8115A8C58500FB78A7 /* STableViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0FDE2ACA15A8DB3900FB78A7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AC815A8DB3900FB78A7 /* Default.png */; };
+		0FDE2ACB15A8DB3900FB78A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */; };
+		0FDE2AD815A8DEE300FB78A7 /* activity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */; };
+		0FDE2AD915A8DEE300FB78A7 /* geonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */; };
+		0FDE2ADA15A8DEE300FB78A7 /* layers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */; };
+		0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,12 +50,8 @@
 		0FDE2A5815A8C27000FB78A7 /* LQAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQAppDelegate.m; sourceTree = "<group>"; };
 		0FDE2A5A15A8C27000FB78A7 /* LQActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQActivityViewController.h; sourceTree = "<group>"; };
 		0FDE2A5B15A8C27000FB78A7 /* LQActivityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQActivityViewController.m; sourceTree = "<group>"; };
-		0FDE2A5D15A8C27000FB78A7 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		0FDE2A5F15A8C27000FB78A7 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		0FDE2A6115A8C27000FB78A7 /* LQGeonotesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQGeonotesViewController.h; sourceTree = "<group>"; };
 		0FDE2A6215A8C27000FB78A7 /* LQGeonotesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQGeonotesViewController.m; sourceTree = "<group>"; };
-		0FDE2A6415A8C27000FB78A7 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		0FDE2A6615A8C27000FB78A7 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		0FDE2A6915A8C27000FB78A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LQActivityViewController.xib; sourceTree = "<group>"; };
 		0FDE2A6C15A8C27000FB78A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LQGeonotesViewController.xib; sourceTree = "<group>"; };
 		0FDE2A7415A8C45000FB78A7 /* LQLayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQLayersViewController.h; sourceTree = "<group>"; };
@@ -78,6 +76,12 @@
 		0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LQTableHeaderView.xib; sourceTree = "<group>"; };
 		0FDE2AA315A8CC5900FB78A7 /* LOLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLDatabase.h; sourceTree = "<group>"; };
 		0FDE2AA415A8CCF200FB78A7 /* LQConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQConfig.h; sourceTree = "<group>"; };
+		0FDE2AC815A8DB3900FB78A7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Graphics/Default.png; sourceTree = "<group>"; };
+		0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Graphics/Default@2x.png"; sourceTree = "<group>"; };
+		0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "activity@2x.png"; path = "Graphics/activity@2x.png"; sourceTree = "<group>"; };
+		0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "geonote@2x.png"; path = "Graphics/geonote@2x.png"; sourceTree = "<group>"; };
+		0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "layers@2x.png"; path = "Graphics/layers@2x.png"; sourceTree = "<group>"; };
+		0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Graphics/settings@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,10 +157,12 @@
 		0FDE2A7315A8C34400FB78A7 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				0FDE2A5D15A8C27000FB78A7 /* first.png */,
-				0FDE2A5F15A8C27000FB78A7 /* first@2x.png */,
-				0FDE2A6415A8C27000FB78A7 /* second.png */,
-				0FDE2A6615A8C27000FB78A7 /* second@2x.png */,
+				0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */,
+				0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */,
+				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
+				0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */,
+				0FDE2AC815A8DB3900FB78A7 /* Default.png */,
+				0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -301,16 +307,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FDE2A5315A8C27000FB78A7 /* InfoPlist.strings in Resources */,
-				0FDE2A5E15A8C27000FB78A7 /* first.png in Resources */,
-				0FDE2A6015A8C27000FB78A7 /* first@2x.png in Resources */,
-				0FDE2A6515A8C27000FB78A7 /* second.png in Resources */,
-				0FDE2A6715A8C27000FB78A7 /* second@2x.png in Resources */,
 				0FDE2A6A15A8C27000FB78A7 /* LQActivityViewController.xib in Resources */,
 				0FDE2A6D15A8C27000FB78A7 /* LQGeonotesViewController.xib in Resources */,
 				0FDE2A7815A8C45000FB78A7 /* LQLayersViewController.xib in Resources */,
 				0FDE2A7E15A8C49B00FB78A7 /* LQSettingsViewController.xib in Resources */,
 				0FDE2A8F15A8C92600FB78A7 /* CHANGELOG.md in Resources */,
 				0FDE2A9115A8C92600FB78A7 /* README.md in Resources */,
+				0FDE2ACA15A8DB3900FB78A7 /* Default.png in Resources */,
+				0FDE2ACB15A8DB3900FB78A7 /* Default@2x.png in Resources */,
+				0FDE2AD815A8DEE300FB78A7 /* activity@2x.png in Resources */,
+				0FDE2AD915A8DEE300FB78A7 /* geonote@2x.png in Resources */,
+				0FDE2ADA15A8DEE300FB78A7 /* layers@2x.png in Resources */,
+				0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
