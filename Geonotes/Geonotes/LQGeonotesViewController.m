@@ -6,19 +6,19 @@
 //  Copyright (c) 2012 Geoloqi, Inc. All rights reserved.
 //
 
-#import "LQSecondViewController.h"
+#import "LQGeonotesViewController.h"
 
-@interface LQSecondViewController ()
+@interface LQGeonotesViewController ()
 
 @end
 
-@implementation LQSecondViewController
+@implementation LQGeonotesViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Second", @"Second");
+        self.title = NSLocalizedString(@"Geonotes", @"Geonotes");
         self.tabBarItem.image = [UIImage imageNamed:@"second"];
     }
     return self;

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LQFirstViewController : UIViewController
+@interface LQActivityViewController : UIViewController
 
 @end

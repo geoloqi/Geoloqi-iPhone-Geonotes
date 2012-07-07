@@ -1,5 +1,5 @@
 //
-//  LQSecondViewController.h
+//  LQSettingsViewController.h
 //  Geonotes
 //
 //  Created by Aaron Parecki on 7/7/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LQSecondViewController : UIViewController
+@interface LQSettingsViewController : UIViewController
 
 @end

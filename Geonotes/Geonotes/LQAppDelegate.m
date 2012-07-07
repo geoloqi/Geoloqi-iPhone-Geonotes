@@ -8,9 +8,10 @@
 
 #import "LQAppDelegate.h"
 
-#import "LQFirstViewController.h"
-
-#import "LQSecondViewController.h"
+#import "LQActivityViewController.h"
+#import "LQGeonotesViewController.h"
+#import "LQLayersViewController.h"
+#import "LQSettingsViewController.h"
 
 @implementation LQAppDelegate
 
@@ -21,10 +22,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    UIViewController *viewController1 = [[LQFirstViewController alloc] initWithNibName:@"LQFirstViewController" bundle:nil];
-    UIViewController *viewController2 = [[LQSecondViewController alloc] initWithNibName:@"LQSecondViewController" bundle:nil];
+    UIViewController *activityViewController = [[LQActivityViewController alloc] initWithNibName:@"LQActivityViewController" bundle:nil];
+    UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] initWithNibName:@"LQGeonotesViewController" bundle:nil];
+    UIViewController *layersViewController = [[LQLayersViewController alloc] initWithNibName:@"LQLayersViewController" bundle:nil];
+    UIViewController *settingsViewController = [[LQSettingsViewController alloc] initWithNibName:@"LQSettingsViewController" bundle:nil];
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:activityViewController, geonotesViewController, layersViewController, settingsViewController, nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
