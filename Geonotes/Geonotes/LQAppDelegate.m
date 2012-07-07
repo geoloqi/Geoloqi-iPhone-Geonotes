@@ -18,9 +18,33 @@
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 
+- (void)registerForPushNotifications {
+    [LQSession registerForPushNotificationsWithCallback:^(NSData *deviceToken, NSError *error) {
+        if(error){
+            NSLog(@"Failed to register for push tokens: %@", error);
+        } else {
+            NSLog(@"Got a push token! %@", deviceToken);
+        }
+    }];
+}
+
+// This method is called by the Geonotes and Layers tabs when a new geonote is created or when a layer is subscribed to.
+// The goal is to not prompt the user for push notifications until absolutely needed to avoid the double-popup problem on first launch.
+// If the app has never launched before, then show the prompt.
+- (void)registerForPushNotificationsIfNotYetRegistered {
+	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasRegisteredForPushNotifications"]){
+        [self registerForPushNotifications];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasRegisteredForPushNotifications"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
+
     // Override point for customization after application launch.
     UIViewController *activityViewController = [[LQActivityViewController alloc] initWithNibName:@"LQActivityViewController" bundle:nil];
     UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] initWithNibName:@"LQGeonotesViewController" bundle:nil];
@@ -30,6 +54,24 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:activityViewController, geonotesViewController, layersViewController, settingsViewController, nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+
+    if(![LQSession savedSession]) {
+		[LQSession createAnonymousUserAccountWithUserInfo:nil completion:^(LQSession *session, NSError *error) {
+			//If we successfully created an anonymous session, tell the tracker to use it
+			if (session) {
+				NSLog(@"Created an anonymous user with access token: %@", session.accessToken);
+				
+				[[LQTracker sharedTracker] setSession:session]; // This saves the session so it will be restored on next app launch
+				[[LQTracker sharedTracker] setProfile:LQTrackerProfileAdaptive]; // This will cause the location prompt to appear the first time
+			} else {
+				NSLog(@"Error creating an anonymous user: %@", error);
+			}
+		}];
+    }
+
+    // Tell the SDK the app finished launching so it can properly handle push notifications, etc
+    [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
+
     return YES;
 }
 
@@ -60,18 +102,26 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 {
+	//For push notification support, we need to get the push token from UIApplication via this method.
+	//If you like, you can be notified when the relevant web service call to the Geoloqi API succeeds.
+    [LQSession registerDeviceToken:deviceToken withMode:LQPushNotificationModeLive];
 }
-*/
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
 {
+    [LQSession handleDidFailToRegisterForRemoteNotifications:error];
 }
-*/
+
+/**
+ * This is called when a push notification is received if the app is running in the foreground. If the app was in the
+ * background when the push was received, this will be run as soon as the app is brought to the foreground by tapping the notification.
+ * The SDK will also call this method in application:didFinishLaunchingWithOptions: if the app was launched because of a push notification.
+ */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [LQSession handlePush:userInfo];
+}
+
 
 @end
