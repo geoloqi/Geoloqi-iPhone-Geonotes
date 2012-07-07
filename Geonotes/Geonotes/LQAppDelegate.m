@@ -13,6 +13,8 @@
 #import "LQLayersViewController.h"
 #import "LQSettingsViewController.h"
 
+#import "Geoloqi.h"
+
 @implementation LQAppDelegate
 
 @synthesize window = _window;
@@ -72,6 +74,7 @@
     // Tell the SDK the app finished launching so it can properly handle push notifications, etc
     [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
 
+    [self initUserDefaults];
     return YES;
 }
 
@@ -123,5 +126,20 @@
     [LQSession handlePush:userInfo];
 }
 
+
+- (void)initUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:LQAllowPublicGeonotesUserDefaultsKey]) {
+        LQSession *session = [LQSession savedSession];
+        NSLog(@"calling 'account/privacy'...");
+        [session runAPIRequest:[session requestWithMethod:@"GET" path:@"account/privacy" payload:nil]
+                    completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+                        NSLog(@"public_geonotes response: %@", [responseDictionary objectForKey:@"public_geonotes"]);
+                        [defaults setObject:[responseDictionary objectForKey:@"public_geonotes"] forKey:LQAllowPublicGeonotesUserDefaultsKey];
+                    }
+         ];
+    }
+    [defaults synchronize];
+}
 
 @end
