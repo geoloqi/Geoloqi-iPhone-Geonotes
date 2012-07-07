@@ -45,13 +45,24 @@
     
 	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
 
-    // Override point for customization after application launch.
-    UIViewController *activityViewController = [[LQActivityViewController alloc] initWithNibName:@"LQActivityViewController" bundle:nil];
-    UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] initWithNibName:@"LQGeonotesViewController" bundle:nil];
-    UIViewController *layersViewController = [[LQLayersViewController alloc] initWithNibName:@"LQLayersViewController" bundle:nil];
+    UIViewController *activityViewController = [[LQActivityViewController alloc] init];
+    UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
+    activityNavController.navigationBar.tintColor = [UIColor blackColor];
+    activityViewController.navigationItem.title = @"Geonotes";
+    activityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
+
+    UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] init];
+    UINavigationController *geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
+    geonotesNavController.navigationBar.tintColor = [UIColor blackColor];
+    
+    UIViewController *layersViewController = [[LQLayersViewController alloc] init];
+    UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
+    layersNavController.navigationBar.tintColor = [UIColor blackColor];
+
     UIViewController *settingsViewController = [[LQSettingsViewController alloc] initWithNibName:@"LQSettingsViewController" bundle:nil];
+    
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:activityViewController, geonotesViewController, layersViewController, settingsViewController, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:activityNavController, geonotesNavController, layersNavController, settingsViewController, nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
 
@@ -73,6 +84,11 @@
     [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
 
     return YES;
+}
+
+- (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender
+{
+    NSLog(@"New geonote");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

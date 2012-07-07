@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STableViewController.h"
 
-@interface LQLayersViewController : UIViewController
+@interface LQLayersViewController : STableViewController
 
 @end

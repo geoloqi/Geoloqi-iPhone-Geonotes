@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
+- (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender;
+
 @end

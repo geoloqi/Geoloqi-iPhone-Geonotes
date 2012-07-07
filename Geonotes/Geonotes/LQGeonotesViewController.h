@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STableViewController.h"
 
-@interface LQGeonotesViewController : UIViewController
+@interface LQGeonotesViewController : STableViewController
 
 @end
