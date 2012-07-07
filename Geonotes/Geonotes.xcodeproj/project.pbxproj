@@ -25,6 +25,11 @@
 		0FDE2A7815A8C45000FB78A7 /* LQLayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A7615A8C45000FB78A7 /* LQLayersViewController.xib */; };
 		0FDE2A7D15A8C49B00FB78A7 /* LQSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A7B15A8C49B00FB78A7 /* LQSettingsViewController.m */; };
 		0FDE2A7E15A8C49B00FB78A7 /* LQSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A7C15A8C49B00FB78A7 /* LQSettingsViewController.xib */; };
+		0FDE2A8715A8C8EA00FB78A7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A8615A8C8EA00FB78A7 /* CoreLocation.framework */; };
+		0FDE2A8915A8C8FC00FB78A7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A8815A8C8FC00FB78A7 /* libsqlite3.dylib */; };
+		0FDE2A8F15A8C92600FB78A7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A8B15A8C92600FB78A7 /* CHANGELOG.md */; };
+		0FDE2A9015A8C92600FB78A7 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE2A8D15A8C92600FB78A7 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0FDE2A9115A8C92600FB78A7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A8E15A8C92600FB78A7 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +61,12 @@
 		0FDE2A7C15A8C49B00FB78A7 /* LQSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQSettingsViewController.xib; sourceTree = "<group>"; };
 		0FDE2A8015A8C58500FB78A7 /* STableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STableViewController.h; sourceTree = "<group>"; };
 		0FDE2A8115A8C58500FB78A7 /* STableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STableViewController.m; sourceTree = "<group>"; };
+		0FDE2A8615A8C8EA00FB78A7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0FDE2A8815A8C8FC00FB78A7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		0FDE2A8B15A8C92600FB78A7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0FDE2A8C15A8C92600FB78A7 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		0FDE2A8D15A8C92600FB78A7 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		0FDE2A8E15A8C92600FB78A7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FDE2A8915A8C8FC00FB78A7 /* libsqlite3.dylib in Frameworks */,
+				0FDE2A8715A8C8EA00FB78A7 /* CoreLocation.framework in Frameworks */,
 				0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */,
 				0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */,
 				0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */,
@@ -95,6 +108,8 @@
 				0FDE2A4815A8C27000FB78A7 /* UIKit.framework */,
 				0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */,
 				0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */,
+				0FDE2A8615A8C8EA00FB78A7 /* CoreLocation.framework */,
+				0FDE2A8815A8C8FC00FB78A7 /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,6 +163,7 @@
 		0FDE2A7F15A8C56800FB78A7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0FDE2A8A15A8C92600FB78A7 /* JSONKit */,
 				0FDE2A8015A8C58500FB78A7 /* STableViewController.h */,
 				0FDE2A8115A8C58500FB78A7 /* STableViewController.m */,
 			);
@@ -192,6 +208,17 @@
 				0FDE2A7B15A8C49B00FB78A7 /* LQSettingsViewController.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		0FDE2A8A15A8C92600FB78A7 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE2A8B15A8C92600FB78A7 /* CHANGELOG.md */,
+				0FDE2A8C15A8C92600FB78A7 /* JSONKit.h */,
+				0FDE2A8D15A8C92600FB78A7 /* JSONKit.m */,
+				0FDE2A8E15A8C92600FB78A7 /* README.md */,
+			);
+			path = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +282,8 @@
 				0FDE2A6D15A8C27000FB78A7 /* LQGeonotesViewController.xib in Resources */,
 				0FDE2A7815A8C45000FB78A7 /* LQLayersViewController.xib in Resources */,
 				0FDE2A7E15A8C49B00FB78A7 /* LQSettingsViewController.xib in Resources */,
+				0FDE2A8F15A8C92600FB78A7 /* CHANGELOG.md in Resources */,
+				0FDE2A9115A8C92600FB78A7 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +300,7 @@
 				0FDE2A6315A8C27000FB78A7 /* LQGeonotesViewController.m in Sources */,
 				0FDE2A7715A8C45000FB78A7 /* LQLayersViewController.m in Sources */,
 				0FDE2A7D15A8C49B00FB78A7 /* LQSettingsViewController.m in Sources */,
+				0FDE2A9015A8C92600FB78A7 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +354,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/GeoloqiSDK\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/GeoloqiSDK\"";
+				OTHER_LDFLAGS = "-lGeoloqi-Debug";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -342,8 +375,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/GeoloqiSDK\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/GeoloqiSDK\"";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lGeoloqi-Release";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
