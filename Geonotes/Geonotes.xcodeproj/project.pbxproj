@@ -70,12 +70,14 @@
 		0FDE2A8C15A8C92600FB78A7 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		0FDE2A8D15A8C92600FB78A7 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		0FDE2A8E15A8C92600FB78A7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		0FDE2A9315A8CAE200FB78A7 /* LQTableFooterView.h */ = {isa = PBXFileReference; path = LQTableFooterView.h; sourceTree = "<group>"; };
+		0FDE2A9315A8CAE200FB78A7 /* LQTableFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQTableFooterView.h; sourceTree = "<group>"; };
 		0FDE2A9415A8CAE200FB78A7 /* LQTableFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQTableFooterView.m; sourceTree = "<group>"; };
-		0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */ = {isa = PBXFileReference; path = LQTableFooterView.xib; sourceTree = "<group>"; };
-		0FDE2A9615A8CAE200FB78A7 /* LQTableHeaderView.h */ = {isa = PBXFileReference; path = LQTableHeaderView.h; sourceTree = "<group>"; };
+		0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LQTableFooterView.xib; sourceTree = "<group>"; };
+		0FDE2A9615A8CAE200FB78A7 /* LQTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQTableHeaderView.h; sourceTree = "<group>"; };
 		0FDE2A9715A8CAE200FB78A7 /* LQTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQTableHeaderView.m; sourceTree = "<group>"; };
-		0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */ = {isa = PBXFileReference; path = LQTableHeaderView.xib; sourceTree = "<group>"; };
+		0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LQTableHeaderView.xib; sourceTree = "<group>"; };
+		0FDE2AA315A8CC5900FB78A7 /* LOLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOLDatabase.h; sourceTree = "<group>"; };
+		0FDE2AA415A8CCF200FB78A7 /* LQConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LQConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		0FDE2A4E15A8C27000FB78A7 /* Geonotes */ = {
 			isa = PBXGroup;
 			children = (
+				0FDE2AA415A8CCF200FB78A7 /* LQConfig.h */,
 				0FDE2A5715A8C27000FB78A7 /* LQAppDelegate.h */,
 				0FDE2A5815A8C27000FB78A7 /* LQAppDelegate.m */,
 				0FDE2A7915A8C45600FB78A7 /* Tabs */,
@@ -174,6 +177,7 @@
 			children = (
 				0FDE2A9215A8CAD600FB78A7 /* TableViewResources */,
 				0FDE2A8A15A8C92600FB78A7 /* JSONKit */,
+				0FDE2AA315A8CC5900FB78A7 /* LOLDatabase.h */,
 				0FDE2A8015A8C58500FB78A7 /* STableViewController.h */,
 				0FDE2A8115A8C58500FB78A7 /* STableViewController.m */,
 			);
