@@ -13,6 +13,8 @@
 #import "LQLayersViewController.h"
 #import "LQSettingsViewController.h"
 
+#import "Geoloqi.h"
+
 @implementation LQAppDelegate
 
 @synthesize window = _window;
@@ -75,10 +77,13 @@
 				
 				[[LQTracker sharedTracker] setSession:session]; // This saves the session so it will be restored on next app launch
 				[[LQTracker sharedTracker] setProfile:LQTrackerProfileAdaptive]; // This will cause the location prompt to appear the first time
+                [self initUserDefaults];
 			} else {
 				NSLog(@"Error creating an anonymous user: %@", error);
 			}
 		}];
+    } else {
+        [self initUserDefaults];
     }
 
     // Tell the SDK the app finished launching so it can properly handle push notifications, etc
@@ -140,5 +145,18 @@
     [LQSession handlePush:userInfo];
 }
 
+
+- (void)initUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:LQAllowPublicGeonotesUserDefaultsKey]) {
+        LQSession *session = [LQSession savedSession];
+        [session runAPIRequest:[session requestWithMethod:@"GET" path:@"/account/privacy" payload:nil]
+                    completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+                        [defaults setObject:[responseDictionary objectForKey:@"public_geonotes"] forKey:LQAllowPublicGeonotesUserDefaultsKey];
+                    }
+         ];
+    }
+    [defaults synchronize];
+}
 
 @end
