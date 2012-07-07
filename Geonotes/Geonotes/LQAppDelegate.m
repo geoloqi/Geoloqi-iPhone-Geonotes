@@ -65,16 +65,18 @@
 				
 				[[LQTracker sharedTracker] setSession:session]; // This saves the session so it will be restored on next app launch
 				[[LQTracker sharedTracker] setProfile:LQTrackerProfileAdaptive]; // This will cause the location prompt to appear the first time
+                [self initUserDefaults];
 			} else {
 				NSLog(@"Error creating an anonymous user: %@", error);
 			}
 		}];
+    } else {
+        [self initUserDefaults];
     }
 
     // Tell the SDK the app finished launching so it can properly handle push notifications, etc
     [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
 
-    [self initUserDefaults];
     return YES;
 }
 
@@ -131,10 +133,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:LQAllowPublicGeonotesUserDefaultsKey]) {
         LQSession *session = [LQSession savedSession];
-        NSLog(@"calling 'account/privacy'...");
-        [session runAPIRequest:[session requestWithMethod:@"GET" path:@"account/privacy" payload:nil]
+        [session runAPIRequest:[session requestWithMethod:@"GET" path:@"/account/privacy" payload:nil]
                     completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
-                        NSLog(@"public_geonotes response: %@", [responseDictionary objectForKey:@"public_geonotes"]);
                         [defaults setObject:[responseDictionary objectForKey:@"public_geonotes"] forKey:LQAllowPublicGeonotesUserDefaultsKey];
                     }
          ];

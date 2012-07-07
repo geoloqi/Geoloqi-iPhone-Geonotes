@@ -26,4 +26,6 @@ static NSString *const LQAllowPublicGeonotesUserDefaultsKey = @"com.geoloqi.LQAl
 - (IBAction)allowPublicGeonotesWasSwitched:(UISwitch *)sender;
 - (IBAction)saveUsernameWasTapped:(UIButton *)sender;
 
+- (IBAction)doneEditing:(id)sender;
+
 @end
