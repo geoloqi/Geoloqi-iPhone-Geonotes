@@ -16,4 +16,6 @@
 
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender;
 
++ (NSString *)cacheDatabasePathForCategory:(NSString *)category;
+
 @end

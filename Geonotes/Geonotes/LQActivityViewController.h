@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "STableViewController.h"
 
-@interface LQActivityViewController : STableViewController
+#import <LQSDKUtils.h>
+#import "LOLDatabase.h"
+
+static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
+
+@interface LQActivityViewController : STableViewController {
+    NSMutableArray *items;
+	LOLDatabase *_itemDB;
+}
+
+- (void)prependObjectFromDictionary:(NSDictionary *)item;
+- (void)appendObjectFromDictionary:(NSDictionary *)item;
 
 @end

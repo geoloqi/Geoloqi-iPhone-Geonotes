@@ -161,4 +161,10 @@
     [defaults synchronize];
 }
 
++ (NSString *)cacheDatabasePathForCategory:(NSString *)category
+{
+	NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	return [caches stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.lol.sqlite", category]];
+}
+
 @end
