@@ -84,6 +84,7 @@
 		}];
     } else {
         [self initUserDefaults];
+        NSLog(@"%@", [LQSession savedSession].accessToken);
     }
 
     // Tell the SDK the app finished launching so it can properly handle push notifications, etc
@@ -95,6 +96,7 @@
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender
 {
     NSLog(@"New geonote");
+    [self registerForPushNotificationsIfNotYetRegistered];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -128,7 +130,7 @@
 {
 	//For push notification support, we need to get the push token from UIApplication via this method.
 	//If you like, you can be notified when the relevant web service call to the Geoloqi API succeeds.
-    [LQSession registerDeviceToken:deviceToken withMode:LQPushNotificationModeLive];
+    [LQSession registerDeviceToken:deviceToken withMode:LQPushNotificationModeDev];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
