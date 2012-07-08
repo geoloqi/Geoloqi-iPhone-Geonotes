@@ -75,14 +75,20 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (NSDictionary *)itemFromDictionary:(NSDictionary *)item
+{
+    NSLog(@"THING: %@", [[item objectForKey:@"object"] objectForKey:@"summary"]);
+    return [[item objectForKey:@"object"] objectForKey:@"summary"];
+}
+
 - (void)prependObjectFromDictionary:(NSDictionary *)item
 {
-    [items insertObject:[item objectForKey:@"title"] atIndex:0];
+    [items insertObject:[self itemFromDictionary:item] atIndex:0];
 }
 
 - (void)appendObjectFromDictionary:(NSDictionary *)item
 {
-    [items insertObject:[item objectForKey:@"title"] atIndex:items.count];
+    [items insertObject:[self itemFromDictionary:item] atIndex:items.count];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +141,7 @@
     // This is just a dummy data loader:
     NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:@"/timeline/messages" payload:nil];
     [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
-        NSLog(@"Got API Response: %@", responseDictionary);
+        NSLog(@"Got API Response: %d items", responseDictionary.count);
 
         for(NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
             [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
