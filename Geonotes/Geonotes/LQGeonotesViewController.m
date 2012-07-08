@@ -27,8 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"Geonotes View Loaded");
+
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
 }
 
 - (void)viewDidUnload

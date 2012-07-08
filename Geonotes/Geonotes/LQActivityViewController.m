@@ -7,6 +7,8 @@
 //
 
 #import "LQActivityViewController.h"
+#import "LQTableHeaderView.h"
+#import "LQTableFooterView.h"
 
 @interface LQActivityViewController ()
 
@@ -28,7 +30,19 @@
 {
     [super viewDidLoad];
     NSLog(@"Activity View Loaded");
-	// Do any additional setup after loading the view, typically from a nib.
+
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
+
+    // set the custom view for "pull to refresh". See LQTableHeaderView.xib
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LQTableHeaderView" owner:self options:nil];
+    LQTableHeaderView *headerView = (LQTableHeaderView *)[nib objectAtIndex:0];
+    self.headerView = headerView;
+    
+    // set the custom view for "load more". See LQTableFooterView.xib
+    nib = [[NSBundle mainBundle] loadNibNamed:@"LQTableFooterView" owner:self options:nil];
+    LQTableFooterView *footerView = (LQTableFooterView *)[nib objectAtIndex:0];
+    self.footerView = footerView;
+
 }
 
 - (void)viewDidUnload

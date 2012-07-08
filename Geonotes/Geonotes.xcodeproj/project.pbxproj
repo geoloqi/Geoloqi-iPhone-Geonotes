@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2E78C515A901AA00D64CFA /* LQTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */; };
+		0F2E78C715A901B200D64CFA /* LQTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -297,6 +299,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F2E78C715A901B200D64CFA /* LQTableFooterView.xib in Resources */,
+				0F2E78C515A901AA00D64CFA /* LQTableHeaderView.xib in Resources */,
 				0FDE2A5315A8C27000FB78A7 /* InfoPlist.strings in Resources */,
 				0FDE2A7E15A8C49B00FB78A7 /* LQSettingsViewController.xib in Resources */,
 				0FDE2A8F15A8C92600FB78A7 /* CHANGELOG.md in Resources */,
@@ -436,6 +440,7 @@
 				0FDE2A7215A8C27000FB78A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -27,8 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     NSLog(@"Layers View Loaded");
+
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
 }
 
 - (void)viewDidUnload
