@@ -38,10 +38,9 @@
     // Do any additional setup after loading the view from its nib.
     NSLog(@"Settings View Loaded");
     
-    // i don't think this is working
-    self.locationTracking.on = ([[LQTracker sharedTracker] status] != LQTrackerStatusNotTracking);
+    self.locationTracking.on = ([[LQTracker sharedTracker] profile] != LQTrackerProfileOff);
 
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:LQAllowPublicGeonotesUserDefaultsKey] intValue] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:LQAllowPublicGeonotesUserDefaultsKey] == 1) {
         self.allowPublicGeonotes.on = YES;
         [self togglePublicGeonoteFields:YES];
     } else {
@@ -70,14 +69,14 @@
 
 - (IBAction)allowPublicGeonotesWasSwitched:(UISwitch *)sender
 {
-    NSNumber *on = [[NSNumber alloc] initWithInt:(sender.on ? 1 : 0)];
+    int on = sender.on ? 1 : 0;
     LQSession *session = [LQSession savedSession];
     [self togglePublicGeonoteFields:sender.on];
-    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:on, @"public_geonotes", nil];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[[NSString alloc] initWithFormat:@"%d", on], @"public_geonotes", nil];
     [session runAPIRequest:[session requestWithMethod:@"POST" path:@"/account/privacy" payload:params]
                 completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
                     // TODO handle response and errors if any
-                    [[NSUserDefaults standardUserDefaults] setObject:on
+                    [[NSUserDefaults standardUserDefaults] setInteger:on
                                                               forKey:LQAllowPublicGeonotesUserDefaultsKey];
                 }
      ];
@@ -85,7 +84,30 @@
 
 - (IBAction)saveUsernameWasTapped:(UIButton *)sender
 {
-    
+    [self doneEditing:self.username];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:username.text, @"desired_username", nil];
+    LQSession *session = [LQSession savedSession];
+    self.savingIndicator.hidden = NO;
+    [session runAPIRequest:[session requestWithMethod:@"POST" path:@"/account/set_username" payload:params]
+                completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+                    self.savingIndicator.hidden = YES;
+                    if (error) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                        message:[[error userInfo] objectForKey:@"NSLocalizedDescription"]
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    }
+                    NSString *res = (NSString *)[responseDictionary objectForKey:@"response"];
+                    if (res && [res isEqualToString:@"ok"]) {
+                        [self populatePublicGeonoteFields:username.text];
+                        // hack to get new session data with the new username
+                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.geoloqi.LQUserID"];
+                        [LQSession sessionWithAccessToken:session.accessToken];
+                    }
+                }
+     ];
 }
 
 - (void)togglePublicGeonoteFields:(BOOL)show
@@ -99,13 +121,26 @@
 
 - (void)populatePublicGeonoteFields
 {
-    LQSession *session = [LQSession savedSession];
-    self.publicGeonoteURL.text = [[NSString alloc] initWithFormat:@"http://geoloqi.com/%@", session.username];
-    self.username.text = session.username;
+    [self populatePublicGeonoteFields:[[LQSession savedSession] username]];
+}
+
+- (void)populatePublicGeonoteFields:(NSString *)_username
+{
+    self.publicGeonoteURL.text = [[NSString alloc] initWithFormat:@"http://geoloqi.com/%@", _username];
+    self.username.text = _username;
 }
 
 - (IBAction)doneEditing:(id)sender
 {
     [sender resignFirstResponder];
 }
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self populatePublicGeonoteFields:[[LQSession savedSession] username]];
+    [self.username becomeFirstResponder];
+}
+
 @end
