@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F2E78C515A901AA00D64CFA /* LQTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */; };
 		0F2E78C715A901B200D64CFA /* LQTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */; };
+		0F83DEE015AA80F300E07D16 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DEDF15AA80F300E07D16 /* NSString+URLEncoding.m */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F83DEDE15AA80F300E07D16 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		0F83DEDF15AA80F300E07D16 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -182,6 +185,8 @@
 				0FDE2AA315A8CC5900FB78A7 /* LOLDatabase.h */,
 				0FDE2A8015A8C58500FB78A7 /* STableViewController.h */,
 				0FDE2A8115A8C58500FB78A7 /* STableViewController.m */,
+				0F83DEDE15AA80F300E07D16 /* NSString+URLEncoding.h */,
+				0F83DEDF15AA80F300E07D16 /* NSString+URLEncoding.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				0FDE2A7715A8C45000FB78A7 /* LQLayersViewController.m in Sources */,
 				0FDE2A7D15A8C49B00FB78A7 /* LQSettingsViewController.m in Sources */,
 				0FDE2A9015A8C92600FB78A7 /* JSONKit.m in Sources */,
+				0F83DEE015AA80F300E07D16 /* NSString+URLEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

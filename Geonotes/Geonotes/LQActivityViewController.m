@@ -12,6 +12,8 @@
 
 #import "LQAppDelegate.h"
 
+#import "NSString+URLEncoding.h"
+
 @interface LQActivityViewController ()
 
 @end
@@ -75,20 +77,14 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (NSDictionary *)itemFromDictionary:(NSDictionary *)item
-{
-    NSLog(@"THING: %@", [[item objectForKey:@"object"] objectForKey:@"summary"]);
-    return [[item objectForKey:@"object"] objectForKey:@"summary"];
-}
-
 - (void)prependObjectFromDictionary:(NSDictionary *)item
 {
-    [items insertObject:[self itemFromDictionary:item] atIndex:0];
+    [items insertObject:item atIndex:0];
 }
 
 - (void)appendObjectFromDictionary:(NSDictionary *)item
 {
-    [items insertObject:[self itemFromDictionary:item] atIndex:items.count];
+    [items insertObject:item atIndex:items.count];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,19 +127,28 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // refresh the list. Do your async calls here.
+// Retrieve newer entries for the top of the list
 //
 - (BOOL) refresh
 {
     if (![super refresh])
         return NO;
     
+    NSDictionary *item = [items objectAtIndex:0];
+    NSLog(@"Newest entry is: %@", item);
+    NSString *date;
+    if(item && [item objectForKey:@"published"])
+        date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
+    else
+        date = @"";
+    
     // Do your async call here
-    // This is just a dummy data loader:
-    NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:@"/timeline/messages" payload:nil];
+    NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/timeline/messages?after=%@", date] payload:nil];
     [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
-        NSLog(@"Got API Response: %d items", responseDictionary.count);
+        NSLog(@"Got API Response: %d items", [[responseDictionary objectForKey:@"items"] count]);
+        NSLog(@"%@", responseDictionary);
 
-        for(NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
+        for(NSDictionary *item in [[responseDictionary objectForKey:@"items"] reverseObjectEnumerator]) {
             [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
                 // Store in the database
                 [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
@@ -206,9 +211,40 @@
     if (![super loadMore])
         return NO;
     
-    // Do your async loading here
-    [self performSelector:@selector(addItemsOnBottom) withObject:nil afterDelay:2.0];
-    // See -addItemsOnBottom for more info on what to do after loading more items
+    NSDictionary *item = [items objectAtIndex:items.count-1];
+    NSLog(@"Oldest entry is: %@", item);
+    NSString *date;
+    if(item && [item objectForKey:@"published"])
+        date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
+    else
+        date = @"";
+    
+    // Do your async call here
+    NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/timeline/messages?before=%@", date] payload:nil];
+    [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
+        NSLog(@"Got API Response: %d items", [[responseDictionary objectForKey:@"items"] count]);
+        NSLog(@"%@", responseDictionary);
+        
+        for(NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
+            [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
+                // Store in the database
+                [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
+                // Also add to the bottom of the local array
+                [self appendObjectFromDictionary:item];
+            }];
+        }
+        
+        // Tell the table to reload
+        [self.tableView reloadData];
+        
+        if ([[responseDictionary objectForKey:@"paging"] objectForKey:@"next_offset"])
+            self.canLoadMore = YES;
+        else
+            self.canLoadMore = NO; // signal that there won't be any more items to load
+        
+        // Inform STableViewController that we have finished loading more items
+        [self loadMoreCompleted];
+    }];
     
     return YES;
 }
@@ -277,7 +313,14 @@
                                        reuseIdentifier:CellIdentifier];
     }
     
-    cell.textLabel.text = [items objectAtIndex:indexPath.row];  
+    id item = [items objectAtIndex:indexPath.row];
+    if(item) {
+        if([item respondsToSelector:@selector(objectForKey:)]) {
+            cell.textLabel.text = [[item objectForKey:@"object"] objectForKey:@"summary"];
+        } else {
+            cell.textLabel.text = item;
+        }
+    }
     return cell;
 }
 
