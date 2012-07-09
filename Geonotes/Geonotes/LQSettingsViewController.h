@@ -11,7 +11,7 @@
 
 static NSString *const LQAllowPublicGeonotesUserDefaultsKey = @"com.geoloqi.LQAllowPublicGeonotes";
 
-@interface LQSettingsViewController : UIViewController
+@interface LQSettingsViewController : UIViewController <UIAlertViewDelegate>
 
 @property (strong) IBOutlet UISwitch *locationTracking;
 @property (strong) IBOutlet UISwitch *allowPublicGeonotes;
