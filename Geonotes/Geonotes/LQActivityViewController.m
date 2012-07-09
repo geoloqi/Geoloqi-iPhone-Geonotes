@@ -251,74 +251,45 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - Dummy data methods 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addItemsOnTop
-{
-    for (int i = 0; i < 3; i++)
-        [items insertObject:[self createRandomValue] atIndex:0];
-    [self.tableView reloadData];
-    
-    // Call this to indicate that we have finished "refreshing".
-    // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
-    [self refreshCompleted];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void) addItemsOnBottom
-{
-    for (int i = 0; i < 5; i++)
-        [items addObject:[self createRandomValue]];  
-    
-    [self.tableView reloadData];
-    
-    if (items.count > 50)
-        self.canLoadMore = NO; // signal that there won't be any more items to load
-    else
-        self.canLoadMore = YES;
-    
-    // Inform STableViewController that we have finished loading more items
-    [self loadMoreCompleted];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-- (NSString *) createRandomValue
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    
-    return [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:[NSDate date]],
-            [NSNumber numberWithInt:rand()]];
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Standard TableView delegates
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 74.0;
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return items.count;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                       reuseIdentifier:CellIdentifier];
-    }
+    LQActivityItemCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if(cell == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"LQActivityItemCellView" owner:self options:nil];
+		cell = tableCellView;
+	}
     
     id item = [items objectAtIndex:indexPath.row];
     if(item) {
         if([item respondsToSelector:@selector(objectForKey:)]) {
-            cell.textLabel.text = [[item objectForKey:@"object"] objectForKey:@"summary"];
+            cell.headerText.text = [item objectForKey:@"title"];
+            cell.secondaryText.text = [[item objectForKey:@"object"] objectForKey:@"summary"];
+            cell.dateText.text = [item objectForKey:@"displayDate"];
+            
+            NSString *imageURL;
+            if(![[[[item objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"] isEqualToString:@""]) {
+                imageURL = [[[item objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"];
+            } else if(![[[[item objectForKey:@"generator"] objectForKey:@"image"] objectForKey:@"url"] isEqualToString:@""]) {
+                imageURL = [[[item objectForKey:@"generator"] objectForKey:@"image"] objectForKey:@"url"];
+            }
+            if(![imageURL isEqualToString:@""]) {
+                [cell setImageFromURL:imageURL];
+            }
         } else {
-            cell.textLabel.text = item;
+            cell.secondaryText.text = item;
         }
     }
     return cell;
