@@ -17,7 +17,7 @@
 
 @implementation LQActivityItemViewController
 
-@synthesize titleLabel, dateLabel, mapView, textView, imageView;
+@synthesize titleLabel, dateLabel, mapView, textView, imageView, detailView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,9 +38,11 @@
         CLLocationCoordinate2D center = CLLocationCoordinate2DMake([[[storyData objectForKey:@"location"] objectForKey:@"latitude"] floatValue], [[[storyData objectForKey:@"location"] objectForKey:@"longitude"] floatValue]);
         [self setMapLocation:center radius:[[[storyData objectForKey:@"location"] objectForKey:@"radius"] floatValue]];
         [mapView addAnnotation:[[LQBasicAnnotation alloc] initWithTitle:[[storyData objectForKey:@"location"] objectForKey:@"displayName"] andCoordinate:center]];
+
+        detailView.frame = CGRectMake(0.0, 130.0, self.view.frame.size.width, self.view.frame.size.height);
     } else {
         // Hide the map
-        
+        detailView.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
     }
  
     self.titleLabel.text = [storyData objectForKey:@"title"];
@@ -57,6 +59,7 @@
         [self.imageView setImageWithURL:[NSURL URLWithString:imageURL]];
     }
 
+    [self.view addSubview:detailView];
 }
 
 - (void)viewDidUnload

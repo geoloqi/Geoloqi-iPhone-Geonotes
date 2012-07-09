@@ -17,6 +17,8 @@
 @property IBOutlet MKMapView *mapView;
 @property IBOutlet UIImageView *imageView;
 
+@property IBOutlet UIView *detailView;
+
 - (void)loadStory:(NSDictionary *)storyData;
 
 - (void)setMapLocation:(CLLocationCoordinate2D)center radius:(CGFloat)radius;
