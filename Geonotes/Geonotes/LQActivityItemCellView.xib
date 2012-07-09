@@ -64,11 +64,11 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="343596318">
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="749963643">
 									<int key="type">1</int>
 									<double key="pointSize">13</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="720516093">
+								<object class="NSFont" key="IBUIFont" id="210750624">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
@@ -80,7 +80,7 @@
 								<string key="NSFrame">{{70, 20}, {230, 38}}</string>
 								<reference key="NSSuperview" ref="857399204"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="292829318"/>
+								<reference key="NSNextKeyView" ref="416922472"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -102,7 +102,7 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUILabel" id="292829318">
+							<object class="IBUILabel" id="416922472">
 								<reference key="NSNextResponder" ref="857399204"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{100, 51}, {200, 21}}</string>
@@ -122,13 +122,13 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">2</int>
-								<reference key="IBUIFontDescription" ref="343596318"/>
-								<reference key="IBUIFont" ref="720516093"/>
+								<reference key="IBUIFontDescription" ref="749963643"/>
+								<reference key="IBUIFont" ref="210750624"/>
 							</object>
 							<object class="IBUIImageView" id="984638303">
 								<reference key="NSNextResponder" ref="857399204"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{1, 5}, {65, 65}}</string>
+								<string key="NSFrame">{{6, 8}, {57, 57}}</string>
 								<reference key="NSSuperview" ref="857399204"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="710624801"/>
@@ -209,7 +209,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dateText</string>
 						<reference key="source" ref="935155554"/>
-						<reference key="destination" ref="292829318"/>
+						<reference key="destination" ref="416922472"/>
 					</object>
 					<int key="connectionID">16</int>
 				</object>
@@ -243,7 +243,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="984638303"/>
 							<reference ref="710624801"/>
-							<reference ref="292829318"/>
+							<reference ref="416922472"/>
 							<reference ref="449541356"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -265,7 +265,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
-						<reference key="object" ref="292829318"/>
+						<reference key="object" ref="416922472"/>
 						<reference key="parent" ref="935155554"/>
 					</object>
 				</object>

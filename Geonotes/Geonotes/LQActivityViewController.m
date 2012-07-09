@@ -7,6 +7,7 @@
 //
 
 #import "LQActivityViewController.h"
+#import "LQActivityItemViewController.h"
 #import "LQTableHeaderView.h"
 #import "LQTableFooterView.h"
 
@@ -252,6 +253,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Standard TableView delegates
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Selected row: %d", indexPath.row);
+    
+    LQActivityItemViewController *itemViewController = [[LQActivityItemViewController alloc] init];
+    [itemViewController loadStory:[items objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:itemViewController animated:YES];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 74.0;

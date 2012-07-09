@@ -14,6 +14,10 @@
 		0F83DEEA15AB438800E07D16 /* LQActivityItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F83DEE815AB438800E07D16 /* LQActivityItemCellView.xib */; };
 		0F83DF1915AB491100E07D16 /* libSDWebImageARC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F83DF1415AB48DE00E07D16 /* libSDWebImageARC.a */; };
 		0F83DF1B15AB491A00E07D16 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F83DF1A15AB491A00E07D16 /* ImageIO.framework */; };
+		0F83DF1F15AB6A1700E07D16 /* LQActivityItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DF1D15AB6A1700E07D16 /* LQActivityItemViewController.m */; };
+		0F83DF2015AB6A1700E07D16 /* LQActivityItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F83DF1E15AB6A1700E07D16 /* LQActivityItemViewController.xib */; };
+		0F83DF2215AB70EF00E07D16 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F83DF2115AB70EE00E07D16 /* MapKit.framework */; };
+		0F83DF3515AB827300E07D16 /* LQBasicAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -80,6 +84,12 @@
 		0F83DEE815AB438800E07D16 /* LQActivityItemCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQActivityItemCellView.xib; sourceTree = "<group>"; };
 		0F83DF0815AB48DE00E07D16 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		0F83DF1A15AB491A00E07D16 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		0F83DF1C15AB6A1700E07D16 /* LQActivityItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQActivityItemViewController.h; sourceTree = "<group>"; };
+		0F83DF1D15AB6A1700E07D16 /* LQActivityItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQActivityItemViewController.m; sourceTree = "<group>"; };
+		0F83DF1E15AB6A1700E07D16 /* LQActivityItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQActivityItemViewController.xib; sourceTree = "<group>"; };
+		0F83DF2115AB70EE00E07D16 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQBasicAnnotation.h; sourceTree = "<group>"; };
+		0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQBasicAnnotation.m; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F83DF2215AB70EF00E07D16 /* MapKit.framework in Frameworks */,
 				0F83DF1B15AB491A00E07D16 /* ImageIO.framework in Frameworks */,
 				0F83DF1915AB491100E07D16 /* libSDWebImageARC.a in Frameworks */,
 				0FDE2A8915A8C8FC00FB78A7 /* libsqlite3.dylib in Frameworks */,
@@ -174,6 +185,7 @@
 			children = (
 				0F83DF1A15AB491A00E07D16 /* ImageIO.framework */,
 				0FDE2A4815A8C27000FB78A7 /* UIKit.framework */,
+				0F83DF2115AB70EE00E07D16 /* MapKit.framework */,
 				0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */,
 				0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */,
 				0FDE2A8615A8C8EA00FB78A7 /* CoreLocation.framework */,
@@ -234,6 +246,8 @@
 		0FDE2A7F15A8C56800FB78A7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */,
+				0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */,
 				0FDE2A9215A8CAD600FB78A7 /* TableViewResources */,
 				0FDE2A8A15A8C92600FB78A7 /* JSONKit */,
 				0FDE2AA315A8CC5900FB78A7 /* LOLDatabase.h */,
@@ -253,6 +267,9 @@
 				0F83DEE615AB438800E07D16 /* LQActivityItemCellView.h */,
 				0F83DEE715AB438800E07D16 /* LQActivityItemCellView.m */,
 				0F83DEE815AB438800E07D16 /* LQActivityItemCellView.xib */,
+				0F83DF1C15AB6A1700E07D16 /* LQActivityItemViewController.h */,
+				0F83DF1D15AB6A1700E07D16 /* LQActivityItemViewController.m */,
+				0F83DF1E15AB6A1700E07D16 /* LQActivityItemViewController.xib */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -405,6 +422,7 @@
 				0FDE2ADA15A8DEE300FB78A7 /* layers@2x.png in Resources */,
 				0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */,
 				0F83DEEA15AB438800E07D16 /* LQActivityItemCellView.xib in Resources */,
+				0F83DF2015AB6A1700E07D16 /* LQActivityItemViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +445,8 @@
 				0FDE2A9015A8C92600FB78A7 /* JSONKit.m in Sources */,
 				0F83DEE015AA80F300E07D16 /* NSString+URLEncoding.m in Sources */,
 				0F83DEE915AB438800E07D16 /* LQActivityItemCellView.m in Sources */,
+				0F83DF1F15AB6A1700E07D16 /* LQActivityItemViewController.m in Sources */,
+				0F83DF3515AB827300E07D16 /* LQBasicAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
