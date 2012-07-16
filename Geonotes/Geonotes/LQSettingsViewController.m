@@ -14,13 +14,17 @@
 
 @implementation LQSettingsViewController
 
-@synthesize locationTracking,
+@synthesize scrollView,
+            locationTracking,
             allowPublicGeonotes,
-            publicGeonoteURL,
             usernameLabel,
             username,
             saveUsername,
             savingIndicator;
+
+@synthesize publicGeonoteURL,
+            publicGeonoteURLLabel,
+            publicGeonoteURLButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,10 +37,13 @@
 }
 
 - (void)viewDidLoad
-{
+{    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSLog(@"Settings View Loaded");
+    
+    scrollView.frame = CGRectMake(0, 88, 320, 416);
+    [scrollView setContentSize:CGSizeMake(320, 416)];
     
     self.locationTracking.on = ([[LQTracker sharedTracker] profile] != LQTrackerProfileOff);
 
@@ -62,6 +69,67 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Keyboard
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:self.view.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    [super viewWillAppear:animated];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    currentTextField = textField;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    currentTextField = nil;
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    if (keyboadIsShown) return;
+    
+    NSDictionary *info = [notification userInfo];
+    NSValue *aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [self.view convertRect:[aValue CGRectValue] fromView:nil];
+    CGRect viewFrame = [scrollView frame];
+    // not sure where these extra 5 pixels are coming from...
+    viewFrame.size.height -= (keyboardRect.size.height - 5);
+    scrollView.frame = viewFrame;
+    CGRect textFieldFrame = [currentTextField frame];
+    [scrollView scrollRectToVisible:textFieldFrame animated:YES];
+    keyboadIsShown = YES;
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    NSValue *aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [self.view convertRect:[aValue CGRectValue] fromView:nil];
+    CGRect viewFrame = [scrollView frame];
+    // not sure where these extra 5 pixels are coming from...
+    viewFrame.size.height += (keyboardRect.size.height - 5);
+    scrollView.frame = viewFrame;
+    keyboadIsShown = NO;
+}
+
+#pragma mark - IBActions
+
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender
 {
     [[LQTracker sharedTracker] setProfile:(sender.on ? LQTrackerProfileAdaptive : LQTrackerProfileOff)];
@@ -84,7 +152,9 @@
 
 - (IBAction)saveUsernameWasTapped:(UIButton *)sender
 {
-    [self doneEditing:self.username];
+    if (currentTextField)
+        [currentTextField resignFirstResponder];
+    
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:username.text, @"desired_username", nil];
     LQSession *session = [LQSession savedSession];
     self.savingIndicator.hidden = NO;
@@ -110,9 +180,26 @@
      ];
 }
 
+- (IBAction)publicGeonoteURLButtonWasTapped:(UIButton *)sender
+{
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    pasteBoard.string = publicGeonoteURL.text;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Copied"
+                                                    message:@"Your public Geonote URL has been copied."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
+}
+
+#pragma mark - Helpers
+
 - (void)togglePublicGeonoteFields:(BOOL)show
 {
     self.publicGeonoteURL.hidden = !show;
+    self.publicGeonoteURLButton.hidden = !show;
+    self.publicGeonoteURLLabel.hidden = !show;
+
     self.usernameLabel.hidden = !show;
     self.username.hidden = !show;
     self.saveUsername.hidden = !show;
@@ -126,13 +213,8 @@
 
 - (void)populatePublicGeonoteFields:(NSString *)_username
 {
-    self.publicGeonoteURL.text = [[NSString alloc] initWithFormat:@"http://geoloqi.com/%@", _username];
+    self.publicGeonoteURL.text = [NSString stringWithFormat:@"https://%@/%@", LQGeoloqiDomainName, _username];
     self.username.text = _username;
-}
-
-- (IBAction)doneEditing:(id)sender
-{
-    [sender resignFirstResponder];
 }
 
 #pragma mark - UIAlertViewDelegate
