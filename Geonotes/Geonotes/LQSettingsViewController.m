@@ -10,6 +10,8 @@
 
 @interface LQSettingsViewController ()
 
+- (LQSettingsActionSheetDelegate *)actionDelegate;
+
 @end
 
 @implementation LQSettingsViewController
@@ -22,9 +24,7 @@
             saveUsername,
             savingIndicator;
 
-@synthesize publicGeonoteURL,
-            publicGeonoteURLLabel,
-            publicGeonoteURLButton;
+@synthesize publicGeonoteURL, publicGeonoteURLLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -157,10 +157,10 @@
     
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:username.text, @"desired_username", nil];
     LQSession *session = [LQSession savedSession];
-    self.savingIndicator.hidden = NO;
+    [self.savingIndicator startAnimating];
     [session runAPIRequest:[session requestWithMethod:@"POST" path:@"/account/set_username" payload:params]
                 completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
-                    self.savingIndicator.hidden = YES;
+                    [self.savingIndicator stopAnimating];
                     if (error) {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                         message:[[error userInfo] objectForKey:@"NSLocalizedDescription"]
@@ -172,32 +172,43 @@
                     NSString *res = (NSString *)[responseDictionary objectForKey:@"response"];
                     if (res && [res isEqualToString:@"ok"]) {
                         [self populatePublicGeonoteFields:username.text];
+                        
                         // hack to get new session data with the new username
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.geoloqi.LQUserID"];
+                        
+                        // clear this so it gets rebuilt
+                        actionDelegate = nil;
+                        
                         [LQSession sessionWithAccessToken:session.accessToken];
                     }
                 }
      ];
 }
 
-- (IBAction)publicGeonoteURLButtonWasTapped:(UIButton *)sender
+#pragma mark -
+
+- (IBAction)publicGeonoteURLWasTapped:(UIButton *)sender
 {
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    pasteBoard.string = publicGeonoteURL.text;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Copied"
-                                                    message:@"Your public Geonote URL has been copied."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles: nil];
-    [alert show];
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:@""
+                                                        delegate:[self actionDelegate]
+                                               cancelButtonTitle:@"OK"
+                                          destructiveButtonTitle:nil
+                                               otherButtonTitles:@"Email", @"Text", @"Copy", nil];
+    [action showFromTabBar:self.tabBarController.tabBar];
 }
 
-#pragma mark - Helpers
+- (LQSettingsActionSheetDelegate *)actionDelegate
+{
+    if (actionDelegate) return actionDelegate;
+    return actionDelegate = [[LQSettingsActionSheetDelegate alloc] initWithUsername:[[LQSession savedSession] username]
+                                                                  andViewController:self];
+}
+
+#pragma mark -
 
 - (void)togglePublicGeonoteFields:(BOOL)show
 {
     self.publicGeonoteURL.hidden = !show;
-    self.publicGeonoteURLButton.hidden = !show;
     self.publicGeonoteURLLabel.hidden = !show;
 
     self.usernameLabel.hidden = !show;
@@ -213,7 +224,8 @@
 
 - (void)populatePublicGeonoteFields:(NSString *)_username
 {
-    self.publicGeonoteURL.text = [NSString stringWithFormat:@"https://%@/%@", LQGeoloqiDomainName, _username];
+    [self.publicGeonoteURL setTitle:[NSString stringWithFormat:@"http://loqi.me/%@", _username]
+                           forState:UIControlStateNormal];
     self.username.text = _username;
 }
 

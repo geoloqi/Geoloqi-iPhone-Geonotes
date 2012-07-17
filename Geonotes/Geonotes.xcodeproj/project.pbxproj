@@ -39,6 +39,8 @@
 		0FDE2AD915A8DEE300FB78A7 /* geonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */; };
 		0FDE2ADA15A8DEE300FB78A7 /* layers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */; };
 		0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */; };
+		BE4AEBBA15B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4AEBB915B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.m */; };
+		BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +123,9 @@
 		0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "geonote@2x.png"; path = "Graphics/geonote@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "layers@2x.png"; path = "Graphics/layers@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Graphics/settings@2x.png"; sourceTree = "<group>"; };
+		BE4AEBB815B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQSettingsActionSheetDelegate.h; sourceTree = "<group>"; };
+		BE4AEBB915B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQSettingsActionSheetDelegate.m; sourceTree = "<group>"; };
+		BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */,
 				0F83DF1B15AB491A00E07D16 /* ImageIO.framework in Frameworks */,
 				0F83DF1915AB491100E07D16 /* libSDWebImageARC.a in Frameworks */,
 				0FDE2A8915A8C8FC00FB78A7 /* libsqlite3.dylib in Frameworks */,
@@ -172,6 +178,7 @@
 		0FDE2A4715A8C27000FB78A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */,
 				0F83DF1A15AB491A00E07D16 /* ImageIO.framework */,
 				0FDE2A4815A8C27000FB78A7 /* UIKit.framework */,
 				0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */,
@@ -281,6 +288,8 @@
 				0FDE2A7C15A8C49B00FB78A7 /* LQSettingsViewController.xib */,
 				0FDE2A7A15A8C49B00FB78A7 /* LQSettingsViewController.h */,
 				0FDE2A7B15A8C49B00FB78A7 /* LQSettingsViewController.m */,
+				BE4AEBB815B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.h */,
+				BE4AEBB915B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -427,6 +436,7 @@
 				0FDE2A9015A8C92600FB78A7 /* JSONKit.m in Sources */,
 				0F83DEE015AA80F300E07D16 /* NSString+URLEncoding.m in Sources */,
 				0F83DEE915AB438800E07D16 /* LQActivityItemCellView.m in Sources */,
+				BE4AEBBA15B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
