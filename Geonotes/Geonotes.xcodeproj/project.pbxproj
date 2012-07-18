@@ -19,6 +19,7 @@
 		0F83DF2215AB70EF00E07D16 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F83DF2115AB70EE00E07D16 /* MapKit.framework */; };
 		0F83DF3515AB827300E07D16 /* LQBasicAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */; };
 		0F83DF3B15AB8E0700E07D16 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F83DF3A15AB8E0700E07D16 /* Settings.bundle */; };
+		0F8DB24915B7385100681B69 /* LQTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB24815B7385100681B69 /* LQTabBarController.m */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -94,6 +95,8 @@
 		0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQBasicAnnotation.h; sourceTree = "<group>"; };
 		0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQBasicAnnotation.m; sourceTree = "<group>"; };
 		0F83DF3A15AB8E0700E07D16 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		0F8DB24715B7385100681B69 /* LQTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQTabBarController.h; sourceTree = "<group>"; };
+		0F8DB24815B7385100681B69 /* LQTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQTabBarController.m; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -249,6 +252,8 @@
 				0FDE2A8315A8C59400FB78A7 /* Geonotes */,
 				0FDE2A8415A8C59B00FB78A7 /* Layers */,
 				0FDE2A8515A8C5A100FB78A7 /* Settings */,
+				0F8DB24715B7385100681B69 /* LQTabBarController.h */,
+				0F8DB24815B7385100681B69 /* LQTabBarController.m */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				0F83DF1F15AB6A1700E07D16 /* LQActivityItemViewController.m in Sources */,
 				0F83DF3515AB827300E07D16 /* LQBasicAnnotation.m in Sources */,
 				BE4AEBBA15B4D1A9008BAD2E /* LQSettingsActionSheetDelegate.m in Sources */,
+				0F8DB24915B7385100681B69 /* LQTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

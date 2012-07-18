@@ -13,6 +13,8 @@
 
 #import "Geoloqi.h"
 
+#import "LQTabBarController.h"
+
 @implementation LQAppDelegate
 
 @synthesize window = _window;
@@ -47,24 +49,34 @@
 	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
 
     activityViewController = [[LQActivityViewController alloc] init];
+
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityNavController.navigationBar.tintColor = [UIColor blackColor];
     activityViewController.navigationItem.title = @"Geonotes";
-    activityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
+    // activityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
 
     UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] init];
     UINavigationController *geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
     geonotesNavController.navigationBar.tintColor = [UIColor blackColor];
-    geonotesViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
-    
+    // geonotesViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
+
+    UIViewController *newGeonoteViewController = [[LQGeonotesViewController alloc] init];
+    UINavigationController *newGeonoteNavController = [[UINavigationController alloc] initWithRootViewController:newGeonoteViewController];
+
     UIViewController *layersViewController = [[LQLayersViewController alloc] init];
     UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
     layersNavController.navigationBar.tintColor = [UIColor blackColor];
 
     UIViewController *settingsViewController = [[LQSettingsViewController alloc] initWithNibName:@"LQSettingsViewController" bundle:nil];
     
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:activityNavController, geonotesNavController, layersNavController, settingsViewController, nil];
+    self.tabBarController = [[LQTabBarController alloc] init];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                                activityNavController, 
+                                                geonotesNavController,
+                                                newGeonoteNavController,
+                                                layersNavController, 
+                                                settingsViewController, 
+                                                nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
