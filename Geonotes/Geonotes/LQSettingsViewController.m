@@ -10,21 +10,21 @@
 
 @interface LQSettingsViewController ()
 
-- (LQSettingsActionSheetDelegate *)actionDelegate;
+//- (LQSettingsActionSheetDelegate *)actionDelegate;
 
 @end
 
 @implementation LQSettingsViewController
 
-@synthesize scrollView,
-            locationTracking,
+@synthesize // scrollView,
+            locationTracking/*,
             allowPublicGeonotes,
             usernameLabel,
             username,
             saveUsername,
-            savingIndicator;
+            savingIndicator*/;
 
-@synthesize publicGeonoteURL, publicGeonoteURLLabel;
+// @synthesize publicGeonoteURL, publicGeonoteURLLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSLog(@"Settings View Loaded");
-    
+/*    
     scrollView.frame = CGRectMake(0, 88, 320, 416);
     [scrollView setContentSize:CGSizeMake(320, 416)];
     
@@ -55,6 +55,7 @@
     }
     
     [self populatePublicGeonoteFields];
+*/
 }
 
 - (void)viewDidUnload
@@ -69,6 +70,55 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Table View
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            cell = [self locationUpdateSettingCell:tableView];
+            break;
+        }
+        
+        case 1:
+            // enable on reboot?
+            break;
+            
+        case 2:
+            // something
+            break;
+            
+    }
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;//3;
+}
+
+- (UITableViewCell *)locationUpdateSettingCell:(UITableView *)tableView
+{
+    static NSString *switchCellIdentifier = @"SwitchCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:switchCellIdentifier];
+    if (cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:switchCellIdentifier];
+    
+    cell.textLabel.text = @"Enable location";
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UISwitch *locationSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
+    cell.accessoryView = locationSwitch;
+    [locationSwitch setOn:([[LQTracker sharedTracker] profile] != LQTrackerProfileOff) animated:NO];
+    [locationSwitch addTarget:self action:@selector(locationTrackingWasSwitched:) forControlEvents:UIControlEventValueChanged];
+    return cell;
+}
+
+/*
 #pragma mark - Keyboard
 
 - (void)viewWillAppear:(BOOL)animated
@@ -127,6 +177,7 @@
     scrollView.frame = viewFrame;
     keyboadIsShown = NO;
 }
+*/
 
 #pragma mark - IBActions
 
@@ -135,6 +186,7 @@
     [[LQTracker sharedTracker] setProfile:(sender.on ? LQTrackerProfileAdaptive : LQTrackerProfileOff)];
 }
 
+/*
 - (IBAction)allowPublicGeonotesWasSwitched:(UISwitch *)sender
 {
     int on = sender.on ? 1 : 0;
@@ -236,5 +288,6 @@
     [self populatePublicGeonoteFields:[[LQSession savedSession] username]];
     [self.username becomeFirstResponder];
 }
+*/
 
 @end

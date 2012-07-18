@@ -80,13 +80,13 @@
 				
 				[[LQTracker sharedTracker] setSession:session]; // This saves the session so it will be restored on next app launch
 				[[LQTracker sharedTracker] setProfile:LQTrackerProfileAdaptive]; // This will cause the location prompt to appear the first time
-                [self initUserDefaults];
+//                [self initUserDefaults];
 			} else {
 				NSLog(@"Error creating an anonymous user: %@", error);
 			}
 		}];
     } else {
-        [self initUserDefaults];
+//        [self initUserDefaults];
         NSLog(@"%@", [LQSession savedSession].accessToken);
     }
 
@@ -182,6 +182,7 @@
 
 
 - (void)initUserDefaults {
+    /*
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:LQAllowPublicGeonotesUserDefaultsKey]) {
         LQSession *session = [LQSession savedSession];
@@ -193,6 +194,7 @@
     }
     [defaults setValue:[LQSession savedSession].username forKey:@"LQUsername"];
     [defaults synchronize];
+    */
 }
 
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category
