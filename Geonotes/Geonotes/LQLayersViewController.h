@@ -15,6 +15,7 @@
     NSMutableArray *items;
 	LOLDatabase *_itemDB;
     IBOutlet LQLayerItemCellView *tableCellView;
+    UIImage *placeholderImage;
 }
 
 - (void)appendObjectFromDictionary:(NSDictionary *)item;

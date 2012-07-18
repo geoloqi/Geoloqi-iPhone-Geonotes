@@ -17,6 +17,6 @@
 @property IBOutlet UISwitch *subscriptionSwitch;
 @property NSString *layerID;
 
-- (void)setImageFromURL:(NSString *)url;
+- (void)setImageFromURL:(NSString *)url placeholderImage:(UIImage *)image;
 
 @end

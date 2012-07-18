@@ -26,6 +26,8 @@
         self.tabBarItem.image = [UIImage imageNamed:@"layers"];
     }
 
+    placeholderImage = [UIImage imageNamed:@"defaultLayerIcon"];
+    
     _itemDB = [[LOLDatabase alloc] initWithPath:[LQAppDelegate cacheDatabasePathForCategory:@"LQLayer"]];
 	_itemDB.serializer = ^(id object){
 		return [LQSDKUtils dataWithJSONObject:object error:NULL];
@@ -110,7 +112,7 @@
     }];
 }
 
-- (IBAction)subscribeWasTapped:(UISwitch *)sender
+- (void)subscribeWasTapped:(UISwitch *)sender
 {
     NSString *path;
     if(sender.on) {
@@ -223,7 +225,7 @@
         cell.subscriptionSwitch.tag = indexPath.row;
         [cell.subscriptionSwitch addTarget:self action:@selector(subscribeWasTapped:) forControlEvents:UIControlEventValueChanged];
         cell.selectionStyle = UITableViewCellSelectionStyleNone; // TODO: Remove this to enable selecting rows again
-        [cell setImageFromURL:[item objectForKey:@"icon"]];
+        [cell setImageFromURL:[item objectForKey:@"icon"] placeholderImage:placeholderImage];
     }
     return cell;
 }

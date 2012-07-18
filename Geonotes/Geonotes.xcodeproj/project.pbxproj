@@ -22,6 +22,8 @@
 		0F8DB24915B7385100681B69 /* LQTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB24815B7385100681B69 /* LQTabBarController.m */; };
 		0F8DB25B15B742F100681B69 /* LQLayerItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB25A15B742F100681B69 /* LQLayerItemCellView.m */; };
 		0F8DB25D15B7430700681B69 /* LQLayerItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB25C15B7430700681B69 /* LQLayerItemCellView.xib */; };
+		0F8DB26B15B76AEC00681B69 /* defaultLayerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */; };
+		0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -101,6 +103,8 @@
 		0F8DB25915B742F100681B69 /* LQLayerItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQLayerItemCellView.h; sourceTree = "<group>"; };
 		0F8DB25A15B742F100681B69 /* LQLayerItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQLayerItemCellView.m; sourceTree = "<group>"; };
 		0F8DB25C15B7430700681B69 /* LQLayerItemCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQLayerItemCellView.xib; sourceTree = "<group>"; };
+		0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultLayerIcon.png; path = Graphics/defaultLayerIcon.png; sourceTree = "<group>"; };
+		0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defaultLayerIcon@2x.png"; path = "Graphics/defaultLayerIcon@2x.png"; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -241,6 +245,8 @@
 				0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */,
 				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
 				0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */,
+				0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */,
+				0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */,
 				0FDE2AC815A8DB3900FB78A7 /* Default.png */,
 				0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */,
 			);
@@ -445,6 +451,8 @@
 				0F83DF2015AB6A1700E07D16 /* LQActivityItemViewController.xib in Resources */,
 				0F83DF3B15AB8E0700E07D16 /* Settings.bundle in Resources */,
 				0F8DB25D15B7430700681B69 /* LQLayerItemCellView.xib in Resources */,
+				0F8DB26B15B76AEC00681B69 /* defaultLayerIcon.png in Resources */,
+				0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

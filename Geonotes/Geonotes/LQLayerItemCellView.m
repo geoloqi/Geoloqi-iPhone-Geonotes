@@ -28,9 +28,8 @@
     // Configure the view for the selected state
 }
 
-
-- (void)setImageFromURL:(NSString *)url {
-    [imgView setImageWithURL:[NSURL URLWithString:url]];
+- (void)setImageFromURL:(NSString *)url placeholderImage:(UIImage *)image {
+    [imgView setImageWithURL:[NSURL URLWithString:url] placeholderImage:image];
 }
 
 @end
