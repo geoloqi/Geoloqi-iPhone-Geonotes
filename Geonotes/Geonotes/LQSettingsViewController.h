@@ -21,6 +21,7 @@ static NSString *const LQAllowPublicGeonotesUserDefaultsKey = @"com.geoloqi.LQAl
     BOOL keyboadIsShown;
     LQSettingsActionSheetDelegate *actionDelegate;
     */
+    NSArray *sectionHeaders;
 }
 
 // @property (nonatomic) IBOutlet UIScrollView *scrollView;
