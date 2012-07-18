@@ -22,5 +22,6 @@ static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
 
 - (void)prependObjectFromDictionary:(NSDictionary *)item;
 - (void)appendObjectFromDictionary:(NSDictionary *)item;
+- (void)reloadDataFromDB;
 
 @end

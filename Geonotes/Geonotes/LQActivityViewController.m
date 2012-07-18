@@ -58,13 +58,17 @@
     self.footerView = footerView;
 
     // Load the stored notes from the local database
+    [self reloadDataFromDB];
+}
+
+- (void)reloadDataFromDB
+{
     items = [[NSMutableArray alloc] init];
     [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
             [self prependObjectFromDictionary:object];
         }];
     }];
-    
 }
 
 - (void)viewDidUnload
@@ -135,13 +139,19 @@
     if (![super refresh])
         return NO;
     
-    NSDictionary *item = [items objectAtIndex:0];
-    NSLog(@"Newest entry is: %@", item);
     NSString *date;
-    if(item && [item objectForKey:@"published"])
-        date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
-    else
+    if(items.count == 0) {
         date = @"";
+    } else {
+        NSDictionary *item = [items objectAtIndex:0];
+        if(item && [item objectForKey:@"published"]) {
+            NSLog(@"Newest entry is: %@", item);
+            date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
+        } else {
+            date = @"";
+        }
+    }
+    
     
     // Do your async call here
     NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/timeline/messages?after=%@", date] payload:nil];
@@ -211,6 +221,11 @@
 {
     if (![super loadMore])
         return NO;
+    
+    if(items.count == 0) {
+        [self loadMoreCompleted];
+        return YES;
+    }
     
     NSDictionary *item = [items objectAtIndex:items.count-1];
     NSLog(@"Oldest entry is: %@", item);

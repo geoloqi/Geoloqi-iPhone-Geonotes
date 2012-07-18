@@ -18,6 +18,7 @@
 		0F83DF2015AB6A1700E07D16 /* LQActivityItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F83DF1E15AB6A1700E07D16 /* LQActivityItemViewController.xib */; };
 		0F83DF2215AB70EF00E07D16 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F83DF2115AB70EE00E07D16 /* MapKit.framework */; };
 		0F83DF3515AB827300E07D16 /* LQBasicAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */; };
+		0F83DF3B15AB8E0700E07D16 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F83DF3A15AB8E0700E07D16 /* Settings.bundle */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -90,6 +91,7 @@
 		0F83DF2115AB70EE00E07D16 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQBasicAnnotation.h; sourceTree = "<group>"; };
 		0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQBasicAnnotation.m; sourceTree = "<group>"; };
+		0F83DF3A15AB8E0700E07D16 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -215,6 +217,7 @@
 				0FDE2A5115A8C27000FB78A7 /* InfoPlist.strings */,
 				0FDE2A5415A8C27000FB78A7 /* main.m */,
 				0FDE2A5615A8C27000FB78A7 /* Geonotes-Prefix.pch */,
+				0F83DF3A15AB8E0700E07D16 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */,
 				0F83DEEA15AB438800E07D16 /* LQActivityItemCellView.xib in Resources */,
 				0F83DF2015AB6A1700E07D16 /* LQActivityItemViewController.xib in Resources */,
+				0F83DF3B15AB8E0700E07D16 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

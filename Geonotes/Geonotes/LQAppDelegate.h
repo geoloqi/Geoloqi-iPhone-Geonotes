@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#import "LQActivityViewController.h"
+#import "LQGeonotesViewController.h"
+#import "LQLayersViewController.h"
+#import "LQSettingsViewController.h"
+
 @interface LQAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) UITabBarController *tabBarController;
+
+@property (strong, nonatomic) LQActivityViewController *activityViewController;
 
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender;
 

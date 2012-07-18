@@ -8,10 +8,8 @@
 
 #import "LQAppDelegate.h"
 
-#import "LQActivityViewController.h"
-#import "LQGeonotesViewController.h"
-#import "LQLayersViewController.h"
-#import "LQSettingsViewController.h"
+#import "LOLDatabase.h"
+#import "sqlite3.h"
 
 #import "Geoloqi.h"
 
@@ -19,6 +17,7 @@
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
+@synthesize activityViewController;
 
 - (void)registerForPushNotifications {
     [LQSession registerForPushNotificationsWithCallback:^(NSData *deviceToken, NSError *error) {
@@ -47,7 +46,7 @@
     
 	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
 
-    UIViewController *activityViewController = [[LQActivityViewController alloc] init];
+    activityViewController = [[LQActivityViewController alloc] init];
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityNavController.navigationBar.tintColor = [UIColor blackColor];
     activityViewController.navigationItem.title = @"Geonotes";
@@ -68,6 +67,10 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:activityNavController, geonotesNavController, layersNavController, settingsViewController, nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    // In the Settings panel for this app, you can enter an access token. If set, this function
+    // re-initializes the LQSession with that account.
+    [self reInitializeSessionFromSettingsPanel];
 
     if(![LQSession savedSession]) {
 		[LQSession createAnonymousUserAccountWithUserInfo:nil completion:^(LQSession *session, NSError *error) {
@@ -91,6 +94,36 @@
     [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
 
     return YES;
+}
+
+- (void)reInitializeSessionFromSettingsPanel
+{
+    NSDictionary *settings = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+    NSLog(@"settings: %@", settings);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if([defaults boolForKey:@"com.geoloqi.geonotes.clearLocalDatabase"]) {
+
+        // Erase the local cache databases
+        sqlite3 *db;
+        if(sqlite3_open([[LQAppDelegate cacheDatabasePathForCategory:@"LQActivity"] UTF8String], &db) == SQLITE_OK) {
+            NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@'", LQActivityListCollectionName];
+            sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL);
+        }
+        // Tell the table view to delete its local copy and reload from the DB
+        [activityViewController reloadDataFromDB];
+        
+        [defaults removeObjectForKey:@"com.geoloqi.geonotes.clearLocalDatabase"];
+    }
+
+    if([defaults valueForKey:@"com.geoloqi.geonotes.newAccessToken"]) {
+        NSString *newAccessToken = [defaults valueForKey:@"com.geoloqi.geonotes.newAccessToken"];
+        [defaults removeObjectForKey:@"com.geoloqi.geonotes.newAccessToken"];
+        [LQSession setSavedSession:nil];
+        LQSession *newSession = [LQSession sessionWithAccessToken:newAccessToken];
+        [LQSession setSavedSession:newSession];
+        NSLog(@"Re-initialized session!");
+    }
 }
 
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender
@@ -158,6 +191,7 @@
                     }
          ];
     }
+    [defaults setValue:[LQSession savedSession].username forKey:@"LQUsername"];
     [defaults synchronize];
 }
 
