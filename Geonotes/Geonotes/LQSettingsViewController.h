@@ -8,15 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "Geoloqi.h"
+#import "LQSettingsActionSheetDelegate.h"
 
 static NSString *const LQAllowPublicGeonotesUserDefaultsKey = @"com.geoloqi.LQAllowPublicGeonotes";
 
 @interface LQSettingsViewController : UIViewController <UIAlertViewDelegate>
+{
+    UITextField *currentTextField;
+    BOOL keyboadIsShown;
+    LQSettingsActionSheetDelegate *actionDelegate;
+}
+
+@property (nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong) IBOutlet UISwitch *locationTracking;
 @property (strong) IBOutlet UISwitch *allowPublicGeonotes;
 
-@property (strong) IBOutlet UITextField *publicGeonoteURL;
+@property (strong) IBOutlet UIButton *publicGeonoteURL;
+@property (strong) IBOutlet UILabel *publicGeonoteURLLabel;
+
 @property (strong) IBOutlet UILabel *usernameLabel;
 @property (strong) IBOutlet UITextField *username;
 @property (strong) IBOutlet UIButton *saveUsername;
@@ -26,6 +36,6 @@ static NSString *const LQAllowPublicGeonotesUserDefaultsKey = @"com.geoloqi.LQAl
 - (IBAction)allowPublicGeonotesWasSwitched:(UISwitch *)sender;
 - (IBAction)saveUsernameWasTapped:(UIButton *)sender;
 
-- (IBAction)doneEditing:(id)sender;
+- (IBAction)publicGeonoteURLWasTapped:(UIButton *)sender;
 
 @end
