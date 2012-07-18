@@ -13,6 +13,9 @@
 #import "LQLayersViewController.h"
 #import "LQSettingsViewController.h"
 
+static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
+static NSString *LQLayerListCollectionName = @"LQLayerListCollection";
+
 @interface LQAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

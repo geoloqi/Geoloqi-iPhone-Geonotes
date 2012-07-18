@@ -110,21 +110,27 @@
 
 - (void)reInitializeSessionFromSettingsPanel
 {
-    NSDictionary *settings = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
-    NSLog(@"settings: %@", settings);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     if([defaults boolForKey:@"com.geoloqi.geonotes.clearLocalDatabase"]) {
 
         // Erase the local cache databases
         sqlite3 *db;
+        
+        // Erase the activity feed
         if(sqlite3_open([[LQAppDelegate cacheDatabasePathForCategory:@"LQActivity"] UTF8String], &db) == SQLITE_OK) {
             NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@'", LQActivityListCollectionName];
             sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL);
         }
         // Tell the table view to delete its local copy and reload from the DB
         [activityViewController reloadDataFromDB];
-        
+
+        // Erase the layer list
+        if(sqlite3_open([[LQAppDelegate cacheDatabasePathForCategory:@"LQLayer"] UTF8String], &db) == SQLITE_OK) {
+            NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@'", LQLayerListCollectionName];
+            sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL);
+        }
+
         [defaults removeObjectForKey:@"com.geoloqi.geonotes.clearLocalDatabase"];
     }
 

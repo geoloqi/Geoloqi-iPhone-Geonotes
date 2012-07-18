@@ -12,8 +12,6 @@
 #import <LQSDKUtils.h>
 #import "LOLDatabase.h"
 
-static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
-
 @interface LQActivityViewController : STableViewController {
     NSMutableArray *items;
 	LOLDatabase *_itemDB;
