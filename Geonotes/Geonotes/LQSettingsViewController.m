@@ -8,6 +8,8 @@
 
 #import "LQSettingsViewController.h"
 
+#define ANONUSER [LQSession savedSession].isAnonymous
+
 @interface LQSettingsViewController ()
 
 //- (LQSettingsActionSheetDelegate *)actionDelegate;
@@ -72,41 +74,91 @@
 
 #pragma mark - Table View
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    int rows;
+    switch (section) {
+        case 0:
+            rows = 1;
+            break;
+            
+        case 1:
+            rows = ANONUSER ? 2 : 1;
+            break;
+            
+        case 2:
+            rows = 3;
+    }
+    return rows;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
     
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0:
-        {
-            cell = [self locationUpdateSettingCell:tableView];
+            switch (indexPath.row) {
+                case 0:
+                    cell = [self locationUpdateCell];
+                    break;
+            }
             break;
-        }
-        
+            
         case 1:
-            // enable on reboot?
+            switch (indexPath.row) {
+                case 0:
+                    if (ANONUSER)
+                        cell = [self setupAccountCell];
+                    else
+                        cell = [self loginCell];
+                    break;
+                case 1:
+                    cell = [self loginCell];
+                    break;
+            }
             break;
             
         case 2:
-            // something
+            switch (indexPath.row) {
+                case 0:
+                    cell = [self privacyPolicyCell];
+                    break;
+                case 1:
+                    cell = [self appVersionCell];
+                    break;
+                case 2:
+                    cell = [self sdkVersionCell];
+                    break;
+            }
             break;
-            
     }
     
     return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;//3;
+    return [[self sectionHeaders] count];
 }
 
-- (UITableViewCell *)locationUpdateSettingCell:(UITableView *)tableView
+- (NSArray *)sectionHeaders
 {
-    static NSString *switchCellIdentifier = @"SwitchCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:switchCellIdentifier];
-    if (cell == nil)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:switchCellIdentifier];
+    if (sectionHeaders == nil)
+        sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"About", nil];
+    return sectionHeaders;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self sectionHeaders] objectAtIndex:section];
+}
+
+#pragma mark - Cells
+
+- (UITableViewCell *)locationUpdateCell
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
     cell.textLabel.text = @"Enable location";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -115,6 +167,46 @@
     cell.accessoryView = locationSwitch;
     [locationSwitch setOn:([[LQTracker sharedTracker] profile] != LQTrackerProfileOff) animated:NO];
     [locationSwitch addTarget:self action:@selector(locationTrackingWasSwitched:) forControlEvents:UIControlEventValueChanged];
+    return cell;
+}
+
+- (UITableViewCell *)setupAccountCell
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textLabel.text = @"Setup account";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (UITableViewCell *)loginCell
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textLabel.text = [NSString stringWithFormat:@"Login to %@ account", (ANONUSER ? @"existing" : @"different")];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (UITableViewCell *)privacyPolicyCell
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textLabel.text = @"Privacy Policy";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (UITableViewCell *)appVersionCell
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textLabel.text = [NSString stringWithFormat:@"Version: %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (UITableViewCell *)sdkVersionCell
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.textLabel.text = [NSString stringWithFormat:@"SDK Version: %@", LQSDKVersionString];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
