@@ -60,6 +60,8 @@
     }
 }
 
+#pragma mark - Data
+
 - (void)reloadDataFromDB
 {
     items = [[NSMutableArray alloc] init];
@@ -167,19 +169,6 @@
     if (![super refresh])
         return NO;
     
-    NSString *date;
-    if(items.count == 0) {
-        date = @"";
-    } else {
-        NSDictionary *item = [items objectAtIndex:0];
-        if(item && [item objectForKey:@"published"]) {
-            NSLog(@"Newest entry is: %@", item);
-            date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
-        } else {
-            date = @"";
-        }
-    }
-    
     // Do your async call here
     [self fetchRemoteDataWithCallback:^{
         // Tell the table to reload
@@ -188,8 +177,6 @@
         // Call this to indicate that we have finished "refreshing".
         // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
         [self refreshCompleted];
-
-        NSLog(@"Items: %@", items);
     }];
     
     return YES;

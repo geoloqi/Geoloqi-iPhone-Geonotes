@@ -16,6 +16,7 @@
 
 static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
 static NSString *LQLayerListCollectionName = @"LQLayerListCollection";
+static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
 
 @interface LQAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 

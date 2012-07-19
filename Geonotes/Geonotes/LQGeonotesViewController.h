@@ -8,7 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "STableViewController.h"
+#import "LQGeonoteItemCellView.h"
+#import "LOLDatabase.h"
 
-@interface LQGeonotesViewController : STableViewController
+@interface LQGeonotesViewController : STableViewController {
+    NSMutableArray *items;
+    LOLDatabase *_itemDB;
+    IBOutlet LQGeonoteItemCellView *tableCellView;
+    UIImage *placeholderImage;
+    NSDateFormatter *dateFormatter;
+}
+
+- (void)appendObjectFromDictionary:(NSDictionary *)item;
+- (void)reloadDataFromDB;
+- (void)fetchRemoteDataWithCallback:(void(^)(void))block;
 
 @end

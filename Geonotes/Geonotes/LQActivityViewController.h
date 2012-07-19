@@ -16,6 +16,7 @@
     NSMutableArray *items;
 	LOLDatabase *_itemDB;
     IBOutlet LQActivityItemCellView *tableCellView;
+    NSDateFormatter *dateFormatter;
 }
 
 - (void)prependObjectFromDictionary:(NSDictionary *)item;

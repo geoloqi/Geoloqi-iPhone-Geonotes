@@ -37,6 +37,10 @@
 		return [LQSDKUtils objectFromJSONData:data error:NULL];
 	};
     
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
     return self;
 }
 							
@@ -301,7 +305,13 @@
         if([item respondsToSelector:@selector(objectForKey:)]) {
             cell.headerText.text = [item objectForKey:@"title"];
             cell.secondaryText.text = [[item objectForKey:@"object"] objectForKey:@"summary"];
-            cell.dateText.text = [item objectForKey:@"displayDate"];
+
+            if([item objectForKey:@"published_ts"]) {
+                NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[item objectForKey:@"published_ts"] doubleValue]];
+                cell.dateText.text = [dateFormatter stringFromDate:date];
+            } else {
+                cell.dateText.text = [item objectForKey:@"displayDate"];
+            }
             
             NSString *imageURL;
             if(![[[[item objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"] isEqualToString:@""]) {
