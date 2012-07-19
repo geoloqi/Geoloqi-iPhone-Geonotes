@@ -10,7 +10,7 @@
 
 @interface LQGeonoteItemCellView : UITableViewCell
 
-@property IBOutlet UILabel *headerText;
+@property IBOutlet UILabel *placeName;
 @property IBOutlet UILabel *secondaryText;
 @property IBOutlet UILabel *dateText;
 

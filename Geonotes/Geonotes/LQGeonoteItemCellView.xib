@@ -47,7 +47,7 @@
 							<object class="IBUILabel" id="449541356">
 								<reference key="NSNextResponder" ref="857399204"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{11, 4}, {283, 38}}</string>
+								<string key="NSFrame">{{11, 2}, {283, 38}}</string>
 								<reference key="NSSuperview" ref="857399204"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="416922472"/>
@@ -75,10 +75,9 @@
 							<object class="IBUILabel" id="416922472">
 								<reference key="NSNextResponder" ref="857399204"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{100, 33}, {200, 21}}</string>
+								<string key="NSFrame">{{179, 33}, {121, 21}}</string>
 								<reference key="NSSuperview" ref="857399204"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -92,18 +91,39 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">2</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="66708005">
 									<int key="type">1</int>
 									<double key="pointSize">13</double>
 								</object>
-								<object class="NSFont" key="IBUIFont">
+								<object class="NSFont" key="IBUIFont" id="772707035">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
+							<object class="IBUILabel" id="708915247">
+								<reference key="NSNextResponder" ref="857399204"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{11, 33}, {121, 21}}</string>
+								<reference key="NSSuperview" ref="857399204"/>
+								<reference key="NSWindow"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<string key="IBUIText">Label</string>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC4zNTIzODkzNzA0AA</bytes>
+								</object>
+								<nil key="IBUIHighlightedColor"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<float key="IBUIMinimumFontSize">10</float>
+								<reference key="IBUIFontDescription" ref="66708005"/>
+								<reference key="IBUIFont" ref="772707035"/>
+							</object>
 						</object>
-						<string key="NSFrameSize">{300, 53}</string>
+						<string key="NSFrameSize">{320, 53}</string>
 						<reference key="NSSuperview" ref="935155554"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="449541356"/>
@@ -128,7 +148,6 @@
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="857399204"/>
 				<string key="IBUIReuseIdentifier">tblCellView</string>
 				<real value="55" key="IBUIRowHeight"/>
@@ -161,6 +180,14 @@
 					</object>
 					<int key="connectionID">16</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">placeName</string>
+						<reference key="source" ref="935155554"/>
+						<reference key="destination" ref="708915247"/>
+					</object>
+					<int key="connectionID">18</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -191,6 +218,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="416922472"/>
 							<reference ref="449541356"/>
+							<reference ref="708915247"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -204,6 +232,11 @@
 						<reference key="object" ref="416922472"/>
 						<reference key="parent" ref="935155554"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="708915247"/>
+						<reference key="parent" ref="935155554"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -215,6 +248,7 @@
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
+					<string>17.IBPluginDependency</string>
 					<string>2.CustomClassName</string>
 					<string>2.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
@@ -224,6 +258,7 @@
 					<string>LQGeonotesViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>LQGeonoteItemCellView</string>
@@ -243,7 +278,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">18</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -256,7 +291,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>dateText</string>
-							<string>headerText</string>
+							<string>placeName</string>
 							<string>secondaryText</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -271,7 +306,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>dateText</string>
-							<string>headerText</string>
+							<string>placeName</string>
 							<string>secondaryText</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -281,7 +316,7 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">headerText</string>
+								<string key="name">placeName</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">

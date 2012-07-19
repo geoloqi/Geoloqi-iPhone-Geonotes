@@ -48,6 +48,9 @@
 
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
     
+    self.navigationItem.leftBarButtonItem = [self editButtonItem];
+    self.navigationItem.leftBarButtonItem.action = @selector(editWasTapped:);
+        
     // set the custom view for "pull to refresh". See LQTableHeaderView.xib
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LQTableHeaderView" owner:self options:nil];
     LQTableHeaderView *headerView = (LQTableHeaderView *)[nib objectAtIndex:0];
@@ -59,6 +62,19 @@
     // If there are no layers, then force an API call
     if(items.count == 0) {
         [self refresh];
+    }
+}
+
+- (void)editWasTapped:(id)sender 
+{
+    if(self.tableView.editing) {
+        [super setEditing:NO animated:YES];
+        [self.tableView setEditing:NO animated:YES];
+        self.navigationItem.leftBarButtonItem.title = @"Edit";
+    } else {
+        [super setEditing:YES animated:YES];
+        [self.tableView setEditing:YES animated:YES];
+        self.navigationItem.leftBarButtonItem.title = @"Done";
     }
 }
 
@@ -153,6 +169,14 @@
 
 #pragma mark - Table View Delegate
 
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSLog(@"Selected row: %d", indexPath.row);
+//    
+//    LQGeonoteItemViewController *itemViewController = [[LQGeonoteItemViewController alloc] init];
+//    [itemViewController loadStory:[items objectAtIndex:indexPath.row]];
+//    [self.navigationController pushViewController:itemViewController animated:YES];
+//}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 54.0;
 }
@@ -174,7 +198,7 @@
     
     id item = [items objectAtIndex:indexPath.row];
     if(item) {
-        cell.headerText.text = @"";
+        cell.placeName.text = [item objectForKey:@"place_name"];
         cell.secondaryText.text = [item objectForKey:@"text"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone; // TODO: Remove this to enable selecting rows again
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[item objectForKey:@"date_created_ts"] doubleValue]];
@@ -182,6 +206,50 @@
     }
     return cell;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    return YES;
+}
+   
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSLog(@"Deleting item: %@", [items objectAtIndex:indexPath.row]);
+
+        NSDictionary *item = [items objectAtIndex:indexPath.row];
+        
+        // Delete from Geoloqi API
+        NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/trigger/delete/%@", [item objectForKey:@"geonote_id"]] payload:nil];
+        [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+            NSLog(@"Deleted note: %@", responseDictionary);
+        }];
+        
+        // Delete from sqlite cache
+        [_itemDB accessCollection:LQGeonoteListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
+            [accessor removeDictionaryForKey:[item objectForKey:@"geonote_id"]];
+        }];
+        
+        // Delete from local array
+        [items removeObjectAtIndex:indexPath.row];
+        
+        // Animate deletion
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 
 #pragma mark -
 

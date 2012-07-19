@@ -10,7 +10,7 @@
 
 @implementation LQGeonoteItemCellView
 
-@synthesize headerText, secondaryText, dateText;
+@synthesize placeName, secondaryText, dateText;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
