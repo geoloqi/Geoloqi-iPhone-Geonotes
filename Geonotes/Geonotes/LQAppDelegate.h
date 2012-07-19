@@ -10,6 +10,7 @@
 
 #import "LQActivityViewController.h"
 #import "LQGeonotesViewController.h"
+#import "LQNewGeonoteViewController.h"
 #import "LQLayersViewController.h"
 #import "LQSettingsViewController.h"
 

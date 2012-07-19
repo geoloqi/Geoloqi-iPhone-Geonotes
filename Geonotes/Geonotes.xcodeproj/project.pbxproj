@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0F2E78C515A901AA00D64CFA /* LQTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */; };
 		0F2E78C715A901B200D64CFA /* LQTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */; };
+		0F60E93B15B79918004BBADF /* newGeonoteTabBarItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */; };
+		0F60E93D15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */; };
 		0F83DEE015AA80F300E07D16 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DEDF15AA80F300E07D16 /* NSString+URLEncoding.m */; };
 		0F83DEE915AB438800E07D16 /* LQActivityItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DEE715AB438800E07D16 /* LQActivityItemCellView.m */; };
 		0F83DEEA15AB438800E07D16 /* LQActivityItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F83DEE815AB438800E07D16 /* LQActivityItemCellView.xib */; };
@@ -24,6 +26,10 @@
 		0F8DB25D15B7430700681B69 /* LQLayerItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB25C15B7430700681B69 /* LQLayerItemCellView.xib */; };
 		0F8DB26B15B76AEC00681B69 /* defaultLayerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */; };
 		0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */; };
+		0F8DB27015B7713E00681B69 /* cameraTabBarItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26E15B7713E00681B69 /* cameraTabBarItem.png */; };
+		0F8DB27115B7713E00681B69 /* cameraTabBarItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26F15B7713E00681B69 /* cameraTabBarItem@2x.png */; };
+		0F8DB27A15B780CE00681B69 /* LQNewGeonoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */; };
+		0F8DB27B15B780CE00681B69 /* LQNewGeonoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -84,6 +90,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newGeonoteTabBarItem@2x.png"; path = "Graphics/newGeonoteTabBarItem@2x.png"; sourceTree = "<group>"; };
+		0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newGeonoteTabBarItemHighlighted@2x.png"; path = "Graphics/newGeonoteTabBarItemHighlighted@2x.png"; sourceTree = "<group>"; };
 		0F83DEDE15AA80F300E07D16 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		0F83DEDF15AA80F300E07D16 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		0F83DEE615AB438800E07D16 /* LQActivityItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQActivityItemCellView.h; sourceTree = "<group>"; };
@@ -105,6 +113,11 @@
 		0F8DB25C15B7430700681B69 /* LQLayerItemCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQLayerItemCellView.xib; sourceTree = "<group>"; };
 		0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultLayerIcon.png; path = Graphics/defaultLayerIcon.png; sourceTree = "<group>"; };
 		0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "defaultLayerIcon@2x.png"; path = "Graphics/defaultLayerIcon@2x.png"; sourceTree = "<group>"; };
+		0F8DB26E15B7713E00681B69 /* cameraTabBarItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cameraTabBarItem.png; path = Graphics/cameraTabBarItem.png; sourceTree = "<group>"; };
+		0F8DB26F15B7713E00681B69 /* cameraTabBarItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cameraTabBarItem@2x.png"; path = "Graphics/cameraTabBarItem@2x.png"; sourceTree = "<group>"; };
+		0F8DB27715B780CE00681B69 /* LQNewGeonoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteViewController.h; sourceTree = "<group>"; };
+		0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteViewController.m; sourceTree = "<group>"; };
+		0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteViewController.xib; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -179,6 +192,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0F8DB26D15B76FBB00681B69 /* New Geonote */ = {
+			isa = PBXGroup;
+			children = (
+				0F8DB27715B780CE00681B69 /* LQNewGeonoteViewController.h */,
+				0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */,
+				0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */,
+			);
+			name = "New Geonote";
+			sourceTree = "<group>";
+		};
 		0FDE2A3915A8C27000FB78A7 = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +269,11 @@
 				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
 				0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */,
 				0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */,
+				0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */,
+				0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */,
 				0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */,
+				0F8DB26E15B7713E00681B69 /* cameraTabBarItem.png */,
+				0F8DB26F15B7713E00681B69 /* cameraTabBarItem@2x.png */,
 				0FDE2AC815A8DB3900FB78A7 /* Default.png */,
 				0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */,
 			);
@@ -258,6 +285,7 @@
 			children = (
 				0FDE2A8215A8C59000FB78A7 /* Activity */,
 				0FDE2A8315A8C59400FB78A7 /* Geonotes */,
+				0F8DB26D15B76FBB00681B69 /* New Geonote */,
 				0FDE2A8415A8C59B00FB78A7 /* Layers */,
 				0FDE2A8515A8C5A100FB78A7 /* Settings */,
 				0F8DB24715B7385100681B69 /* LQTabBarController.h */,
@@ -453,6 +481,11 @@
 				0F8DB25D15B7430700681B69 /* LQLayerItemCellView.xib in Resources */,
 				0F8DB26B15B76AEC00681B69 /* defaultLayerIcon.png in Resources */,
 				0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */,
+				0F8DB27015B7713E00681B69 /* cameraTabBarItem.png in Resources */,
+				0F8DB27115B7713E00681B69 /* cameraTabBarItem@2x.png in Resources */,
+				0F8DB27B15B780CE00681B69 /* LQNewGeonoteViewController.xib in Resources */,
+				0F60E93B15B79918004BBADF /* newGeonoteTabBarItem@2x.png in Resources */,
+				0F60E93D15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +512,7 @@
 				0F83DF3515AB827300E07D16 /* LQBasicAnnotation.m in Sources */,
 				0F8DB24915B7385100681B69 /* LQTabBarController.m in Sources */,
 				0F8DB25B15B742F100681B69 /* LQLayerItemCellView.m in Sources */,
+				0F8DB27A15B780CE00681B69 /* LQNewGeonoteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,7 +52,7 @@
 
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityNavController.navigationBar.tintColor = [UIColor blackColor];
-    activityViewController.navigationItem.title = @"Geonotes";
+    // activityViewController.navigationItem.title = @"Geonotes";
     // activityViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
 
     UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] init];
@@ -60,8 +60,9 @@
     geonotesNavController.navigationBar.tintColor = [UIColor blackColor];
     // geonotesViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newGeonoteButtonWasTapped:)];
 
-    UIViewController *newGeonoteViewController = [[LQGeonotesViewController alloc] init];
+    UIViewController *newGeonoteViewController = [[LQNewGeonoteViewController alloc] init];
     UINavigationController *newGeonoteNavController = [[UINavigationController alloc] initWithRootViewController:newGeonoteViewController];
+    newGeonoteNavController.navigationBar.tintColor = [UIColor blackColor];
 
     UIViewController *layersViewController = [[LQLayersViewController alloc] init];
     UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
@@ -77,6 +78,7 @@
                                                 layersNavController, 
                                                 settingsViewController, 
                                                 nil];
+    // [(LQTabBarController *)self.tabBarController addCenterButtonTarget:self action:@selector(openNewGeonoteController:)];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
@@ -106,6 +108,11 @@
     [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
 
     return YES;
+}
+
+- (void)openNewGeonoteController:(id)sender 
+{
+    NSLog(@"Center was tapped");
 }
 
 - (void)reInitializeSessionFromSettingsPanel

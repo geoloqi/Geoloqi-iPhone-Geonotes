@@ -15,38 +15,64 @@
 @implementation LQTabBarController
 
 // Create a view controller and setup it's tab bar item with a title and image
--(UIViewController*) viewControllerWithTabTitle:(NSString*) title image:(UIImage*)image
+- (UIViewController *)viewControllerWithTabTitle:(NSString*) title image:(UIImage*)image
 {
-    UIViewController* viewController = [[UIViewController alloc] init];
+    UIViewController *viewController = [[UIViewController alloc] init];
     viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:image tag:0];
     return viewController;
 }
 
 // Create a custom UIButton and add it to the center of our tab bar
--(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
+- (void)addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
 {
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-    button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
-    [button setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+//    centerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    centerButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+//    centerButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+//    [centerButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+//    [centerButton setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+
+    // Store as local variables
+    defaultImage = buttonImage;
+    highlightedImage = highlightImage;
     
+    centerButton = [[UIImageView alloc] initWithImage:buttonImage];
+    centerButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+    centerButton.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
+
+    // centerButton.isUserInteractionEnabled = NO;
+    // [centerButton setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
+
     CGFloat heightDifference = buttonImage.size.height - self.tabBar.frame.size.height;
     if (heightDifference < 0)
-        button.center = self.tabBar.center;
+        centerButton.center = self.tabBar.center;
     else
     {
         CGPoint center = self.tabBar.center;
         center.y = center.y - heightDifference/2.0;
-        button.center = center;
+        centerButton.center = center;
     }
     
-    [self.view addSubview:button];
+    [self.view addSubview:centerButton];
 }
 
--(void)willAppearIn:(UINavigationController *)navigationController
+- (void)viewWillAppear:(BOOL)animated
 {
-    [self addCenterButtonWithImage:[UIImage imageNamed:@"geonote.png"] highlightImage:nil];
+    [super viewWillAppear:animated];
+    
+    self.delegate = self;
+    
+    [self addCenterButtonWithImage:[UIImage imageNamed:@"newGeonoteTabBarItem.png"] 
+                    highlightImage:[UIImage imageNamed:@"newGeonoteTabBarItemHighlighted.png"]];
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if(self.selectedIndex == 2) {
+        // Center button tapped
+        centerButton.image = highlightedImage;
+    } else {
+        // Some other button tapped
+        centerButton.image = defaultImage;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
