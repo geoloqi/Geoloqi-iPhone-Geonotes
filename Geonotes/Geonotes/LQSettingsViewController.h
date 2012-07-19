@@ -8,13 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "Geoloqi.h"
+#import "LQSetupAccountViewController.h"
+#import "LQLoginViewController.h"
+#import "LQPrivacyPolicyViewController.h"
 
 @interface LQSettingsViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *sectionHeaders;
 }
 
-@property (strong) IBOutlet UISwitch *locationTracking;
+@property (nonatomic, strong) IBOutlet UISwitch *locationTracking;
+@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, strong) IBOutlet UIViewController *setupAccountViewController;
+@property (nonatomic, strong) IBOutlet UIViewController *loginViewController;
+@property (nonatomic, strong) IBOutlet UIViewController *privacyPolicyViewController;
 
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender;
 
