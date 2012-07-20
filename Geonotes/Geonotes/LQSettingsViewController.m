@@ -8,11 +8,10 @@
 
 #import "LQSettingsViewController.h"
 
-#define ANONUSER [LQSession savedSession].isAnonymous
-
 @implementation LQSettingsViewController
 
-@synthesize locationTracking;
+@synthesize locationTracking, navigationBar,
+            setupAccountViewController, loginViewController, privacyPolicyViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSLog(@"Settings View Loaded");
+    
 }
 
 - (void)viewDidUnload
@@ -54,7 +54,7 @@
             break;
             
         case 1:
-            rows = ANONUSER ? 2 : 1;
+            rows = [LQSession savedSession].isAnonymous ? 2 : 1;
             break;
             
         case 2:
@@ -79,7 +79,7 @@
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    if (ANONUSER)
+                    if ([LQSession savedSession].isAnonymous)
                         cell = [self setupAccountCell];
                     else
                         cell = [self loginCell];
@@ -152,7 +152,7 @@
 - (UITableViewCell *)loginCell
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = [NSString stringWithFormat:@"Login to %@ account", (ANONUSER ? @"existing" : @"different")];
+    cell.textLabel.text = [NSString stringWithFormat:@"Login to %@ account", ([LQSession savedSession].isAnonymous ? @"existing" : @"different")];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -189,7 +189,7 @@
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    if (ANONUSER)
+                    if ([LQSession savedSession].isAnonymous)
                         [self setupAccountCellWasTapped];
                     else
                         [self loginCellWasTapped];                    
@@ -204,21 +204,42 @@
                 [self privacyPolicyCellWasTapped];
             break;
     }
+    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
 }
 
 - (void)setupAccountCellWasTapped
 {
-    
+    if (self.setupAccountViewController == nil) {
+        self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
+                                                                                         bundle:[NSBundle mainBundle]];
+    } else {
+        UINavigationController *nc = (UINavigationController *)self.setupAccountViewController;
+        LQSetupAccountViewController *savc = [[nc viewControllers] objectAtIndex:0];
+        [savc resetField];
+    }
+    [self presentModalViewController:self.setupAccountViewController animated:YES];
 }
 
 - (void)loginCellWasTapped
 {
-    
+    if (self.loginViewController == nil) {
+        self.loginViewController = [[LQLoginViewController alloc] initWithNibName:@"LQLoginViewController"
+                                                                           bundle:[NSBundle mainBundle]];
+    } else {
+        UINavigationController *nc = (UINavigationController *)self.loginViewController;
+        LQLoginViewController *lvc = [[nc viewControllers] objectAtIndex:0];
+        [lvc resetFields];
+    }
+    [self presentModalViewController:self.loginViewController animated:YES];
 }
 
 - (void)privacyPolicyCellWasTapped
 {
-    
+    if (self.privacyPolicyViewController == nil) {
+        self.privacyPolicyViewController = [[LQPrivacyPolicyViewController alloc] initWithNibName:@"LQPrivacyPolicyViewController"
+                                                                                  bundle:[NSBundle mainBundle]];
+    }
+    [self presentModalViewController:self.privacyPolicyViewController animated:YES];
 }
 
 #pragma mark - IBActions
