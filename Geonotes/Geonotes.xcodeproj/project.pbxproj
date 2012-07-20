@@ -30,6 +30,7 @@
 		0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */; };
 		0F8DB27A15B780CE00681B69 /* LQNewGeonoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */; };
 		0F8DB27B15B780CE00681B69 /* LQNewGeonoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */; };
+		0FA402E815B9E99C007C2827 /* newGeonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA402E715B9E99C007C2827 /* newGeonote@2x.png */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -119,6 +120,7 @@
 		0F8DB27715B780CE00681B69 /* LQNewGeonoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteViewController.h; sourceTree = "<group>"; };
 		0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteViewController.m; sourceTree = "<group>"; };
 		0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteViewController.xib; sourceTree = "<group>"; };
+		0FA402E715B9E99C007C2827 /* newGeonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newGeonote@2x.png"; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -270,6 +272,7 @@
 				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
 				0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */,
 				0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */,
+				0FA402E715B9E99C007C2827 /* newGeonote@2x.png */,
 				0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */,
 				0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */,
 				0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */,
@@ -487,6 +490,7 @@
 				0F60E93B15B79918004BBADF /* newGeonoteTabBarItem@2x.png in Resources */,
 				0F60E93D15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png in Resources */,
 				0F60E94715B88F9B004BBADF /* LQGeonoteItemCellView.xib in Resources */,
+				0FA402E815B9E99C007C2827 /* newGeonote@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

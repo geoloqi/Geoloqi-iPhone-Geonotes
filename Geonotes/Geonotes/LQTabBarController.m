@@ -52,8 +52,8 @@
     
     self.delegate = self;
     
-    [self addCenterButtonWithImage:[UIImage imageNamed:@"newGeonoteTabBarItem.png"] 
-                    highlightImage:[UIImage imageNamed:@"newGeonoteTabBarItemHighlighted.png"]];
+    [self addCenterButtonWithImage:[UIImage imageNamed:@"newGeonote.png"] 
+                    highlightImage:nil];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
