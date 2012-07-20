@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LQTabBarController : UITabBarController <UITabBarControllerDelegate> {
-    UIImageView *centerButton;
+    UIButton *centerButton;
     UIImage *defaultImage;
     UIImage *highlightedImage;
 }
@@ -19,5 +19,7 @@
 
 // Create a custom UIButton and add it to the center of our tab bar
 - (void)addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage;
+
+- (void)addCenterButtonTarget:(id)target action:(SEL)sel;
 
 @end
