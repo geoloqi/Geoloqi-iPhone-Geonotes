@@ -10,7 +10,7 @@
 
 @implementation LQSettingsViewController
 
-@synthesize locationTracking, navigationBar,
+@synthesize locationTracking, navigationBar, tableView = _tableView,
             setupAccountViewController, loginViewController, privacyPolicyViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -125,6 +125,21 @@
     return [[self sectionHeaders] objectAtIndex:section];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    LQSession *session = [LQSession savedSession];
+    NSString *footer;
+    if (section == 1) {
+        if (session.isAnonymous)
+            footer = @"Logged in anonymously";
+        else {
+            NSString *displayName = [[NSUserDefaults standardUserDefaults] objectForKey:LQDisplayNameUserDefaultsKey];
+            footer = [NSString stringWithFormat:@"Currently logged in as '%@'", displayName];
+        }
+    }
+    return footer;
+}
+
 #pragma mark - Table View - Cells
 
 - (UITableViewCell *)locationUpdateCell
@@ -213,24 +228,23 @@
         self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
                                                                                          bundle:[NSBundle mainBundle]];
     } else {
-        UINavigationController *nc = (UINavigationController *)self.setupAccountViewController;
-        LQSetupAccountViewController *savc = [[nc viewControllers] objectAtIndex:0];
+        LQSetupAccountViewController *savc = (LQSetupAccountViewController *)self.setupAccountViewController;
         [savc resetField];
     }
-    [self presentModalViewController:self.setupAccountViewController animated:YES];
+    [self.navigationController pushViewController:self.setupAccountViewController animated:YES];
 }
 
 - (void)loginCellWasTapped
 {
     if (self.loginViewController == nil) {
         self.loginViewController = [[LQLoginViewController alloc] initWithNibName:@"LQLoginViewController"
-                                                                           bundle:[NSBundle mainBundle]];
+                                                                           bundle:[NSBundle mainBundle]
+                                                             andSettingsTableView:_tableView];
     } else {
-        UINavigationController *nc = (UINavigationController *)self.loginViewController;
-        LQLoginViewController *lvc = [[nc viewControllers] objectAtIndex:0];
+        LQLoginViewController *lvc  = (LQLoginViewController *)self.loginViewController;
         [lvc resetFields];
     }
-    [self presentModalViewController:self.loginViewController animated:YES];
+    [self.navigationController pushViewController:self.loginViewController animated:YES];
 }
 
 - (void)privacyPolicyCellWasTapped
@@ -239,7 +253,7 @@
         self.privacyPolicyViewController = [[LQPrivacyPolicyViewController alloc] initWithNibName:@"LQPrivacyPolicyViewController"
                                                                                   bundle:[NSBundle mainBundle]];
     }
-    [self presentModalViewController:self.privacyPolicyViewController animated:YES];
+    [self.navigationController pushViewController:self.privacyPolicyViewController animated:YES];
 }
 
 #pragma mark - IBActions

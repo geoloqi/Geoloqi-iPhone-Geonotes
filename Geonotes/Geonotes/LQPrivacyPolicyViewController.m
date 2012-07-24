@@ -28,9 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                          target:self
-                                                                                          action:@selector(cancel)];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:LQPrivacyPolicyURL]]];
 }
 

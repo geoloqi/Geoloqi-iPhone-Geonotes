@@ -14,7 +14,7 @@
 
 @implementation LQLoginViewController
 
-@synthesize tableView,
+@synthesize tableView, settingsTableView, activityIndicator,
             emailAddressField, passwordField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,12 +26,18 @@
     return self;
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsTableView:(UITableView *)_settingsTableView
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.settingsTableView = _settingsTableView;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                          target:self
-                                                                                          action:@selector(cancel)];
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Login", nil)
 																			  style:UIBarButtonItemStyleDone 
 																			 target:self 
@@ -57,6 +63,7 @@
 {
     self.emailAddressField.text = nil;
     self.passwordField.text = nil;
+    [self.emailAddressField becomeFirstResponder];
 }
 
 - (BOOL)isComplete
@@ -71,6 +78,9 @@
 
 - (IBAction)loginToAccount
 {
+    [self.activityIndicator startAnimating];
+    [self.emailAddressField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
     [LQSession requestSessionWithUsername:emailAddressField.text
                                  password:passwordField.text
                                completion:^(LQSession *session, NSError *error) {
@@ -83,7 +93,11 @@
                                        [alert show];
                                    } else {
                                        [LQSession setSavedSession:session];
-                                       [self cancel];
+                                       [self setDisplayName:^() {
+                                           [self.settingsTableView reloadData];
+                                           [self.activityIndicator stopAnimating];
+                                           [self.navigationController popViewControllerAnimated:YES];
+                                       }];
                                    }
                                }];
 }
@@ -91,6 +105,17 @@
 - (IBAction)textFieldDidEditChanged:(UITextField *)textField
 {
     self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+}
+
+- (void)setDisplayName:(void (^)())block
+{
+    LQSession *session = [LQSession savedSession];
+    NSURLRequest *req = [session requestWithMethod:@"GET" path:@"/account/profile" payload:nil];
+    [session runAPIRequest:req completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+                    [[NSUserDefaults standardUserDefaults] setObject:[responseDictionary objectForKey:@"display_name"]
+                                                              forKey:LQDisplayNameUserDefaultsKey];
+                    block();
+                }];
 }
 
 #pragma mark - table view datasource
