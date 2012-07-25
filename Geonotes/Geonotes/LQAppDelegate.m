@@ -112,8 +112,8 @@
 {
     NSLog(@"Center was tapped");
     LQNewGeonoteViewController *newGeonoteController = [[LQNewGeonoteViewController alloc] init];
-    [self.tabBarController presentModalViewController:newGeonoteController animated:YES];
-    // [newGeonoteController.closeButton sele
+    newGeonoteController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self.tabBarController presentViewController:newGeonoteController animated:YES completion:nil];
 }
 
 - (void)reInitializeSessionFromSettingsPanel

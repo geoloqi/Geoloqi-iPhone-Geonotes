@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LQNewGeonoteViewController : UIViewController
+@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate>
+
+@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelBarButton;
+@property (nonatomic, strong) IBOutlet UITextView *geonoteTextView;
+@property (nonatomic, strong) IBOutlet UIButton *pickOnMapButton;
+@property (nonatomic, strong) IBOutlet UIButton *submitButton;
+@property (nonatomic, strong) IBOutlet UILabel *locationLabel;
+
+- (IBAction)cancelBarButtonWasTapped:(id)sender;
+- (IBAction)pickOnMapButtonWasTapped:(id)sender;
+- (IBAction)submitButtonWasTapped:(id)sender;
 
 @end

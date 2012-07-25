@@ -14,12 +14,14 @@
 
 @implementation LQNewGeonoteViewController
 
+@synthesize navigationBar, cancelBarButton,
+            geonoteTextView, pickOnMapButton, submitButton, locationLabel;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"New Geonote", @"New Geonote");
     }
     return self;
 }
@@ -40,6 +42,23 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+
+- (IBAction)cancelBarButtonWasTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)pickOnMapButtonWasTapped:(id)sender
+{
+    
+}
+
+- (IBAction)submitButtonWasTapped:(id)sender
+{
+    
 }
 
 @end
