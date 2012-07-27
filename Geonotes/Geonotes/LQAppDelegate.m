@@ -64,7 +64,9 @@
     UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
     layersNavController.navigationBar.tintColor = [UIColor blackColor];
 
-    UIViewController *settingsViewController = [[LQSettingsViewController alloc] initWithNibName:@"LQSettingsViewController" bundle:nil];
+    UIViewController *settingsViewController = [[LQSettingsViewController alloc] init];
+    UINavigationController *settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+    settingsNavController.navigationBar.tintColor = [UIColor blackColor];
     
     self.tabBarController = [[LQTabBarController alloc] init];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
@@ -72,7 +74,7 @@
                                                 geonotesNavController,
                                                 newGeonoteNavController,
                                                 layersNavController, 
-                                                settingsViewController, 
+                                                settingsNavController,
                                                 nil];
     [(LQTabBarController *)self.tabBarController addCenterButtonTarget:self action:@selector(openNewGeonoteController:)];
     self.window.rootViewController = self.tabBarController;

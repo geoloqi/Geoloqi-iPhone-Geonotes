@@ -12,6 +12,8 @@
 #import "LQLoginViewController.h"
 #import "LQPrivacyPolicyViewController.h"
 
+static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.LQDisplayName";
+
 @interface LQSettingsViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *sectionHeaders;
@@ -19,6 +21,7 @@
 
 @property (nonatomic, strong) IBOutlet UISwitch *locationTracking;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIViewController *setupAccountViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *loginViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *privacyPolicyViewController;
