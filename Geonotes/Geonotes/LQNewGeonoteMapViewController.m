@@ -16,7 +16,6 @@
 @implementation LQNewGeonoteMapViewController
 
 @synthesize toolbar, locateMeButton,
-            navigationBar, cancelButton, pickButton,
             geonotePin, geonotePinShadow, geonoteTarget;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -24,6 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.navigationItem.rightBarButtonItem = [self pickButton];
     }
     return self;
 }
@@ -33,7 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.locateMeButton = [[MTLocateMeBarButtonItem alloc] initWithMapView:mapView];
-    [self.toolbar setItems:[NSArray arrayWithObject:self.locateMeButton] animated:NO];
+    [self.toolbar setItems:[NSArray arrayWithObjects:self.locateMeButton, nil] animated:NO];
 }
 
 - (void)viewDidUnload
@@ -55,9 +55,21 @@
 
 #pragma mark -
 
-- (IBAction)cancelWasTapped:(id)sender
+- (UIBarButtonItem *)pickButton
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UIBarButtonItem *pick = [[UIBarButtonItem alloc] initWithTitle:@"Pick"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(pickButtonWasTapped:)];
+    pick.tintColor = [UIColor blueColor];
+    return pick;
+}
+
+#pragma mark -
+
+- (IBAction)pickButtonWasTapped:(UIBarButtonItem *)pickButton
+{
+    
 }
 
 @end

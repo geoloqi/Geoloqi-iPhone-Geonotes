@@ -9,19 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "LQNewGeonoteMapViewController.h"
 
-@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate> {
+#define kLQGeonoteTotalCharacterCount 140
+
+@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     LQNewGeonoteMapViewController *mapViewController;
+    UILabel *characterCount;
+    CLLocation *geonoteLocation;
+    NSString *geonoteLocationDescription;
 }
 
-@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelBarButton;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextView *geonoteTextView;
-@property (nonatomic, strong) IBOutlet UIButton *pickOnMapButton;
-@property (nonatomic, strong) IBOutlet UIButton *submitButton;
-@property (nonatomic, strong) IBOutlet UILabel *locationLabel;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *saveButton;
 
-- (IBAction)cancelBarButtonWasTapped:(id)sender;
-- (IBAction)pickOnMapButtonWasTapped:(id)sender;
-- (IBAction)submitButtonWasTapped:(id)sender;
+- (IBAction)cancelButtonWasTapped:(id)sender;
+- (IBAction)saveButtonWasTapped:(id)sender;
 
 @end

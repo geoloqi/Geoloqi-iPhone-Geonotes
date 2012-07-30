@@ -16,14 +16,10 @@
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *locateMeButton;
 
-@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *pickButton;
-
 @property (nonatomic, strong) IBOutlet UIImageView *geonotePin;
 @property (nonatomic, strong) IBOutlet UIImageView *geonotePinShadow;
 @property (nonatomic, strong) IBOutlet UIImageView *geonoteTarget;
 
-- (IBAction)cancelWasTapped:(id)sender;
+- (IBAction)pickButtonWasTapped:(UIBarButtonItem *)pickButton;
 
 @end

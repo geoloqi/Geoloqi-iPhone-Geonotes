@@ -19,6 +19,9 @@ static NSString *LQLayerListCollectionName = @"LQLayerListCollection";
 static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
 
 @interface LQAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+{
+    UINavigationController *newGeonoteNavController;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController *tabBarController;
