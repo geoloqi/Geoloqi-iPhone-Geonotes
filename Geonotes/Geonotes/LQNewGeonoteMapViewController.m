@@ -1,21 +1,23 @@
 //
-//  LQNewGeonoteViewController.m
+//  LQNewGeonoteMapViewController.m
 //  Geonotes
 //
-//  Created by Aaron Parecki on 7/18/12.
+//  Created by Kenichi Nakamura on 7/27/12.
 //  Copyright (c) 2012 Geoloqi, Inc. All rights reserved.
 //
 
-#import "LQNewGeonoteViewController.h"
+#import "LQNewGeonoteMapViewController.h"
+#import "MTLocation/MTLocateMeBarButtonItem.h"
 
-@interface LQNewGeonoteViewController ()
+@interface LQNewGeonoteMapViewController ()
 
 @end
 
-@implementation LQNewGeonoteViewController
+@implementation LQNewGeonoteMapViewController
 
-@synthesize navigationBar, cancelBarButton,
-            geonoteTextView, pickOnMapButton, submitButton, locationLabel;
+@synthesize toolbar, locateMeButton,
+            navigationBar, cancelButton, pickButton,
+            geonotePin, geonotePinShadow, geonoteTarget;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.locateMeButton = [[MTLocateMeBarButtonItem alloc] initWithMapView:mapView];
+    [self.toolbar setItems:[NSArray arrayWithObject:self.locateMeButton] animated:NO];
 }
 
 - (void)viewDidUnload
@@ -44,23 +48,16 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark -
-
-- (IBAction)cancelBarButtonWasTapped:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)pickOnMapButtonWasTapped:(id)sender
-{
-    if (mapViewController == nil)
-        mapViewController = [[LQNewGeonoteMapViewController alloc] init];
-    [self presentViewController:mapViewController animated:YES completion:nil];
-}
-
-- (IBAction)submitButtonWasTapped:(id)sender
+- (void)viewWillAppear:(BOOL)animated
 {
     
+}
+
+#pragma mark -
+
+- (IBAction)cancelWasTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

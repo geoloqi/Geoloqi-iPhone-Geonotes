@@ -108,7 +108,7 @@
     return YES;
 }
 
-- (void)openNewGeonoteController:(id)sender 
+- (void)openNewGeonoteController:(id)sender
 {
     NSLog(@"Center was tapped");
     LQNewGeonoteViewController *newGeonoteController = [[LQNewGeonoteViewController alloc] init];

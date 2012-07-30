@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:LQPrivacyPolicyURL]]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kLQPrivacyPolicyURL]]];
 }
 
 - (void)viewDidUnload

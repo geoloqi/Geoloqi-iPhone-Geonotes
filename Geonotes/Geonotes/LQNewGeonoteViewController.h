@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LQNewGeonoteMapViewController.h"
 
-@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate>
+@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate> {
+    LQNewGeonoteMapViewController *mapViewController;
+}
 
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelBarButton;

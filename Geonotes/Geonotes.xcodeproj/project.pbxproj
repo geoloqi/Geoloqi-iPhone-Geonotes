@@ -56,6 +56,26 @@
 		0FDE2AD915A8DEE300FB78A7 /* geonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */; };
 		0FDE2ADA15A8DEE300FB78A7 /* layers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */; };
 		0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */; };
+		BE4033FB15C337590093EFF8 /* LQNewGeonoteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */; };
+		BE4033FC15C337590093EFF8 /* LQNewGeonoteMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */; };
+		BE40340315C338A50093EFF8 /* 07-map-marker-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */; };
+		BE40340415C338A50093EFF8 /* 07-map-marker-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FE15C338A40093EFF8 /* 07-map-marker-shadow@2x.png */; };
+		BE40340515C338A50093EFF8 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FF15C338A40093EFF8 /* 07-map-marker.png */; };
+		BE40340615C338A50093EFF8 /* 07-map-marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340015C338A40093EFF8 /* 07-map-marker@2x.png */; };
+		BE40340715C338A50093EFF8 /* map-x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340115C338A50093EFF8 /* map-x.png */; };
+		BE40340815C338A50093EFF8 /* map-x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340215C338A50093EFF8 /* map-x@2x.png */; };
+		BE40340B15C33DA10093EFF8 /* cartographer_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340915C33DA10093EFF8 /* cartographer_bg.png */; };
+		BE40340C15C33DA10093EFF8 /* cartographer_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340A15C33DA10093EFF8 /* cartographer_bg@2x.png */; };
+		BE40345615C35BF60093EFF8 /* MKAnnotationView+MTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40344115C35BF60093EFF8 /* MKAnnotationView+MTLocation.m */; };
+		BE40345715C35BF60093EFF8 /* MKMapView+MTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40344315C35BF60093EFF8 /* MKMapView+MTLocation.m */; };
+		BE40345815C35BF60093EFF8 /* MTLocateMeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40344515C35BF60093EFF8 /* MTLocateMeBarButtonItem.m */; };
+		BE40345915C35BF60093EFF8 /* MTLocateMeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40344715C35BF60093EFF8 /* MTLocateMeButton.m */; };
+		BE40345A15C35BF60093EFF8 /* MTLocation.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE40344815C35BF60093EFF8 /* MTLocation.bundle */; };
+		BE40345B15C35BF60093EFF8 /* MTLocationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40344C15C35BF60093EFF8 /* MTLocationFunctions.m */; };
+		BE40345C15C35BF60093EFF8 /* MTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40344E15C35BF60093EFF8 /* MTLocationManager.m */; };
+		BE40345D15C35BF60093EFF8 /* MTOneTimeLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40345015C35BF60093EFF8 /* MTOneTimeLocationManager.m */; };
+		BE40345E15C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40345215C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m */; };
+		BE40345F15C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE40345515C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m */; };
 		BE4ACC4615B8A30F000D6EDD /* LQSetupAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4ACC4415B8A30F000D6EDD /* LQSetupAccountViewController.m */; };
 		BE4ACC4715B8A30F000D6EDD /* LQSetupAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4ACC4515B8A30F000D6EDD /* LQSetupAccountViewController.xib */; };
 		BE4ACC4B15B8BE1E000D6EDD /* LQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4ACC4915B8BE1E000D6EDD /* LQLoginViewController.m */; };
@@ -168,6 +188,39 @@
 		0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "geonote@2x.png"; path = "Graphics/geonote@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "layers@2x.png"; path = "Graphics/layers@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Graphics/settings@2x.png"; sourceTree = "<group>"; };
+		BE4033F815C337590093EFF8 /* LQNewGeonoteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteMapViewController.h; sourceTree = "<group>"; };
+		BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteMapViewController.m; sourceTree = "<group>"; };
+		BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteMapViewController.xib; sourceTree = "<group>"; };
+		BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker-shadow.png"; path = "Graphics/07-map-marker-shadow.png"; sourceTree = "<group>"; };
+		BE4033FE15C338A40093EFF8 /* 07-map-marker-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker-shadow@2x.png"; path = "Graphics/07-map-marker-shadow@2x.png"; sourceTree = "<group>"; };
+		BE4033FF15C338A40093EFF8 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker.png"; path = "Graphics/07-map-marker.png"; sourceTree = "<group>"; };
+		BE40340015C338A40093EFF8 /* 07-map-marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker@2x.png"; path = "Graphics/07-map-marker@2x.png"; sourceTree = "<group>"; };
+		BE40340115C338A50093EFF8 /* map-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-x.png"; path = "Graphics/map-x.png"; sourceTree = "<group>"; };
+		BE40340215C338A50093EFF8 /* map-x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-x@2x.png"; path = "Graphics/map-x@2x.png"; sourceTree = "<group>"; };
+		BE40340915C33DA10093EFF8 /* cartographer_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cartographer_bg.png; path = Graphics/cartographer_bg.png; sourceTree = "<group>"; };
+		BE40340A15C33DA10093EFF8 /* cartographer_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cartographer_bg@2x.png"; path = "Graphics/cartographer_bg@2x.png"; sourceTree = "<group>"; };
+		BE40344015C35BF60093EFF8 /* MKAnnotationView+MTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MKAnnotationView+MTLocation.h"; path = "MTLocation/MKAnnotationView+MTLocation.h"; sourceTree = "<group>"; };
+		BE40344115C35BF60093EFF8 /* MKAnnotationView+MTLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MKAnnotationView+MTLocation.m"; path = "MTLocation/MKAnnotationView+MTLocation.m"; sourceTree = "<group>"; };
+		BE40344215C35BF60093EFF8 /* MKMapView+MTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MKMapView+MTLocation.h"; path = "MTLocation/MKMapView+MTLocation.h"; sourceTree = "<group>"; };
+		BE40344315C35BF60093EFF8 /* MKMapView+MTLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MKMapView+MTLocation.m"; path = "MTLocation/MKMapView+MTLocation.m"; sourceTree = "<group>"; };
+		BE40344415C35BF60093EFF8 /* MTLocateMeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLocateMeBarButtonItem.h; path = MTLocation/MTLocateMeBarButtonItem.h; sourceTree = "<group>"; };
+		BE40344515C35BF60093EFF8 /* MTLocateMeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLocateMeBarButtonItem.m; path = MTLocation/MTLocateMeBarButtonItem.m; sourceTree = "<group>"; };
+		BE40344615C35BF60093EFF8 /* MTLocateMeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLocateMeButton.h; path = MTLocation/MTLocateMeButton.h; sourceTree = "<group>"; };
+		BE40344715C35BF60093EFF8 /* MTLocateMeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLocateMeButton.m; path = MTLocation/MTLocateMeButton.m; sourceTree = "<group>"; };
+		BE40344815C35BF60093EFF8 /* MTLocation.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MTLocation.bundle; path = MTLocation/MTLocation.bundle; sourceTree = "<group>"; };
+		BE40344915C35BF60093EFF8 /* MTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLocation.h; path = MTLocation/MTLocation.h; sourceTree = "<group>"; };
+		BE40344A15C35BF60093EFF8 /* MTLocationDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLocationDefines.h; path = MTLocation/MTLocationDefines.h; sourceTree = "<group>"; };
+		BE40344B15C35BF60093EFF8 /* MTLocationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLocationFunctions.h; path = MTLocation/MTLocationFunctions.h; sourceTree = "<group>"; };
+		BE40344C15C35BF60093EFF8 /* MTLocationFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLocationFunctions.m; path = MTLocation/MTLocationFunctions.m; sourceTree = "<group>"; };
+		BE40344D15C35BF60093EFF8 /* MTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLocationManager.h; path = MTLocation/MTLocationManager.h; sourceTree = "<group>"; };
+		BE40344E15C35BF60093EFF8 /* MTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLocationManager.m; path = MTLocation/MTLocationManager.m; sourceTree = "<group>"; };
+		BE40344F15C35BF60093EFF8 /* MTOneTimeLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTOneTimeLocationManager.h; path = MTLocation/MTOneTimeLocationManager.h; sourceTree = "<group>"; };
+		BE40345015C35BF60093EFF8 /* MTOneTimeLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTOneTimeLocationManager.m; path = MTLocation/MTOneTimeLocationManager.m; sourceTree = "<group>"; };
+		BE40345115C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTTouchesMovedGestureRecognizer.h; path = MTLocation/MTTouchesMovedGestureRecognizer.h; sourceTree = "<group>"; };
+		BE40345215C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTTouchesMovedGestureRecognizer.m; path = MTLocation/MTTouchesMovedGestureRecognizer.m; sourceTree = "<group>"; };
+		BE40345315C35BF60093EFF8 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = MTLocation/Prefix.pch; sourceTree = "<group>"; };
+		BE40345415C35BF60093EFF8 /* UIBarButtonItem+MTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+MTLocation.h"; path = "MTLocation/UIBarButtonItem+MTLocation.h"; sourceTree = "<group>"; };
+		BE40345515C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+MTLocation.m"; path = "MTLocation/UIBarButtonItem+MTLocation.m"; sourceTree = "<group>"; };
 		BE4ACC4315B8A30F000D6EDD /* LQSetupAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQSetupAccountViewController.h; sourceTree = "<group>"; };
 		BE4ACC4415B8A30F000D6EDD /* LQSetupAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQSetupAccountViewController.m; sourceTree = "<group>"; };
 		BE4ACC4515B8A30F000D6EDD /* LQSetupAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQSetupAccountViewController.xib; sourceTree = "<group>"; };
@@ -216,6 +269,9 @@
 				0F8DB27715B780CE00681B69 /* LQNewGeonoteViewController.h */,
 				0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */,
 				0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */,
+				BE4033F815C337590093EFF8 /* LQNewGeonoteMapViewController.h */,
+				BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */,
+				BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */,
 			);
 			name = "New Geonote";
 			sourceTree = "<group>";
@@ -282,6 +338,14 @@
 		0FDE2A7315A8C34400FB78A7 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				BE40340915C33DA10093EFF8 /* cartographer_bg.png */,
+				BE40340A15C33DA10093EFF8 /* cartographer_bg@2x.png */,
+				BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */,
+				BE4033FE15C338A40093EFF8 /* 07-map-marker-shadow@2x.png */,
+				BE4033FF15C338A40093EFF8 /* 07-map-marker.png */,
+				BE40340015C338A40093EFF8 /* 07-map-marker@2x.png */,
+				BE40340115C338A50093EFF8 /* map-x.png */,
+				BE40340215C338A50093EFF8 /* map-x@2x.png */,
 				0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */,
 				0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */,
 				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
@@ -314,6 +378,7 @@
 		0FDE2A7F15A8C56800FB78A7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BE40342215C35AD60093EFF8 /* MTLocation */,
 				0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */,
 				0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */,
 				0FDE2A9215A8CAD600FB78A7 /* TableViewResources */,
@@ -402,6 +467,35 @@
 				0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */,
 			);
 			name = TableViewResources;
+			sourceTree = "<group>";
+		};
+		BE40342215C35AD60093EFF8 /* MTLocation */ = {
+			isa = PBXGroup;
+			children = (
+				BE40344015C35BF60093EFF8 /* MKAnnotationView+MTLocation.h */,
+				BE40344115C35BF60093EFF8 /* MKAnnotationView+MTLocation.m */,
+				BE40344215C35BF60093EFF8 /* MKMapView+MTLocation.h */,
+				BE40344315C35BF60093EFF8 /* MKMapView+MTLocation.m */,
+				BE40344415C35BF60093EFF8 /* MTLocateMeBarButtonItem.h */,
+				BE40344515C35BF60093EFF8 /* MTLocateMeBarButtonItem.m */,
+				BE40344615C35BF60093EFF8 /* MTLocateMeButton.h */,
+				BE40344715C35BF60093EFF8 /* MTLocateMeButton.m */,
+				BE40344815C35BF60093EFF8 /* MTLocation.bundle */,
+				BE40344915C35BF60093EFF8 /* MTLocation.h */,
+				BE40344A15C35BF60093EFF8 /* MTLocationDefines.h */,
+				BE40344B15C35BF60093EFF8 /* MTLocationFunctions.h */,
+				BE40344C15C35BF60093EFF8 /* MTLocationFunctions.m */,
+				BE40344D15C35BF60093EFF8 /* MTLocationManager.h */,
+				BE40344E15C35BF60093EFF8 /* MTLocationManager.m */,
+				BE40344F15C35BF60093EFF8 /* MTOneTimeLocationManager.h */,
+				BE40345015C35BF60093EFF8 /* MTOneTimeLocationManager.m */,
+				BE40345115C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.h */,
+				BE40345215C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m */,
+				BE40345315C35BF60093EFF8 /* Prefix.pch */,
+				BE40345415C35BF60093EFF8 /* UIBarButtonItem+MTLocation.h */,
+				BE40345515C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m */,
+			);
+			name = MTLocation;
 			sourceTree = "<group>";
 		};
 		BE4ACC3515B87EF6000D6EDD /* Account */ = {
@@ -526,6 +620,16 @@
 				BE4ACC4715B8A30F000D6EDD /* LQSetupAccountViewController.xib in Resources */,
 				BE4ACC4C15B8BE1E000D6EDD /* LQLoginViewController.xib in Resources */,
 				BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */,
+				BE4033FC15C337590093EFF8 /* LQNewGeonoteMapViewController.xib in Resources */,
+				BE40340315C338A50093EFF8 /* 07-map-marker-shadow.png in Resources */,
+				BE40340415C338A50093EFF8 /* 07-map-marker-shadow@2x.png in Resources */,
+				BE40340515C338A50093EFF8 /* 07-map-marker.png in Resources */,
+				BE40340615C338A50093EFF8 /* 07-map-marker@2x.png in Resources */,
+				BE40340715C338A50093EFF8 /* map-x.png in Resources */,
+				BE40340815C338A50093EFF8 /* map-x@2x.png in Resources */,
+				BE40340B15C33DA10093EFF8 /* cartographer_bg.png in Resources */,
+				BE40340C15C33DA10093EFF8 /* cartographer_bg@2x.png in Resources */,
+				BE40345A15C35BF60093EFF8 /* MTLocation.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +661,16 @@
 				BE4ACC4615B8A30F000D6EDD /* LQSetupAccountViewController.m in Sources */,
 				BE4ACC4B15B8BE1E000D6EDD /* LQLoginViewController.m in Sources */,
 				BE4ACC5015B8C829000D6EDD /* LQPrivacyPolicyViewController.m in Sources */,
+				BE4033FB15C337590093EFF8 /* LQNewGeonoteMapViewController.m in Sources */,
+				BE40345615C35BF60093EFF8 /* MKAnnotationView+MTLocation.m in Sources */,
+				BE40345715C35BF60093EFF8 /* MKMapView+MTLocation.m in Sources */,
+				BE40345815C35BF60093EFF8 /* MTLocateMeBarButtonItem.m in Sources */,
+				BE40345915C35BF60093EFF8 /* MTLocateMeButton.m in Sources */,
+				BE40345B15C35BF60093EFF8 /* MTLocationFunctions.m in Sources */,
+				BE40345C15C35BF60093EFF8 /* MTLocationManager.m in Sources */,
+				BE40345D15C35BF60093EFF8 /* MTOneTimeLocationManager.m in Sources */,
+				BE40345E15C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m in Sources */,
+				BE40345F15C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

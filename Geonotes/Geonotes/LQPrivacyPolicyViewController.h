@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-static NSString *const LQPrivacyPolicyURL = @"https://geoloqi.com/privacy";
+#define kLQPrivacyPolicyURL @"https://geoloqi.com/privacy"
 
 @interface LQPrivacyPolicyViewController : UIViewController
 
