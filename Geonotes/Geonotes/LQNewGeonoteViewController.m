@@ -88,7 +88,7 @@
                                                         delegate:self
                                                cancelButtonTitle:@"Cancel"
                                           destructiveButtonTitle:@"Delete"
-                                               otherButtonTitles: nil];
+                                               otherButtonTitles:nil];
         [as showInView:self.view];
     }
 }
@@ -113,15 +113,23 @@
 
 - (IBAction)saveButtonWasTapped:(id)sender
 {
-    NSLog(@"save button tapped!");
+    [self.geonoteTextView resignFirstResponder];
+    [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"Saving"];
+    [self.geonote save:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+        if (error) {
+            // TODO handle error
+        } else if ([[responseDictionary objectForKey:@"result"] isEqualToString:@"ok"]) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self cancelGeonote];
+            if (self.saveComplete) self.saveComplete();
+        }
+    }];
 }
 
 - (LQGeonote *)geonote
 {
-    if (!geonote) {
-        geonote = [[LQGeonote alloc] init];
-        geonote.delegate = self;
-    }
+    if (!geonote)
+        geonote = [[LQGeonote alloc] initWithDelegate:self];
     return geonote;
 }
 

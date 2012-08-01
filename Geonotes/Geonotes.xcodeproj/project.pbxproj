@@ -56,6 +56,7 @@
 		0FDE2AD915A8DEE300FB78A7 /* geonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */; };
 		0FDE2ADA15A8DEE300FB78A7 /* layers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */; };
 		0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */; };
+		BE2F883215C999250041F9C9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F883115C999250041F9C9 /* MBProgressHUD.m */; };
 		BE4033FB15C337590093EFF8 /* LQNewGeonoteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */; };
 		BE4033FC15C337590093EFF8 /* LQNewGeonoteMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */; };
 		BE40340315C338A50093EFF8 /* 07-map-marker-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */; };
@@ -189,6 +190,8 @@
 		0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "geonote@2x.png"; path = "Graphics/geonote@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "layers@2x.png"; path = "Graphics/layers@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Graphics/settings@2x.png"; sourceTree = "<group>"; };
+		BE2F883015C999250041F9C9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		BE2F883115C999250041F9C9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		BE32091B15C8F9A500B8B535 /* LQGeonoteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonoteDelegate.h; sourceTree = "<group>"; };
 		BE4033F815C337590093EFF8 /* LQNewGeonoteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteMapViewController.h; sourceTree = "<group>"; };
 		BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteMapViewController.m; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 		0FDE2A7F15A8C56800FB78A7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BE2F882F15C999140041F9C9 /* MBProgressHUD */,
 				BE40342215C35AD60093EFF8 /* MTLocation */,
 				0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */,
 				0F83DF3415AB827300E07D16 /* LQBasicAnnotation.m */,
@@ -474,6 +478,15 @@
 				0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */,
 			);
 			name = TableViewResources;
+			sourceTree = "<group>";
+		};
+		BE2F882F15C999140041F9C9 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BE2F883015C999250041F9C9 /* MBProgressHUD.h */,
+				BE2F883115C999250041F9C9 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		BE40342215C35AD60093EFF8 /* MTLocation */ = {
@@ -679,6 +692,7 @@
 				BE40345E15C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m in Sources */,
 				BE40345F15C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m in Sources */,
 				BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */,
+				BE2F883215C999250041F9C9 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

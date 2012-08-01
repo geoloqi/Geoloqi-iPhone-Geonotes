@@ -8,7 +8,22 @@
 
 #import "LQGeonote.h"
 
+@interface LQGeonote ()
+
+- (NSDictionary *)dictionary;
+
+@end
+
 @implementation LQGeonote
+
+- (id)initWithDelegate:(id<LQGeonoteDelegate>)delegate
+{
+    if (self = [super init]) {
+        maxTextLength = 0;
+        self.delegate = delegate;
+    }
+    return self;
+}
 
 #pragma mark - setters
 
@@ -37,9 +52,20 @@
 
 #pragma mark - other
 
-- (BOOL)isSaveable:(NSInteger)maxTextLength
+- (BOOL)isSaveable:(NSInteger)_maxTextLength
 {
+    if (maxTextLength != _maxTextLength)
+        maxTextLength = _maxTextLength;
     return ((_location != nil) && (_text != nil) && (_text.length > 0) && (_text.length <= maxTextLength));
+}
+
+- (BOOL)isSaveable
+{
+    BOOL r = NO;
+    if (maxTextLength > 0) {
+        r = [self isSaveable:maxTextLength];
+    }
+    return r;
 }
 
 - (NSString *)description
@@ -49,6 +75,25 @@
             self.location.coordinate.longitude,
             self.radius,
             self.text];
+}
+
+- (void)save:(void (^)(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error))complete
+{
+    if ([self isSaveable]) {
+        LQSession *session = [LQSession savedSession];
+        NSURLRequest *request = [session requestWithMethod:@"POST" path:@"/geonote/create" payload:[self dictionary]];
+        [session runAPIRequest:request completion:complete];
+    }
+}
+
+- (NSDictionary *)dictionary
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            self.text, @"text",
+            [NSString stringWithFormat:@"%f", self.location.coordinate.latitude],  @"latitude",
+            [NSString stringWithFormat:@"%f", self.location.coordinate.longitude], @"longitude",
+            [NSString stringWithFormat:@"%d", [[NSNumber numberWithFloat:self.radius] intValue]], @"radius",
+            nil];
 }
 
 @end

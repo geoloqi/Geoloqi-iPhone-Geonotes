@@ -53,8 +53,8 @@
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityNavController.navigationBar.tintColor = [UIColor blackColor];
 
-    UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] init];
-    UINavigationController *geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
+    geonotesViewController = [[LQGeonotesViewController alloc] init];
+    geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
     geonotesNavController.navigationBar.tintColor = [UIColor blackColor];
 
     UIViewController *newGeonotePlaceholderController = [[UINavigationController alloc] init];
@@ -151,9 +151,14 @@
     
     if (newGeonoteNavController == nil) {
         LQNewGeonoteViewController *newGeonoteController = [[LQNewGeonoteViewController alloc] init];
+        newGeonoteController.saveComplete = ^{
+            self.tabBarController.selectedViewController = geonotesNavController;
+            [geonotesViewController refresh];
+        };
         newGeonoteNavController = [[UINavigationController alloc] initWithRootViewController:newGeonoteController];
         newGeonoteNavController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         newGeonoteNavController.navigationBar.tintColor = [UIColor blackColor];
+
     }
     [self.tabBarController presentViewController:newGeonoteNavController animated:YES completion:nil];
 }
