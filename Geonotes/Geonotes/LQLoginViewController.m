@@ -97,6 +97,7 @@
                                            [self.settingsTableView reloadData];
                                            [self.activityIndicator stopAnimating];
                                            [self.navigationController popViewControllerAnimated:YES];
+                                           [[[UIApplication sharedApplication] delegate] performSelector:@selector(refreshAllSubTableViews)];
                                        }];
                                    }
                                }];

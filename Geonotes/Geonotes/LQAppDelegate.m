@@ -26,7 +26,6 @@
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
-@synthesize activityViewController;
 
 - (void)registerForPushNotifications:(void (^)())onSuccess {
     [LQSession registerForPushNotificationsWithCallback:^(NSData *deviceToken, NSError *error) {
@@ -58,7 +57,6 @@
 	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
 
     activityViewController = [[LQActivityViewController alloc] init];
-
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityNavController.navigationBar.tintColor = [UIColor blackColor];
 
@@ -69,11 +67,11 @@
     UIViewController *newGeonotePlaceholderController = [[UINavigationController alloc] init];
     newGeonotePlaceholderController.title = @"New Geonote";
 
-    UIViewController *layersViewController = [[LQLayersViewController alloc] init];
+    layersViewController = [[LQLayersViewController alloc] init];
     UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
     layersNavController.navigationBar.tintColor = [UIColor blackColor];
 
-    UIViewController *settingsViewController = [[LQSettingsViewController alloc] init];
+    settingsViewController = [[LQSettingsViewController alloc] init];
     UINavigationController *settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     settingsNavController.navigationBar.tintColor = [UIColor blackColor];
     
@@ -151,6 +149,13 @@
         [LQSession setSavedSession:newSession];
         NSLog(@"Re-initialized session!");
     }
+}
+
+- (void)refreshAllSubTableViews
+{
+    [activityViewController refresh];
+    [geonotesViewController refresh];
+    [layersViewController refresh];
 }
 
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender

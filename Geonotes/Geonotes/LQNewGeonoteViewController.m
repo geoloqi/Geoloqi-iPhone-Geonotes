@@ -84,10 +84,10 @@
     if ((self.geonote.text == nil || self.geonote.text.length == 0) && (self.geonote.location == nil)) {
         [self cancelGeonote];
     } else {
-        UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Delete Geonote?"
+        UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil
                                                         delegate:self
                                                cancelButtonTitle:@"Cancel"
-                                          destructiveButtonTitle:@"Delete"
+                                          destructiveButtonTitle:@"Delete Draft"
                                                otherButtonTitles:nil];
         [as showInView:self.view];
     }
@@ -116,10 +116,15 @@
     [self.geonoteTextView resignFirstResponder];
     [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"Saving"];
     [self.geonote save:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (error) {
-            // TODO handle error
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[error description]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
         } else if ([[responseDictionary objectForKey:@"result"] isEqualToString:@"ok"]) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self cancelGeonote];
             if (self.saveComplete) self.saveComplete();
         }

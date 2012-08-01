@@ -20,17 +20,21 @@ static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
 
 @interface LQAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 {
+    LQActivityViewController *activityViewController;
+    
     UINavigationController *newGeonoteNavController;
     LQGeonotesViewController *geonotesViewController;
     UINavigationController *geonotesNavController;
+    
+    LQLayersViewController *layersViewController;
+    LQSettingsViewController *settingsViewController;
 }
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
-@property (strong, nonatomic) LQActivityViewController *activityViewController;
-
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender;
+- (void)refreshAllSubTableViews;
 
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category;
 
