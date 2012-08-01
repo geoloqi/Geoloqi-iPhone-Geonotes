@@ -198,7 +198,11 @@
             
             CGRect characterCountRect = CGRectMake(270, 160, 20, 18);
             characterCount = [[UILabel alloc] initWithFrame:characterCountRect];
-            characterCount.text = [NSString stringWithFormat:@"%d", (kLQGeonoteTotalCharacterCount - geonoteTextView.text.length)];
+            
+            NSInteger chars = kLQGeonoteTotalCharacterCount - geonoteTextView.text.length;
+            characterCount.text = [NSString stringWithFormat:@"%d", chars];
+            characterCount.textColor = (chars < 0) ? [UIColor redColor] : [UIColor darkTextColor];
+            
             characterCount.textAlignment = UITextAlignmentRight;
             characterCount.font = [UIFont systemFontOfSize:10];
             [cell.contentView addSubview:characterCount];

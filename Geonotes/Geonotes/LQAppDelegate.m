@@ -15,18 +15,26 @@
 
 #import "LQTabBarController.h"
 
+@interface LQAppDelegate ()
+
+- (void)registerForPushNotifications:(void (^)())onSuccess;
+- (void)registerForPushNotificationsIfNotYetRegistered;
+
+@end
+
 @implementation LQAppDelegate
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 @synthesize activityViewController;
 
-- (void)registerForPushNotifications {
+- (void)registerForPushNotifications:(void (^)())onSuccess {
     [LQSession registerForPushNotificationsWithCallback:^(NSData *deviceToken, NSError *error) {
         if(error){
             NSLog(@"Failed to register for push tokens: %@", error);
         } else {
             NSLog(@"Got a push token! %@", deviceToken);
+            onSuccess();
         }
     }];
 }
@@ -36,9 +44,10 @@
 // If the app has never launched before, then show the prompt.
 - (void)registerForPushNotificationsIfNotYetRegistered {
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasRegisteredForPushNotifications"]){
-        [self registerForPushNotifications];
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasRegisteredForPushNotifications"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
+        [self registerForPushNotifications: ^{
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasRegisteredForPushNotifications"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }];
 	}
 }
 

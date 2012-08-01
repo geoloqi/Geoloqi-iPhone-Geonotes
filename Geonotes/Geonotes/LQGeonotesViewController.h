@@ -19,7 +19,8 @@
     NSDateFormatter *dateFormatter;
 }
 
-- (void)appendObjectFromDictionary:(NSDictionary *)item;
+//- (void)appendObjectFromDictionary:(NSDictionary *)item;
+- (void)prependObjectFromDictionary:(NSDictionary *)item;
 - (void)reloadDataFromDB;
 - (void)fetchRemoteDataWithCallback:(void(^)(void))block;
 
