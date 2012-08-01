@@ -93,7 +93,7 @@
                                        [alert show];
                                    } else {
                                        [LQSession setSavedSession:session];
-                                       [self setDisplayName:^() {
+                                       [self updateDisplayName:^() {
                                            [self.settingsTableView reloadData];
                                            [self.activityIndicator stopAnimating];
                                            [self.navigationController popViewControllerAnimated:YES];
@@ -107,7 +107,7 @@
     self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
 }
 
-- (void)setDisplayName:(void (^)())block
+- (void)updateDisplayName:(void (^)())block
 {
     LQSession *session = [LQSession savedSession];
     NSURLRequest *req = [session requestWithMethod:@"GET" path:@"/account/profile" payload:nil];
