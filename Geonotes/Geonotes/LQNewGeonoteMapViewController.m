@@ -15,7 +15,7 @@
 
 @implementation LQNewGeonoteMapViewController
 
-@synthesize toolbar, locateMeButton,
+@synthesize mapView, toolbar, locateMeButton,
             geonotePin, geonotePinShadow, geonoteTarget;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -24,6 +24,7 @@
     if (self) {
         // Custom initialization
         self.navigationItem.rightBarButtonItem = [self pickButton];
+        pinUp = NO;
     }
     return self;
 }
@@ -34,6 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     self.locateMeButton = [[MTLocateMeBarButtonItem alloc] initWithMapView:mapView];
     [self.toolbar setItems:[NSArray arrayWithObjects:self.locateMeButton, nil] animated:NO];
+    [self zoomMapToLocation:[[[CLLocationManager alloc] init] location]];
 }
 
 - (void)viewDidUnload
@@ -55,6 +57,36 @@
 
 #pragma mark -
 
+- (void)zoomMapToLocation:(CLLocation *)_location
+{
+    if (_location) {
+        MKCoordinateSpan span;
+        span.latitudeDelta  = 0.05;
+        span.longitudeDelta = 0.05;
+        
+        MKCoordinateRegion region;
+        
+        [mapView setCenterCoordinate:_location.coordinate animated:YES];
+        
+        region.center = _location.coordinate;
+        region.span   = span;
+        
+        [mapView setRegion:region animated:YES];
+    }
+}
+
+- (void)setGeonotePositionFromMapCenter
+{
+	MKCoordinateSpan currentSpan = mapView.region.span;
+	// 111.0 km/degree of latitude * 1000 m/km * current delta * 20% of the half-screen width
+	CGFloat desiredRadius = 111.0 * 1000 * currentSpan.latitudeDelta * 0.2;
+    self.geonote.location = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude
+                                                       longitude:mapView.centerCoordinate.longitude];
+	self.geonote.radius = desiredRadius;
+}
+
+#pragma mark -
+
 - (UIBarButtonItem *)pickButton
 {
     UIBarButtonItem *pick = [[UIBarButtonItem alloc] initWithTitle:@"Pick"
@@ -69,7 +101,59 @@
 
 - (IBAction)pickButtonWasTapped:(UIBarButtonItem *)pickButton
 {
-    
+    [self setGeonotePositionFromMapCenter];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    [self liftGeonotePin];
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    [self dropGeonotePin];
+}
+
+- (void)liftGeonotePin
+{
+    if (!pinUp) {
+        [UIView beginAnimations:@"" context:NULL];
+        self.geonotePin.center = (CGPoint) {
+            self.geonotePin.center.x,
+            (self.geonotePin.center.y - kLQGeonotePinYDelta)
+        };
+        self.geonotePinShadow.center = (CGPoint) {
+            (self.geonotePinShadow.center.x + kLQGeonotePinShadowXDelta),
+            (self.geonotePinShadow.center.y - kLQGeonotePinShadowYDelta)
+        };
+        [UIView setAnimationDuration:kLQGeonotePinAnimationDuration];
+        [UIView setAnimationDelay:UIViewAnimationCurveEaseOut];
+        [UIView commitAnimations];
+        pinUp = YES;
+    }
+}
+
+- (void)dropGeonotePin
+{
+    if (pinUp) {
+        [UIView beginAnimations:@"" context:NULL];
+        self.geonotePin.center = (CGPoint) {
+            self.geonotePin.center.x,
+            (self.geonotePin.center.y + kLQGeonotePinYDelta)
+        };
+        self.geonotePinShadow.center = (CGPoint) {
+            (self.geonotePinShadow.center.x - kLQGeonotePinShadowXDelta),
+            (self.geonotePinShadow.center.y + kLQGeonotePinShadowYDelta)
+        };
+        [UIView setAnimationDuration:kLQGeonotePinAnimationDuration];
+        [UIView setAnimationDelay:UIViewAnimationCurveEaseIn];
+        [UIView commitAnimations];
+        
+        pinUp = NO;
+    }
 }
 
 @end

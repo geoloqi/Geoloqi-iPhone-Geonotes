@@ -8,10 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "LQGeonote.h"
+
+#define kLQGeonotePinYDelta            30
+#define kLQGeonotePinShadowXDelta      10
+#define kLQGeonotePinShadowYDelta      20
+#define kLQGeonotePinAnimationDuration 0.2
+
+@class LQNewGeonoteMapViewController;
 
 @interface LQNewGeonoteMapViewController : UIViewController {
-    IBOutlet MKMapView *mapView;
+    BOOL pinUp;
 }
+
+@property (nonatomic, strong) LQGeonote *geonote;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
 
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *locateMeButton;

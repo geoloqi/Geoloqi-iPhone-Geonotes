@@ -7,17 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LQGeonote.h"
 #import "LQNewGeonoteMapViewController.h"
 
 #define kLQGeonoteTotalCharacterCount 140
 
-@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, LQGeonoteDelegate, UIActionSheetDelegate> {
     LQNewGeonoteMapViewController *mapViewController;
     UILabel *characterCount;
-    CLLocation *geonoteLocation;
     NSString *geonoteLocationDescription;
 }
 
+@property (nonatomic, strong) LQGeonote *geonote;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextView *geonoteTextView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;

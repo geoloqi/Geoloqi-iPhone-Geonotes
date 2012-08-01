@@ -83,6 +83,7 @@
 		BE4ACC5015B8C829000D6EDD /* LQPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */; };
 		BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */; };
 		BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */; };
+		BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC597BD15C7429B00684667 /* LQGeonote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +189,7 @@
 		0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "geonote@2x.png"; path = "Graphics/geonote@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "layers@2x.png"; path = "Graphics/layers@2x.png"; sourceTree = "<group>"; };
 		0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Graphics/settings@2x.png"; sourceTree = "<group>"; };
+		BE32091B15C8F9A500B8B535 /* LQGeonoteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonoteDelegate.h; sourceTree = "<group>"; };
 		BE4033F815C337590093EFF8 /* LQNewGeonoteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteMapViewController.h; sourceTree = "<group>"; };
 		BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteMapViewController.m; sourceTree = "<group>"; };
 		BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteMapViewController.xib; sourceTree = "<group>"; };
@@ -231,6 +233,8 @@
 		BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQPrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQPrivacyPolicyViewController.xib; sourceTree = "<group>"; };
 		BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		BEC597BC15C7429B00684667 /* LQGeonote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonote.h; sourceTree = "<group>"; };
+		BEC597BD15C7429B00684667 /* LQGeonote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonote.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +276,9 @@
 				BE4033F815C337590093EFF8 /* LQNewGeonoteMapViewController.h */,
 				BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */,
 				BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */,
+				BEC597BC15C7429B00684667 /* LQGeonote.h */,
+				BEC597BD15C7429B00684667 /* LQGeonote.m */,
+				BE32091B15C8F9A500B8B535 /* LQGeonoteDelegate.h */,
 			);
 			name = "New Geonote";
 			sourceTree = "<group>";
@@ -671,6 +678,7 @@
 				BE40345D15C35BF60093EFF8 /* MTOneTimeLocationManager.m in Sources */,
 				BE40345E15C35BF60093EFF8 /* MTTouchesMovedGestureRecognizer.m in Sources */,
 				BE40345F15C35BF60093EFF8 /* UIBarButtonItem+MTLocation.m in Sources */,
+				BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

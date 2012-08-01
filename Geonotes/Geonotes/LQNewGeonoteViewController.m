@@ -10,14 +10,15 @@
 
 @interface LQNewGeonoteViewController ()
 
-- (UIBarButtonItem *)cancelButton;
-- (UIBarButtonItem *)saveButton;
+- (UIBarButtonItem *)createCancelButton;
+- (UIBarButtonItem *)createSaveButton;
 
 @end
 
 @implementation LQNewGeonoteViewController
 
 @synthesize tableView = _tableView,
+            geonote,
             geonoteTextView,
             cancelButton, saveButton;
 
@@ -27,8 +28,8 @@
     if (self) {
         // Custom initialization
         self.navigationItem.title = @"New Geonote";
-        self.navigationItem.leftBarButtonItem = [self cancelButton];
-        self.navigationItem.rightBarButtonItem = [self saveButton];
+        self.navigationItem.leftBarButtonItem = [self createCancelButton];
+        self.navigationItem.rightBarButtonItem = [self createSaveButton];
     }
     return self;
 }
@@ -52,18 +53,19 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark -
+#pragma mark - buttons
 
-- (UIBarButtonItem *)cancelButton
+- (UIBarButtonItem *)createCancelButton
 {
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
                                                                style:UIBarButtonItemStylePlain
                                                               target:self
                                                               action:@selector(cancelButtonWasTapped:)];
+    self.cancelButton = cancel;
     return cancel;
 }
 
-- (UIBarButtonItem *)saveButton
+- (UIBarButtonItem *)createSaveButton
 {
     UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithTitle:@"Save"
                                                              style:UIBarButtonItemStyleDone
@@ -71,26 +73,56 @@
                                                             action:@selector(saveButtonWasTapped:)];
     save.tintColor = [UIColor blueColor];
     save.enabled = NO;
+    self.saveButton = save;
     return save;
 }
 
-#pragma mark -
+#pragma mark - IBActions & utils
 
 - (IBAction)cancelButtonWasTapped:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ((self.geonote.text == nil || self.geonote.text.length == 0) && (self.geonote.location == nil)) {
+        [self cancelGeonote];
+    } else {
+        UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Delete Geonote?"
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                          destructiveButtonTitle:@"Delete"
+                                               otherButtonTitles: nil];
+        [as showInView:self.view];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        [self cancelGeonote];
+    }
+}
+
+- (void)cancelGeonote
+{
+    self.geonote = nil;
+    mapViewController.geonote = nil;
+    self.geonoteTextView.text = nil;
+    self.saveButton.enabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.tableView reloadData];
+    }];
 }
 
 - (IBAction)saveButtonWasTapped:(id)sender
 {
-    
+    NSLog(@"save button tapped!");
 }
 
-- (BOOL) isSaveable
+- (LQGeonote *)geonote
 {
-    return geonoteTextView.text.length > 0 &&
-           geonoteTextView.text.length <= kLQGeonoteTotalCharacterCount &&
-           geonoteLocation != nil;
+    if (!geonote) {
+        geonote = [[LQGeonote alloc] init];
+        geonote.delegate = self;
+    }
+    return geonote;
 }
 
 #pragma mark - UITableViewDelegate
@@ -101,6 +133,9 @@
         case 1:
             if (mapViewController == nil)
                 mapViewController = [[LQNewGeonoteMapViewController alloc] init];
+            if (mapViewController.geonote == nil)
+                mapViewController.geonote = [self geonote];
+
             [self.navigationController pushViewController:mapViewController animated:YES];
             break;
     }
@@ -123,33 +158,39 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
 }
 
-- (NSArray *) sectionIndexTitlesForTableView:(UITableView *)tableView
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     return [[NSArray alloc] initWithObjects:nil, @"Location", nil];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell;
     switch (indexPath.section) {
         case 0:
         {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"text"];
+            if (!cell)
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"text"];
+            
             CGRect textViewRect = CGRectMake(10, 10, 280, 150);
             geonoteTextView = [[UITextView alloc] initWithFrame:textViewRect];
             geonoteTextView.font = [UIFont systemFontOfSize:16];
             geonoteTextView.returnKeyType = UIReturnKeyDone;
             [geonoteTextView setDelegate:self];
-//            cell.backgroundColor = [UIColor darkGrayColor];
+            if (self.geonote)
+                geonoteTextView.text = self.geonote.text;
+            cell.backgroundColor = [UIColor whiteColor];
             [cell.contentView addSubview:geonoteTextView];
             
             CGRect characterCountRect = CGRectMake(270, 160, 20, 18);
             characterCount = [[UILabel alloc] initWithFrame:characterCountRect];
-            characterCount.text = [NSString stringWithFormat:@"%d", kLQGeonoteTotalCharacterCount];
+            characterCount.text = [NSString stringWithFormat:@"%d", (kLQGeonoteTotalCharacterCount - geonoteTextView.text.length)];
             characterCount.textAlignment = UITextAlignmentRight;
             characterCount.font = [UIFont systemFontOfSize:10];
             [cell.contentView addSubview:characterCount];
@@ -158,7 +199,23 @@
         }
             
         case 1:
-            cell.textLabel.text = @"Pick Location";
+            cell = [tableView dequeueReusableCellWithIdentifier:@"location"];
+            if (!cell)
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"location"];
+            
+            if (self.geonote.location &&
+                self.geonote.location.coordinate.latitude &&
+                self.geonote.location.coordinate.longitude) {
+                
+                cell.textLabel.text = [NSString stringWithFormat:@"%f, %f",
+                                       self.geonote.location.coordinate.latitude, self.geonote.location.coordinate.longitude];
+                cell.textLabel.textColor = [UIColor blueColor];
+
+            } else {
+                cell.textLabel.text = @"Pick Location";
+                cell.textLabel.textColor = [UIColor darkTextColor];
+            }
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
     }
@@ -188,12 +245,10 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSInteger chars = kLQGeonoteTotalCharacterCount - geonoteTextView.text.length;
-    if (chars < 0)
-        characterCount.textColor = [UIColor redColor];
-    else
-        characterCount.textColor = [UIColor darkTextColor];
+    characterCount.textColor = (chars < 0) ? [UIColor redColor] : [UIColor darkTextColor];
     characterCount.text = [NSString stringWithFormat:@"%d", chars];
-    saveButton.enabled = [self isSaveable];
+    self.geonote.text = textView.text;
+    self.saveButton.enabled = [self.geonote isSaveable:kLQGeonoteTotalCharacterCount];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -205,6 +260,14 @@
         should = YES;
     }
     return should;
+}
+
+#pragma mark - LQGeonoteDelegate
+
+- (void)geonote:(LQGeonote *)_geonote locationDidChange:(CLLocation *)newLocation
+{
+    [self.tableView reloadData];
+    self.saveButton.enabled = [_geonote isSaveable:kLQGeonoteTotalCharacterCount];
 }
 
 @end
