@@ -85,7 +85,8 @@
     items = [[NSMutableArray alloc] init];
     [_itemDB accessCollection:LQGeonoteListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
-            [self appendObjectFromDictionary:object];
+//            [self appendObjectFromDictionary:object];
+            [self prependObjectFromDictionary:object];
         }];
     }];
 }
@@ -103,7 +104,8 @@
                     // Store in the database
                     [accessor setDictionary:item forKey:[item objectForKey:@"geonote_id"]];
                     // Also add to the local array
-                    [self appendObjectFromDictionary:item];
+//                    [self appendObjectFromDictionary:item];
+                    [self prependObjectFromDictionary:item];
                 }];
             }
         }
@@ -114,9 +116,14 @@
     }];
 }
 
-- (void)appendObjectFromDictionary:(NSDictionary *)item
+//- (void)appendObjectFromDictionary:(NSDictionary *)item
+//{
+//    [items insertObject:item atIndex:items.count];
+//}
+
+- (void)prependObjectFromDictionary:(NSDictionary *)item
 {
-    [items insertObject:item atIndex:items.count];
+    [items insertObject:item atIndex:0];
 }
 
 #pragma mark - Pull to Refresh

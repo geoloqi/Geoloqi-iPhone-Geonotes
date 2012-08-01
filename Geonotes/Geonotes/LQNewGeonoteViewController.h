@@ -7,7 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface LQNewGeonoteViewController : UIViewController
+#import "LQGeonote.h"
+#import "LQNewGeonoteMapViewController.h"
+
+#define kLQGeonoteTotalCharacterCount 140
+
+typedef void(^CompletionCallback)(void);
+
+@interface LQNewGeonoteViewController : UIViewController <UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, LQGeonoteDelegate, UIActionSheetDelegate> {
+    LQNewGeonoteMapViewController *mapViewController;
+    UILabel *characterCount;
+    NSString *geonoteLocationDescription;
+}
+
+@property (nonatomic, strong) CompletionCallback saveComplete;
+@property (nonatomic, strong) LQGeonote *geonote;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UITextView *geonoteTextView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *saveButton;
+
+- (IBAction)cancelButtonWasTapped:(id)sender;
+- (IBAction)saveButtonWasTapped:(id)sender;
 
 @end

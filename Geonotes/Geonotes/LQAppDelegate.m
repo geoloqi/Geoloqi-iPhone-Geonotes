@@ -53,12 +53,12 @@
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
     activityNavController.navigationBar.tintColor = [UIColor blackColor];
 
-    UIViewController *geonotesViewController = [[LQGeonotesViewController alloc] init];
-    UINavigationController *geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
+    geonotesViewController = [[LQGeonotesViewController alloc] init];
+    geonotesNavController = [[UINavigationController alloc] initWithRootViewController:geonotesViewController];
     geonotesNavController.navigationBar.tintColor = [UIColor blackColor];
 
-    UINavigationController *newGeonoteNavController = [[UINavigationController alloc] init]; // placeholder
-    newGeonoteNavController.title = @"New Geonote";
+    UIViewController *newGeonotePlaceholderController = [[UINavigationController alloc] init];
+    newGeonotePlaceholderController.title = @"New Geonote";
 
     UIViewController *layersViewController = [[LQLayersViewController alloc] init];
     UINavigationController *layersNavController = [[UINavigationController alloc] initWithRootViewController:layersViewController];
@@ -72,11 +72,11 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
                                                 activityNavController, 
                                                 geonotesNavController,
-                                                newGeonoteNavController,
-                                                layersNavController, 
+                                                newGeonotePlaceholderController,
+                                                layersNavController,
                                                 settingsNavController,
                                                 nil];
-    [(LQTabBarController *)self.tabBarController addCenterButtonTarget:self action:@selector(openNewGeonoteController:)];
+    [(LQTabBarController *)self.tabBarController addCenterButtonTarget:self action:@selector(newGeonoteButtonWasTapped:)];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
@@ -106,14 +106,6 @@
     [LQSession application:application didFinishLaunchingWithOptions:launchOptions];
 
     return YES;
-}
-
-- (void)openNewGeonoteController:(id)sender 
-{
-    NSLog(@"Center was tapped");
-    LQNewGeonoteViewController *newGeonoteController = [[LQNewGeonoteViewController alloc] init];
-    [self.tabBarController presentModalViewController:newGeonoteController animated:YES];
-    // [newGeonoteController.closeButton sele
 }
 
 - (void)reInitializeSessionFromSettingsPanel
@@ -156,6 +148,19 @@
 {
     NSLog(@"New geonote");
     [self registerForPushNotificationsIfNotYetRegistered];
+    
+    if (newGeonoteNavController == nil) {
+        LQNewGeonoteViewController *newGeonoteController = [[LQNewGeonoteViewController alloc] init];
+        newGeonoteController.saveComplete = ^{
+            self.tabBarController.selectedViewController = geonotesNavController;
+            [geonotesViewController refresh];
+        };
+        newGeonoteNavController = [[UINavigationController alloc] initWithRootViewController:newGeonoteController];
+        newGeonoteNavController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        newGeonoteNavController.navigationBar.tintColor = [UIColor blackColor];
+
+    }
+    [self.tabBarController presentViewController:newGeonoteNavController animated:YES completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
