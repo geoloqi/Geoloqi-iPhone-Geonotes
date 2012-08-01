@@ -84,8 +84,9 @@
                     if (res && [res isEqualToString:@"ok"]) {
                         // hack to get new session data
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"com.geoloqi.LQUserID"];
-                        [LQSession sessionWithAccessToken:session.accessToken];
-                        [self cancel];
+                        [LQSession setSavedSession:[LQSession sessionWithAccessToken:session.accessToken]];
+                        // [self cancel];
+                        [self.navigationController popViewControllerAnimated:YES];
                     }
                 }
     ];
