@@ -99,7 +99,7 @@
         items = [[NSMutableArray alloc] init];
         
         for(NSString *key in responseDictionary) {
-            for(NSDictionary *item in [[responseDictionary objectForKey:key] reverseObjectEnumerator]) {
+            for(NSDictionary *item in [responseDictionary objectForKey:key]) {
                 [_itemDB accessCollection:LQGeonoteListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
                     // Store in the database
                     [accessor setDictionary:item forKey:[item objectForKey:@"geonote_id"]];
