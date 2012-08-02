@@ -67,7 +67,7 @@
 					<object class="IBUIImageView" id="364986586">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{157, 163}, {26, 22}}</string>
+						<string key="NSFrame">{{144, 138}, {57, 47}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="695132712"/>
@@ -76,13 +76,13 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">07-map-marker-shadow.png</string>
+							<string key="NSResourceName">marker-shadow.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="957450002">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{151, 157}, {18, 28}}</string>
+						<string key="NSFrame">{{143, 134}, {34, 49}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="364986586"/>
@@ -91,7 +91,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">07-map-marker.png</string>
+							<string key="NSResourceName">map-marker.png</string>
 						</object>
 					</object>
 					<object class="IBUIToolbar" id="91282861">
@@ -330,9 +330,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="07-map-marker-shadow.png">{26, 22}</string>
-			<string key="07-map-marker.png">{18, 28}</string>
+			<string key="map-marker.png">{34, 49}</string>
 			<string key="map-x.png">{16, 12}</string>
+			<string key="marker-shadow.png">{57, 47}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>

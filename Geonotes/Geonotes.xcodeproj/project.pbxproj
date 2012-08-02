@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0F2E78C515A901AA00D64CFA /* LQTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9815A8CAE200FB78A7 /* LQTableHeaderView.xib */; };
 		0F2E78C715A901B200D64CFA /* LQTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */; };
-		0F60E93B15B79918004BBADF /* newGeonoteTabBarItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */; };
-		0F60E93D15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */; };
 		0F60E94715B88F9B004BBADF /* LQGeonoteItemCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F60E94615B88F9B004BBADF /* LQGeonoteItemCellView.xib */; };
 		0F60E94A15B88FC2004BBADF /* LQGeonoteItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F60E94915B88FC2004BBADF /* LQGeonoteItemCellView.m */; };
 		0F83DEE015AA80F300E07D16 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F83DEDF15AA80F300E07D16 /* NSString+URLEncoding.m */; };
@@ -30,7 +28,6 @@
 		0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */; };
 		0F8DB27A15B780CE00681B69 /* LQNewGeonoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */; };
 		0F8DB27B15B780CE00681B69 /* LQNewGeonoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */; };
-		0FA402E815B9E99C007C2827 /* newGeonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA402E715B9E99C007C2827 /* newGeonote@2x.png */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -61,10 +58,6 @@
 		BE2F883215C999250041F9C9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F883115C999250041F9C9 /* MBProgressHUD.m */; };
 		BE4033FB15C337590093EFF8 /* LQNewGeonoteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */; };
 		BE4033FC15C337590093EFF8 /* LQNewGeonoteMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */; };
-		BE40340315C338A50093EFF8 /* 07-map-marker-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */; };
-		BE40340415C338A50093EFF8 /* 07-map-marker-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FE15C338A40093EFF8 /* 07-map-marker-shadow@2x.png */; };
-		BE40340515C338A50093EFF8 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FF15C338A40093EFF8 /* 07-map-marker.png */; };
-		BE40340615C338A50093EFF8 /* 07-map-marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340015C338A40093EFF8 /* 07-map-marker@2x.png */; };
 		BE40340715C338A50093EFF8 /* map-x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340115C338A50093EFF8 /* map-x.png */; };
 		BE40340815C338A50093EFF8 /* map-x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340215C338A50093EFF8 /* map-x@2x.png */; };
 		BE40340B15C33DA10093EFF8 /* cartographer_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE40340915C33DA10093EFF8 /* cartographer_bg.png */; };
@@ -87,6 +80,16 @@
 		BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */; };
 		BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */; };
 		BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC597BD15C7429B00684667 /* LQGeonote.m */; };
+		BED232E915CB2A7B001EE0A5 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E015CB2A7B001EE0A5 /* activity.png */; };
+		BED232EA15CB2A7B001EE0A5 /* geonote.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E115CB2A7B001EE0A5 /* geonote.png */; };
+		BED232EB15CB2A7B001EE0A5 /* layers.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E215CB2A7B001EE0A5 /* layers.png */; };
+		BED232EC15CB2A7B001EE0A5 /* map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E315CB2A7B001EE0A5 /* map-marker.png */; };
+		BED232ED15CB2A7B001EE0A5 /* map-marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E415CB2A7B001EE0A5 /* map-marker@2x.png */; };
+		BED232EE15CB2A7B001EE0A5 /* marker-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E515CB2A7B001EE0A5 /* marker-shadow.png */; };
+		BED232EF15CB2A7B001EE0A5 /* marker-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E615CB2A7B001EE0A5 /* marker-shadow@2x.png */; };
+		BED232F015CB2A7B001EE0A5 /* newGeonote.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E715CB2A7B001EE0A5 /* newGeonote.png */; };
+		BED232F115CB2A7B001EE0A5 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E815CB2A7B001EE0A5 /* settings.png */; };
+		BED232F315CB2AC1001EE0A5 /* newGeonote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232F215CB2AC1001EE0A5 /* newGeonote@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,8 +124,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newGeonoteTabBarItem@2x.png"; path = "Graphics/newGeonoteTabBarItem@2x.png"; sourceTree = "<group>"; };
-		0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newGeonoteTabBarItemHighlighted@2x.png"; path = "Graphics/newGeonoteTabBarItemHighlighted@2x.png"; sourceTree = "<group>"; };
 		0F60E94615B88F9B004BBADF /* LQGeonoteItemCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQGeonoteItemCellView.xib; sourceTree = "<group>"; };
 		0F60E94815B88FC2004BBADF /* LQGeonoteItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonoteItemCellView.h; sourceTree = "<group>"; };
 		0F60E94915B88FC2004BBADF /* LQGeonoteItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonoteItemCellView.m; sourceTree = "<group>"; };
@@ -150,7 +151,6 @@
 		0F8DB27715B780CE00681B69 /* LQNewGeonoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteViewController.h; sourceTree = "<group>"; };
 		0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteViewController.m; sourceTree = "<group>"; };
 		0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteViewController.xib; sourceTree = "<group>"; };
-		0FA402E715B9E99C007C2827 /* newGeonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newGeonote@2x.png"; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -200,10 +200,6 @@
 		BE4033F815C337590093EFF8 /* LQNewGeonoteMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteMapViewController.h; sourceTree = "<group>"; };
 		BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteMapViewController.m; sourceTree = "<group>"; };
 		BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteMapViewController.xib; sourceTree = "<group>"; };
-		BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker-shadow.png"; path = "Graphics/07-map-marker-shadow.png"; sourceTree = "<group>"; };
-		BE4033FE15C338A40093EFF8 /* 07-map-marker-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker-shadow@2x.png"; path = "Graphics/07-map-marker-shadow@2x.png"; sourceTree = "<group>"; };
-		BE4033FF15C338A40093EFF8 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker.png"; path = "Graphics/07-map-marker.png"; sourceTree = "<group>"; };
-		BE40340015C338A40093EFF8 /* 07-map-marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "07-map-marker@2x.png"; path = "Graphics/07-map-marker@2x.png"; sourceTree = "<group>"; };
 		BE40340115C338A50093EFF8 /* map-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-x.png"; path = "Graphics/map-x.png"; sourceTree = "<group>"; };
 		BE40340215C338A50093EFF8 /* map-x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-x@2x.png"; path = "Graphics/map-x@2x.png"; sourceTree = "<group>"; };
 		BE40340915C33DA10093EFF8 /* cartographer_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cartographer_bg.png; path = Graphics/cartographer_bg.png; sourceTree = "<group>"; };
@@ -242,6 +238,16 @@
 		BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BEC597BC15C7429B00684667 /* LQGeonote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonote.h; sourceTree = "<group>"; };
 		BEC597BD15C7429B00684667 /* LQGeonote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonote.m; sourceTree = "<group>"; };
+		BED232E015CB2A7B001EE0A5 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Graphics/activity.png; sourceTree = "<group>"; };
+		BED232E115CB2A7B001EE0A5 /* geonote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = geonote.png; path = Graphics/geonote.png; sourceTree = "<group>"; };
+		BED232E215CB2A7B001EE0A5 /* layers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = layers.png; path = Graphics/layers.png; sourceTree = "<group>"; };
+		BED232E315CB2A7B001EE0A5 /* map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker.png"; path = "Graphics/map-marker.png"; sourceTree = "<group>"; };
+		BED232E415CB2A7B001EE0A5 /* map-marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "map-marker@2x.png"; path = "Graphics/map-marker@2x.png"; sourceTree = "<group>"; };
+		BED232E515CB2A7B001EE0A5 /* marker-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marker-shadow.png"; path = "Graphics/marker-shadow.png"; sourceTree = "<group>"; };
+		BED232E615CB2A7B001EE0A5 /* marker-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marker-shadow@2x.png"; path = "Graphics/marker-shadow@2x.png"; sourceTree = "<group>"; };
+		BED232E715CB2A7B001EE0A5 /* newGeonote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newGeonote.png; path = Graphics/newGeonote.png; sourceTree = "<group>"; };
+		BED232E815CB2A7B001EE0A5 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = Graphics/settings.png; sourceTree = "<group>"; };
+		BED232F215CB2AC1001EE0A5 /* newGeonote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newGeonote@2x.png"; path = "Graphics/newGeonote@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,22 +360,25 @@
 		0FDE2A7315A8C34400FB78A7 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				BE40340915C33DA10093EFF8 /* cartographer_bg.png */,
-				BE40340A15C33DA10093EFF8 /* cartographer_bg@2x.png */,
-				BE4033FD15C338A40093EFF8 /* 07-map-marker-shadow.png */,
-				BE4033FE15C338A40093EFF8 /* 07-map-marker-shadow@2x.png */,
-				BE4033FF15C338A40093EFF8 /* 07-map-marker.png */,
-				BE40340015C338A40093EFF8 /* 07-map-marker@2x.png */,
+				BED232E015CB2A7B001EE0A5 /* activity.png */,
+				0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */,
+				BED232E115CB2A7B001EE0A5 /* geonote.png */,
+				0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */,
+				BED232E215CB2A7B001EE0A5 /* layers.png */,
+				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
 				BE40340115C338A50093EFF8 /* map-x.png */,
 				BE40340215C338A50093EFF8 /* map-x@2x.png */,
-				0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */,
-				0FDE2AD515A8DEE300FB78A7 /* geonote@2x.png */,
-				0FDE2AD615A8DEE300FB78A7 /* layers@2x.png */,
+				BED232E315CB2A7B001EE0A5 /* map-marker.png */,
+				BED232E415CB2A7B001EE0A5 /* map-marker@2x.png */,
+				BED232E515CB2A7B001EE0A5 /* marker-shadow.png */,
+				BED232E615CB2A7B001EE0A5 /* marker-shadow@2x.png */,
+				BED232E715CB2A7B001EE0A5 /* newGeonote.png */,
+				BED232F215CB2AC1001EE0A5 /* newGeonote@2x.png */,
+				BED232E815CB2A7B001EE0A5 /* settings.png */,
 				0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */,
+				BE40340915C33DA10093EFF8 /* cartographer_bg.png */,
+				BE40340A15C33DA10093EFF8 /* cartographer_bg@2x.png */,
 				0F8DB26915B76AEC00681B69 /* defaultLayerIcon.png */,
-				0FA402E715B9E99C007C2827 /* newGeonote@2x.png */,
-				0F60E93A15B79918004BBADF /* newGeonoteTabBarItem@2x.png */,
-				0F60E93C15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png */,
 				0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */,
 				0FDE2AC815A8DB3900FB78A7 /* Default.png */,
 				0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */,
@@ -639,18 +648,11 @@
 				0F8DB26B15B76AEC00681B69 /* defaultLayerIcon.png in Resources */,
 				0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */,
 				0F8DB27B15B780CE00681B69 /* LQNewGeonoteViewController.xib in Resources */,
-				0F60E93B15B79918004BBADF /* newGeonoteTabBarItem@2x.png in Resources */,
-				0F60E93D15B799C5004BBADF /* newGeonoteTabBarItemHighlighted@2x.png in Resources */,
 				0F60E94715B88F9B004BBADF /* LQGeonoteItemCellView.xib in Resources */,
-				0FA402E815B9E99C007C2827 /* newGeonote@2x.png in Resources */,
 				BE4ACC4715B8A30F000D6EDD /* LQSetupAccountViewController.xib in Resources */,
 				BE4ACC4C15B8BE1E000D6EDD /* LQLoginViewController.xib in Resources */,
 				BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */,
 				BE4033FC15C337590093EFF8 /* LQNewGeonoteMapViewController.xib in Resources */,
-				BE40340315C338A50093EFF8 /* 07-map-marker-shadow.png in Resources */,
-				BE40340415C338A50093EFF8 /* 07-map-marker-shadow@2x.png in Resources */,
-				BE40340515C338A50093EFF8 /* 07-map-marker.png in Resources */,
-				BE40340615C338A50093EFF8 /* 07-map-marker@2x.png in Resources */,
 				BE40340715C338A50093EFF8 /* map-x.png in Resources */,
 				BE40340815C338A50093EFF8 /* map-x@2x.png in Resources */,
 				BE40340B15C33DA10093EFF8 /* cartographer_bg.png in Resources */,
@@ -658,6 +660,16 @@
 				BE40345A15C35BF60093EFF8 /* MTLocation.bundle in Resources */,
 				BE03B1E015C9E69000FE023E /* Icon.png in Resources */,
 				BE03B1E215C9E69C00FE023E /* Icon@2x.png in Resources */,
+				BED232E915CB2A7B001EE0A5 /* activity.png in Resources */,
+				BED232EA15CB2A7B001EE0A5 /* geonote.png in Resources */,
+				BED232EB15CB2A7B001EE0A5 /* layers.png in Resources */,
+				BED232EC15CB2A7B001EE0A5 /* map-marker.png in Resources */,
+				BED232ED15CB2A7B001EE0A5 /* map-marker@2x.png in Resources */,
+				BED232EE15CB2A7B001EE0A5 /* marker-shadow.png in Resources */,
+				BED232EF15CB2A7B001EE0A5 /* marker-shadow@2x.png in Resources */,
+				BED232F015CB2A7B001EE0A5 /* newGeonote.png in Resources */,
+				BED232F115CB2A7B001EE0A5 /* settings.png in Resources */,
+				BED232F315CB2AC1001EE0A5 /* newGeonote@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,6 +744,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -757,6 +770,7 @@
 					"-lGeoloqi-Debug",
 					"-ObjC",
 				);
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				WARNING_LDFLAGS = (
 					"-lGeoloqi-Release",
