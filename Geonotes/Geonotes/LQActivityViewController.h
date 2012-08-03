@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STableViewController.h"
+#import "LQSTableViewController.h"
 #import "LQActivityItemCellView.h"
 #import <LQSDKUtils.h>
 #import "LOLDatabase.h"
 
-@interface LQActivityViewController : STableViewController {
+@interface LQActivityViewController : LQSTableViewController {
     NSMutableArray *items;
 	LOLDatabase *_itemDB;
     IBOutlet LQActivityItemCellView *tableCellView;

@@ -231,7 +231,12 @@
         LQSetupAccountViewController *savc = (LQSetupAccountViewController *)self.setupAccountViewController;
         [savc resetField];
     }
-    [self.navigationController pushViewController:self.setupAccountViewController animated:YES];
+    
+    if (self.navigationController.topViewController != self.setupAccountViewController) {
+        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController pushViewController:self.setupAccountViewController animated:NO
+         ];
+    }
 }
 
 - (void)loginCellWasTapped

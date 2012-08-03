@@ -17,6 +17,8 @@
 
 @interface LQActivityViewController ()
 
+- (void)showUsingAnonymouslyBanner;
+
 @end
 
 @implementation LQActivityViewController
@@ -60,7 +62,7 @@
     nib = [[NSBundle mainBundle] loadNibNamed:@"LQTableFooterView" owner:self options:nil];
     LQTableFooterView *footerView = (LQTableFooterView *)[nib objectAtIndex:0];
     self.footerView = footerView;
-
+    
     // Load the stored notes from the local database
     [self reloadDataFromDB];
 }

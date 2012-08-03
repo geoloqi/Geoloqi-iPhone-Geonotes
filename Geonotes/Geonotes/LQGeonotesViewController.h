@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STableViewController.h"
+#import "LQSTableViewController.h"
 #import "LQGeonoteItemCellView.h"
 #import "LOLDatabase.h"
 
-@interface LQGeonotesViewController : STableViewController {
+@interface LQGeonotesViewController : LQSTableViewController {
     NSMutableArray *items;
     LOLDatabase *_itemDB;
     IBOutlet LQGeonoteItemCellView *tableCellView;

@@ -28,4 +28,6 @@ static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.LQD
 
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender;
 
+- (void)setupAccountCellWasTapped;
+
 @end

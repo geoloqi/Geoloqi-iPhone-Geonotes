@@ -72,7 +72,7 @@
     layersNavController.navigationBar.tintColor = [UIColor blackColor];
 
     settingsViewController = [[LQSettingsViewController alloc] init];
-    UINavigationController *settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+    settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     settingsNavController.navigationBar.tintColor = [UIColor blackColor];
     
     self.tabBarController = [[LQTabBarController alloc] init];
@@ -246,6 +246,42 @@
 {
 	NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	return [caches stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.lol.sqlite", category]];
+}
+
+- (void)selectSetupAccountView
+{
+    self.tabBarController.selectedViewController = settingsNavController;
+    [settingsViewController setupAccountCellWasTapped];
+}
+
+
+#pragma mark -
+
+- (void)addUsingAnonymouslyBannerToView:(UIView *)view withTableView:(UITableView *)tableView
+{
+    CGRect _tvf = tableView.frame;
+    CGRect tvf = CGRectMake(_tvf.origin.x, (_tvf.origin.y + kLQUsingAnonymouslyBannerHeight), _tvf.size.width, (_tvf.size.height - kLQUsingAnonymouslyBannerHeight));
+    CGRect bannerFrame = CGRectMake(_tvf.origin.x, _tvf.origin.y, _tvf.size.width, kLQUsingAnonymouslyBannerHeight);
+//    CGRect bannerFrame = CGRectMake(kLQUsingAnonymouslyBannerOriginX,
+//                                    kLQUsingAnonymouslyBannerOriginY,
+//                                    kLQUsingAnonymouslyBannerWidth,
+//                                    kLQUsingAnonymouslyBannerHeight);
+    UIButton *anonymousBanner = [UIButton buttonWithType:UIButtonTypeCustom];
+    anonymousBanner.frame = bannerFrame;
+    anonymousBanner.backgroundColor = [UIColor colorWithRed:kLQAnonymousBannerBackgroundRed
+                                                      green:kLQAnonymousBannerBackgroundGreen
+                                                       blue:kLQAnonymousBannerBackgroundBlue
+                                                      alpha:kLQAnonymousBannerBackgroundAlpha];
+    [anonymousBanner setTitle:@"You are using Geonotes anonymously" forState:UIControlStateNormal];
+    [anonymousBanner setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    anonymousBanner.titleLabel.font = [UIFont systemFontOfSize:12];
+    [anonymousBanner setUserInteractionEnabled:YES];
+    [anonymousBanner addTarget:self
+                        action:@selector(selectSetupAccountView)
+              forControlEvents:UIControlEventTouchUpInside];
+    
+    tableView.frame = tvf;
+    [view addSubview:anonymousBanner];
 }
 
 @end
