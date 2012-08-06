@@ -79,7 +79,19 @@
 		BE4ACC5015B8C829000D6EDD /* LQPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */; };
 		BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */; };
 		BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */; };
+		BE601D2115D05B0E0032B6FA /* LQButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE601D2015D05B0E0032B6FA /* LQButtonTableViewCell.xib */; };
+		BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */; };
 		BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */; };
+		BE9CB8DC15CC83D700ED1526 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8DA15CC83D700ED1526 /* logo.png */; };
+		BE9CB8DD15CC83D700ED1526 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8DB15CC83D700ED1526 /* logo@2x.png */; };
+		BE9CB8E515CC8B1100ED1526 /* LQLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9CB8E415CC8B1100ED1526 /* LQLogoCell.m */; };
+		BE9CB8E715CC8B2100ED1526 /* LQLogoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8E615CC8B2100ED1526 /* LQLogoCell.xib */; };
+		BE9CB8EE15CC91C900ED1526 /* button_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8E815CC91C900ED1526 /* button_disabled.png */; };
+		BE9CB8EF15CC91C900ED1526 /* button_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8E915CC91C900ED1526 /* button_disabled@2x.png */; };
+		BE9CB8F015CC91C900ED1526 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8EA15CC91C900ED1526 /* button_pressed.png */; };
+		BE9CB8F115CC91C900ED1526 /* button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8EB15CC91C900ED1526 /* button_pressed@2x.png */; };
+		BE9CB8F215CC91C900ED1526 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8EC15CC91C900ED1526 /* button.png */; };
+		BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8ED15CC91C900ED1526 /* button@2x.png */; };
 		BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC597BD15C7429B00684667 /* LQGeonote.m */; };
 		BED232E915CB2A7B001EE0A5 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E015CB2A7B001EE0A5 /* activity.png */; };
 		BED232EA15CB2A7B001EE0A5 /* geonote.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E115CB2A7B001EE0A5 /* geonote.png */; };
@@ -237,8 +249,22 @@
 		BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQPrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQPrivacyPolicyViewController.xib; sourceTree = "<group>"; };
 		BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		BE601D2015D05B0E0032B6FA /* LQButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQButtonTableViewCell.xib; sourceTree = "<group>"; };
+		BE601D2515D05F6F0032B6FA /* LQButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQButtonTableViewCell.h; sourceTree = "<group>"; };
+		BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQButtonTableViewCell.m; sourceTree = "<group>"; };
 		BE9CB8D715CC668600ED1526 /* LQSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQSTableViewController.h; sourceTree = "<group>"; };
 		BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQSTableViewController.m; sourceTree = "<group>"; };
+		BE9CB8DA15CC83D700ED1526 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Graphics/logo.png; sourceTree = "<group>"; };
+		BE9CB8DB15CC83D700ED1526 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "Graphics/logo@2x.png"; sourceTree = "<group>"; };
+		BE9CB8E315CC8B1100ED1526 /* LQLogoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQLogoCell.h; sourceTree = "<group>"; };
+		BE9CB8E415CC8B1100ED1526 /* LQLogoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQLogoCell.m; sourceTree = "<group>"; };
+		BE9CB8E615CC8B2100ED1526 /* LQLogoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQLogoCell.xib; sourceTree = "<group>"; };
+		BE9CB8E815CC91C900ED1526 /* button_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_disabled.png; path = Graphics/button_disabled.png; sourceTree = "<group>"; };
+		BE9CB8E915CC91C900ED1526 /* button_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_disabled@2x.png"; path = "Graphics/button_disabled@2x.png"; sourceTree = "<group>"; };
+		BE9CB8EA15CC91C900ED1526 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_pressed.png; path = Graphics/button_pressed.png; sourceTree = "<group>"; };
+		BE9CB8EB15CC91C900ED1526 /* button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_pressed@2x.png"; path = "Graphics/button_pressed@2x.png"; sourceTree = "<group>"; };
+		BE9CB8EC15CC91C900ED1526 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = Graphics/button.png; sourceTree = "<group>"; };
+		BE9CB8ED15CC91C900ED1526 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button@2x.png"; path = "Graphics/button@2x.png"; sourceTree = "<group>"; };
 		BEC597BC15C7429B00684667 /* LQGeonote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonote.h; sourceTree = "<group>"; };
 		BEC597BD15C7429B00684667 /* LQGeonote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonote.m; sourceTree = "<group>"; };
 		BED232E015CB2A7B001EE0A5 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Graphics/activity.png; sourceTree = "<group>"; };
@@ -363,6 +389,14 @@
 		0FDE2A7315A8C34400FB78A7 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				BE9CB8E815CC91C900ED1526 /* button_disabled.png */,
+				BE9CB8E915CC91C900ED1526 /* button_disabled@2x.png */,
+				BE9CB8EA15CC91C900ED1526 /* button_pressed.png */,
+				BE9CB8EB15CC91C900ED1526 /* button_pressed@2x.png */,
+				BE9CB8EC15CC91C900ED1526 /* button.png */,
+				BE9CB8ED15CC91C900ED1526 /* button@2x.png */,
+				BE9CB8DA15CC83D700ED1526 /* logo.png */,
+				BE9CB8DB15CC83D700ED1526 /* logo@2x.png */,
 				BED232E015CB2A7B001EE0A5 /* activity.png */,
 				0FDE2AD415A8DEE300FB78A7 /* activity@2x.png */,
 				BED232E115CB2A7B001EE0A5 /* geonote.png */,
@@ -472,6 +506,9 @@
 				BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */,
 				BE4ACC4D15B8C829000D6EDD /* LQPrivacyPolicyViewController.h */,
 				BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */,
+				BE9CB8E315CC8B1100ED1526 /* LQLogoCell.h */,
+				BE9CB8E415CC8B1100ED1526 /* LQLogoCell.m */,
+				BE9CB8E615CC8B2100ED1526 /* LQLogoCell.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -496,6 +533,9 @@
 				0FDE2A9315A8CAE200FB78A7 /* LQTableFooterView.h */,
 				0FDE2A9415A8CAE200FB78A7 /* LQTableFooterView.m */,
 				0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */,
+				BE601D2015D05B0E0032B6FA /* LQButtonTableViewCell.xib */,
+				BE601D2515D05F6F0032B6FA /* LQButtonTableViewCell.h */,
+				BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */,
 			);
 			name = TableViewResources;
 			sourceTree = "<group>";
@@ -675,6 +715,16 @@
 				BED232F015CB2A7B001EE0A5 /* newGeonote.png in Resources */,
 				BED232F115CB2A7B001EE0A5 /* settings.png in Resources */,
 				BED232F315CB2AC1001EE0A5 /* newGeonote@2x.png in Resources */,
+				BE9CB8DC15CC83D700ED1526 /* logo.png in Resources */,
+				BE9CB8DD15CC83D700ED1526 /* logo@2x.png in Resources */,
+				BE9CB8E715CC8B2100ED1526 /* LQLogoCell.xib in Resources */,
+				BE9CB8EE15CC91C900ED1526 /* button_disabled.png in Resources */,
+				BE9CB8EF15CC91C900ED1526 /* button_disabled@2x.png in Resources */,
+				BE9CB8F015CC91C900ED1526 /* button_pressed.png in Resources */,
+				BE9CB8F115CC91C900ED1526 /* button_pressed@2x.png in Resources */,
+				BE9CB8F215CC91C900ED1526 /* button.png in Resources */,
+				BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */,
+				BE601D2115D05B0E0032B6FA /* LQButtonTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,6 +769,8 @@
 				BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */,
 				BE2F883215C999250041F9C9 /* MBProgressHUD.m in Sources */,
 				BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */,
+				BE9CB8E515CC8B1100ED1526 /* LQLogoCell.m in Sources */,
+				BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,8 @@
 @implementation LQSettingsViewController
 
 @synthesize locationTracking, navigationBar, tableView = _tableView,
-            setupAccountViewController, loginViewController, privacyPolicyViewController;
+            setupAccountViewController, loginViewController, privacyPolicyViewController,
+            logoCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,6 +60,11 @@
             
         case 2:
             rows = 3;
+            break;
+            
+        case 3:
+            rows = 1;
+            break;
     }
     return rows;
 }
@@ -103,6 +109,11 @@
                     break;
             }
             break;
+        
+        case 3:
+            cell = [self logoCell];
+            break;
+        
     }
     
     return cell;
@@ -116,7 +127,7 @@
 - (NSArray *)sectionHeaders
 {
     if (sectionHeaders == nil)
-        sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"About", nil];
+        sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"About", @"", nil];
     return sectionHeaders;
 }
 
@@ -140,12 +151,19 @@
     return footer;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat f = 44.0;
+    if (indexPath.section == 3)
+        f = 64.0;
+    return f;
+}
+
 #pragma mark - Table View - Cells
 
 - (UITableViewCell *)locationUpdateCell
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    
+    UITableViewCell *cell = [self getCellForId:@"locationUpdateCell"];
     cell.textLabel.text = @"Enable location";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -158,7 +176,7 @@
 
 - (UITableViewCell *)setupAccountCell
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell = [self getCellForId:@"setupAccountCell"];
     cell.textLabel.text = @"Setup account";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
@@ -166,7 +184,7 @@
 
 - (UITableViewCell *)loginCell
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell = [self getCellForId:@"loginCell"];
     cell.textLabel.text = [NSString stringWithFormat:@"Login to %@ account", ([LQSession savedSession].isAnonymous ? @"existing" : @"different")];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
@@ -174,7 +192,7 @@
 
 - (UITableViewCell *)privacyPolicyCell
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell = [self getCellForId:@"privacyPolicyCell"];
     cell.textLabel.text = @"Privacy Policy";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
@@ -182,7 +200,7 @@
 
 - (UITableViewCell *)appVersionCell
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell = [self getCellForId:@"appVersionCell"];
     cell.textLabel.text = [NSString stringWithFormat:@"Version: %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -190,9 +208,30 @@
 
 - (UITableViewCell *)sdkVersionCell
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell = [self getCellForId:@"sdkVersionCell"];
     cell.textLabel.text = [NSString stringWithFormat:@"SDK Version: %@", LQSDKVersionString];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (UITableViewCell *)logoCell
+{
+    static NSString *logoCellId = @"logoCell";
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:logoCellId];
+    if (!cell) {
+        [[NSBundle mainBundle] loadNibNamed:@"LQLogoCell" owner:self options:nil];
+        cell = logoCell;
+        cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        cell.userInteractionEnabled = NO;
+    }
+    return cell;
+}
+
+- (UITableViewCell *)getCellForId:(NSString *)cellIdentifier
+{
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     return cell;
 }
 
@@ -234,8 +273,7 @@
     
     if (self.navigationController.topViewController != self.setupAccountViewController) {
         [self.navigationController popViewControllerAnimated:NO];
-        [self.navigationController pushViewController:self.setupAccountViewController animated:NO
-         ];
+        [self.navigationController pushViewController:self.setupAccountViewController animated:NO];
     }
 }
 

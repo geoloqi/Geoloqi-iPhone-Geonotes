@@ -157,15 +157,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat f;
-    switch (indexPath.section) {
-        case 0:
-            f = 180;
-            break;
-        case 1:
-            f = 44;
-            break;
-    }
+    CGFloat f = 44;
+    if (indexPath.section == 0)
+        f = 180;
     return f;
 }
 
@@ -173,12 +167,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return [[NSArray alloc] initWithObjects:nil, @"Location", nil];
+    return [[NSArray alloc] initWithObjects:nil, @"Location", nil, nil];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -234,6 +228,13 @@
             }
             cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
+            
+        case 2:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"create"];
+            if (!cell)
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"create"];
+            cell.textLabel.text = @"Create";
             break;
     }
     return cell;

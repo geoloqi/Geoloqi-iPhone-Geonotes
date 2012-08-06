@@ -15,12 +15,6 @@
 
 #import "NSString+URLEncoding.h"
 
-@interface LQActivityViewController ()
-
-- (void)showUsingAnonymouslyBanner;
-
-@end
-
 @implementation LQActivityViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

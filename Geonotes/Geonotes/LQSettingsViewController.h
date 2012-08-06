@@ -26,6 +26,8 @@ static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.LQD
 @property (nonatomic, strong) IBOutlet UIViewController *loginViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *privacyPolicyViewController;
 
+@property (nonatomic, strong) IBOutlet UITableViewCell *logoCell;
+
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender;
 
 - (void)setupAccountCellWasTapped;
