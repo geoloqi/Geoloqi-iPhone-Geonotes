@@ -79,8 +79,8 @@
 		BE4ACC5015B8C829000D6EDD /* LQPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */; };
 		BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */; };
 		BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */; };
-		BE601D2115D05B0E0032B6FA /* LQButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE601D2015D05B0E0032B6FA /* LQButtonTableViewCell.xib */; };
 		BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */; };
+		BE601D2B15D06D830032B6FA /* LQButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */; };
 		BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */; };
 		BE9CB8DC15CC83D700ED1526 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8DA15CC83D700ED1526 /* logo.png */; };
 		BE9CB8DD15CC83D700ED1526 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8DB15CC83D700ED1526 /* logo@2x.png */; };
@@ -249,9 +249,9 @@
 		BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQPrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQPrivacyPolicyViewController.xib; sourceTree = "<group>"; };
 		BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		BE601D2015D05B0E0032B6FA /* LQButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQButtonTableViewCell.xib; sourceTree = "<group>"; };
 		BE601D2515D05F6F0032B6FA /* LQButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQButtonTableViewCell.h; sourceTree = "<group>"; };
 		BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQButtonTableViewCell.m; sourceTree = "<group>"; };
+		BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQButtonTableViewCell.xib; sourceTree = "<group>"; };
 		BE9CB8D715CC668600ED1526 /* LQSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQSTableViewController.h; sourceTree = "<group>"; };
 		BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQSTableViewController.m; sourceTree = "<group>"; };
 		BE9CB8DA15CC83D700ED1526 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Graphics/logo.png; sourceTree = "<group>"; };
@@ -533,9 +533,9 @@
 				0FDE2A9315A8CAE200FB78A7 /* LQTableFooterView.h */,
 				0FDE2A9415A8CAE200FB78A7 /* LQTableFooterView.m */,
 				0FDE2A9515A8CAE200FB78A7 /* LQTableFooterView.xib */,
-				BE601D2015D05B0E0032B6FA /* LQButtonTableViewCell.xib */,
 				BE601D2515D05F6F0032B6FA /* LQButtonTableViewCell.h */,
 				BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */,
+				BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */,
 			);
 			name = TableViewResources;
 			sourceTree = "<group>";
@@ -724,7 +724,7 @@
 				BE9CB8F115CC91C900ED1526 /* button_pressed@2x.png in Resources */,
 				BE9CB8F215CC91C900ED1526 /* button.png in Resources */,
 				BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */,
-				BE601D2115D05B0E0032B6FA /* LQButtonTableViewCell.xib in Resources */,
+				BE601D2B15D06D830032B6FA /* LQButtonTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

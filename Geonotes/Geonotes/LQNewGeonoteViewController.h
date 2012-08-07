@@ -11,6 +11,7 @@
 
 #import "LQGeonote.h"
 #import "LQNewGeonoteMapViewController.h"
+#import "LQButtonTableViewCell.h"
 
 #define kLQGeonoteTotalCharacterCount 140
 
@@ -20,6 +21,7 @@ typedef void(^CompletionCallback)(void);
     LQNewGeonoteMapViewController *mapViewController;
     UILabel *characterCount;
     NSString *geonoteLocationDescription;
+    LQButtonTableViewCell *buttonTableViewCell;
 }
 
 @property (nonatomic, strong) CompletionCallback saveComplete;
@@ -27,7 +29,6 @@ typedef void(^CompletionCallback)(void);
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextView *geonoteTextView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *saveButton;
 
 - (IBAction)cancelButtonWasTapped:(id)sender;
 - (IBAction)saveButtonWasTapped:(id)sender;

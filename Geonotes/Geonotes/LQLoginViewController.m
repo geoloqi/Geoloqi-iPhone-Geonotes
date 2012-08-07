@@ -38,11 +38,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Login", nil)
-																			  style:UIBarButtonItemStyleDone 
-																			 target:self 
-																			 action:@selector(loginToAccount)];
-	self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Login", nil)
+//																			  style:UIBarButtonItemStyleDone 
+//																			 target:self 
+//																			 action:@selector(loginToAccount)];
+//	self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
 }
 
 - (void)viewDidUnload
@@ -64,6 +64,7 @@
     self.emailAddressField.text = nil;
     self.passwordField.text = nil;
     [self.emailAddressField becomeFirstResponder];
+    [buttonTableViewCell setButtonState:NO];
 }
 
 - (BOOL)isComplete
@@ -105,7 +106,8 @@
 
 - (IBAction)textFieldDidEditChanged:(UITextField *)textField
 {
-    self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+//    self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+    [buttonTableViewCell setButtonState:[self isComplete]];
 }
 
 - (void)updateDisplayName:(void (^)())block
@@ -121,31 +123,53 @@
 
 #pragma mark - table view datasource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
 - (NSString *)tableView:(UITableView *)inTableView titleForHeaderInSection:(NSInteger)section;
 {
-	return NSLocalizedString(@"Login to your Geoloqi account", nil);
+	return (section == 0) ? NSLocalizedString(@"Login to your Geoloqi account", nil) : nil;
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
 {
-	return 2;
+    int rows;
+    switch (section) {
+        case 0:
+            rows = 2;
+            break;
+        case 1:
+            rows = 1;
+            break;
+    }
+    return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-    if (indexPath.row == 0) {
-        cell.accessoryView = emailAddressField;
-        cell.detailTextLabel.text = NSLocalizedString(@"Email", nil);
-    } else if (indexPath.row == 1) {
-        cell.accessoryView = passwordField;
-        cell.detailTextLabel.text = NSLocalizedString(@"Password", nil);
+	UITableViewCell *cell;
+    if (indexPath.section == 0) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        if (indexPath.row == 0) {
+            cell.accessoryView = emailAddressField;
+            cell.detailTextLabel.text = NSLocalizedString(@"Email", nil);
+        } else if (indexPath.row == 1) {
+            cell.accessoryView = passwordField;
+            cell.detailTextLabel.text = NSLocalizedString(@"Password", nil);
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else if (indexPath.section == 1) {
+        buttonTableViewCell = [LQButtonTableViewCell buttonTableViewCellWithTitle:@"Login"
+                                                                            owner:self
+                                                                          enabled:[self isComplete]
+                                                                           target:self
+                                                                         selector:@selector(loginToAccount)];
+        cell = buttonTableViewCell;
     }
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	return cell;
 }
-
-#pragma mark - table view delegate
 
 #pragma mark - text field delegate
 

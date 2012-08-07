@@ -11,7 +11,7 @@
 @interface LQNewGeonoteViewController ()
 
 - (UIBarButtonItem *)createCancelButton;
-- (UIBarButtonItem *)createSaveButton;
+//- (UIBarButtonItem *)createSaveButton;
 
 @end
 
@@ -20,7 +20,7 @@
 @synthesize tableView = _tableView,
             geonote,
             geonoteTextView,
-            cancelButton, saveButton;
+            cancelButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +29,7 @@
         // Custom initialization
         self.navigationItem.title = @"New Geonote";
         self.navigationItem.leftBarButtonItem = [self createCancelButton];
-        self.navigationItem.rightBarButtonItem = [self createSaveButton];
+//        self.navigationItem.rightBarButtonItem = [self createSaveButton];
     }
     return self;
 }
@@ -65,17 +65,17 @@
     return cancel;
 }
 
-- (UIBarButtonItem *)createSaveButton
-{
-    UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithTitle:@"Save"
-                                                             style:UIBarButtonItemStyleDone
-                                                            target:self
-                                                            action:@selector(saveButtonWasTapped:)];
-    save.tintColor = [UIColor blueColor];
-    save.enabled = NO;
-    self.saveButton = save;
-    return save;
-}
+//- (UIBarButtonItem *)createSaveButton
+//{
+//    UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+//                                                             style:UIBarButtonItemStyleDone
+//                                                            target:self
+//                                                            action:@selector(saveButtonWasTapped:)];
+//    save.tintColor = [UIColor blueColor];
+//    save.enabled = NO;
+//    self.saveButton = save;
+//    return save;
+//}
 
 #pragma mark - IBActions & utils
 
@@ -105,7 +105,7 @@
     self.geonote = nil;
     mapViewController.geonote = nil;
     self.geonoteTextView.text = nil;
-    self.saveButton.enabled = NO;
+    [buttonTableViewCell setButtonState:NO];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.tableView reloadData];
     }];
@@ -231,11 +231,15 @@
             break;
             
         case 2:
-            cell = [tableView dequeueReusableCellWithIdentifier:@"create"];
-            if (!cell)
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"create"];
-            cell.textLabel.text = @"Create";
+        {
+            buttonTableViewCell = [LQButtonTableViewCell buttonTableViewCellWithTitle:@"Create"
+                                                                                owner:self
+                                                                              enabled:[self.geonote isSaveable:kLQGeonoteTotalCharacterCount]
+                                                                               target:self
+                                                                             selector:@selector(saveButtonWasTapped:)];
+            cell = buttonTableViewCell;
             break;
+        }
     }
     return cell;
 }
@@ -266,7 +270,7 @@
     characterCount.textColor = (chars < 0) ? [UIColor redColor] : [UIColor darkTextColor];
     characterCount.text = [NSString stringWithFormat:@"%d", chars];
     self.geonote.text = textView.text;
-    self.saveButton.enabled = [self.geonote isSaveable:kLQGeonoteTotalCharacterCount];
+    [buttonTableViewCell setButtonState:[self.geonote isSaveable:kLQGeonoteTotalCharacterCount]];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -284,8 +288,8 @@
 
 - (void)geonote:(LQGeonote *)_geonote locationDidChange:(CLLocation *)newLocation
 {
+    [buttonTableViewCell setButtonState:[_geonote isSaveable:kLQGeonoteTotalCharacterCount]];
     [self.tableView reloadData];
-    self.saveButton.enabled = [_geonote isSaveable:kLQGeonoteTotalCharacterCount];
 }
 
 @end

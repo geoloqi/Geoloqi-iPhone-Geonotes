@@ -251,7 +251,7 @@
 - (void)selectSetupAccountView
 {
     self.tabBarController.selectedViewController = settingsNavController;
-    [settingsViewController setupAccountCellWasTapped];
+    [settingsViewController anonymousBannerWasTapped];
 }
 
 

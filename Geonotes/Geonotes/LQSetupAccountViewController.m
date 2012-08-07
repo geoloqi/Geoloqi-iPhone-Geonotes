@@ -14,7 +14,7 @@
 
 @implementation LQSetupAccountViewController
 
-@synthesize tableView, emailAddressField;
+@synthesize tableView = _tableView, emailAddressField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,11 +29,11 @@
 {
     [super viewDidLoad];
     
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", nil)
-																			  style:UIBarButtonItemStyleDone 
-																			 target:self 
-																			 action:@selector(setupAccount)];
-	self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", nil)
+//																			  style:UIBarButtonItemStyleDone 
+//																			 target:self 
+//																			 action:@selector(setupAccount)];
+//	self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
 }
 
 - (void)viewDidUnload
@@ -53,6 +53,7 @@
 - (void)resetField
 {
     self.emailAddressField.text = nil;
+    [buttonTableViewCell setButtonState:NO];
 }
 
 - (BOOL)isComplete;
@@ -67,6 +68,7 @@
 
 - (IBAction)setupAccount
 {
+    [self.emailAddressField resignFirstResponder];
     LQSession *session = [LQSession savedSession];
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:emailAddressField.text, @"email", nil];
     NSURLRequest *r = [session requestWithMethod:@"POST" path:@"/account/anonymous_set_email" payload:params];
@@ -94,32 +96,69 @@
 
 - (IBAction)textFieldDidEditChanged:(UITextField *)textField
 {
-    self.navigationItem.rightBarButtonItem.enabled = textField.text.length > 0;
+//    self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+    [buttonTableViewCell setButtonState:[self isComplete]];
 }
 
 #pragma mark - table view datasource
 
 - (NSString *)tableView:(UITableView *)inTableView titleForHeaderInSection:(NSInteger)section;
 {
-	return NSLocalizedString(@"Create your Geoloqi account", nil);
+    NSString *title;
+    switch (section) {
+        case 0:
+            title = NSLocalizedString(@"Create your Geoloqi account", nil);
+            break;
+    }
+    return title;
 }
 
 - (NSString *)tableView:(UITableView *)inTableView titleForFooterInSection:(NSInteger)section;
 {
-	return NSLocalizedString(@"You'll get an email to complete the setup.", nil);
+    NSString *footer;
+    switch (section) {
+        case 0:
+            footer = NSLocalizedString(@"You'll get an email to complete the setup.", nil);
+            break;
+    }
+    return footer;
 }
 
-- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
 	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-    cell.accessoryView = emailAddressField;
-    cell.detailTextLabel.text = NSLocalizedString(@"Email", nil);
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	UITableViewCell *cell;
+    NSString *cellId;
+    switch (indexPath.section) {
+        case 0:
+            cellId = @"email";
+            cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+            if (!cell)
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+            cell.accessoryView = emailAddressField;
+            cell.detailTextLabel.text = NSLocalizedString(@"Email", nil);
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            break;
+            
+        case 1:
+            buttonTableViewCell = [LQButtonTableViewCell buttonTableViewCellWithTitle:@"Save"
+                                                                                owner:self
+                                                                              enabled:[self isComplete]
+                                                                               target:self
+                                                                             selector:@selector(setupAccount)];
+            cell = buttonTableViewCell;
+            break;
+    }
+
 	return cell;
 }
 

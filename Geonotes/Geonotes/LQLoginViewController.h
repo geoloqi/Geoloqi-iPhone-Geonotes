@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "LQSettingsViewController.h"
+#import "LQButtonTableViewCell.h"
 
-@interface LQLoginViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface LQLoginViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
+    
+    LQButtonTableViewCell *buttonTableViewCell;
+}
 
 @property (nonatomic, strong) IBOutlet UITableView *settingsTableView;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

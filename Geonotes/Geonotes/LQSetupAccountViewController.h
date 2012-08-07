@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LQButtonTableViewCell.h"
 
-@interface LQSetupAccountViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
+@interface LQSetupAccountViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
+    
+    LQButtonTableViewCell *buttonTableViewCell;
+}
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *emailAddressField;

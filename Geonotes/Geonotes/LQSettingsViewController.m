@@ -261,7 +261,7 @@
     [tableView cellForRowAtIndexPath:indexPath].selected = NO;
 }
 
-- (void)setupAccountCellWasTapped
+- (void)initSetupAccountViewController
 {
     if (self.setupAccountViewController == nil) {
         self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
@@ -270,7 +270,17 @@
         LQSetupAccountViewController *savc = (LQSetupAccountViewController *)self.setupAccountViewController;
         [savc resetField];
     }
-    
+}
+
+- (void)setupAccountCellWasTapped
+{
+    [self initSetupAccountViewController];
+    [self.navigationController pushViewController:self.setupAccountViewController animated:YES];
+}
+
+- (void)anonymousBannerWasTapped
+{
+    [self initSetupAccountViewController];
     if (self.navigationController.topViewController != self.setupAccountViewController) {
         [self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:self.setupAccountViewController animated:NO];
