@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 #import "LQButtonTableViewCell.h"
 
 @class LQSettingsViewController;
@@ -19,7 +20,6 @@
 @property (nonatomic, strong) LQSettingsViewController *settingsViewController;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *emailAddressField;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsViewController:(LQSettingsViewController *)settingsViewController;
 

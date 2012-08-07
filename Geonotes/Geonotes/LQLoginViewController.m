@@ -15,7 +15,7 @@
 
 @implementation LQLoginViewController
 
-@synthesize settingsViewController, tableView, settingsTableView, activityIndicator,
+@synthesize settingsViewController, tableView, settingsTableView,
             emailAddressField, passwordField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -109,13 +109,10 @@
 
 - (void)toggleFormStatus:(BOOL)status
 {
-    if (status) {
-        [self.activityIndicator stopAnimating];
-        [buttonTableViewCell.button setTitle:nil forState:UIControlStateDisabled];
-    } else {
-        [self.activityIndicator startAnimating];
-        [buttonTableViewCell.button setTitle:@"Logging in..." forState:UIControlStateDisabled];
-    }
+    if (status)
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    else
+        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"Logging In"];
     self.emailAddressField.enabled = status;
     self.passwordField.enabled = status;
     [buttonTableViewCell setButtonState:status];

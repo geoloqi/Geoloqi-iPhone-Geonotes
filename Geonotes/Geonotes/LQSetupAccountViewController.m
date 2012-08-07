@@ -17,7 +17,7 @@
 
 @synthesize settingsViewController,
             tableView = _tableView,
-            emailAddressField, activityIndicator;
+            emailAddressField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,7 +88,6 @@
     [session runAPIRequest:r
                 completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
                     [self toggleFormStatus:YES];
-                    [self.activityIndicator stopAnimating];
                     if (error) {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                         message:[[error userInfo] objectForKey:@"NSLocalizedDescription"]
@@ -111,13 +110,11 @@
 
 - (void)toggleFormStatus:(BOOL)status
 {
-    if (status) {
-        [self.activityIndicator stopAnimating];
-        [buttonTableViewCell.button setTitle:nil forState:UIControlStateDisabled];
-    } else {
-        [self.activityIndicator startAnimating];
-        [buttonTableViewCell.button setTitle:@"Saving..." forState:UIControlStateDisabled];
-    }
+    if (status)
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    else
+        [[MBProgressHUD showHUDAddedTo:self.view animated:YES] setLabelText:@"Saving"];
+
     self.emailAddressField.enabled = status;
     [buttonTableViewCell setButtonState:status];
 }
