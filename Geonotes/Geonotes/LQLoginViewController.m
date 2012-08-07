@@ -79,13 +79,14 @@
 
 - (IBAction)loginToAccount
 {
-    [self.activityIndicator startAnimating];
+    [self toggleFormStatus:NO];
     [self.emailAddressField resignFirstResponder];
     [self.passwordField resignFirstResponder];
     [LQSession requestSessionWithUsername:emailAddressField.text
                                  password:passwordField.text
                                completion:^(LQSession *session, NSError *error) {
                                    if (error) {
+                                       [self toggleFormStatus:YES];
                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                                        message:[[error userInfo] objectForKey:@"error_description"]
                                                                                       delegate:self
@@ -96,12 +97,26 @@
                                        [LQSession setSavedSession:session];
                                        [self updateDisplayName:^() {
                                            [self.settingsTableView reloadData];
-                                           [self.activityIndicator stopAnimating];
+                                           [self toggleFormStatus:YES];
                                            [self.navigationController popViewControllerAnimated:YES];
                                            [[[UIApplication sharedApplication] delegate] performSelector:@selector(refreshAllSubTableViews)];
                                        }];
                                    }
                                }];
+}
+
+- (void)toggleFormStatus:(BOOL)status
+{
+    if (status) {
+        [self.activityIndicator stopAnimating];
+        [buttonTableViewCell.button setTitle:nil forState:UIControlStateDisabled];
+    } else {
+        [self.activityIndicator startAnimating];
+        [buttonTableViewCell.button setTitle:@"Logging in..." forState:UIControlStateDisabled];
+    }
+    self.emailAddressField.enabled = status;
+    self.passwordField.enabled = status;
+    [buttonTableViewCell setButtonState:status];
 }
 
 - (IBAction)textFieldDidEditChanged:(UITextField *)textField

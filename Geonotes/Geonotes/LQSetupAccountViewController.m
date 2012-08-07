@@ -14,7 +14,7 @@
 
 @implementation LQSetupAccountViewController
 
-@synthesize tableView = _tableView, emailAddressField;
+@synthesize tableView = _tableView, emailAddressField, activityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,11 +69,14 @@
 - (IBAction)setupAccount
 {
     [self.emailAddressField resignFirstResponder];
+    [self toggleFormStatus:NO];
     LQSession *session = [LQSession savedSession];
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:emailAddressField.text, @"email", nil];
     NSURLRequest *r = [session requestWithMethod:@"POST" path:@"/account/anonymous_set_email" payload:params];
     [session runAPIRequest:r
                 completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+                    [self toggleFormStatus:YES];
+                    [self.activityIndicator stopAnimating];
                     if (error) {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                         message:[[error userInfo] objectForKey:@"NSLocalizedDescription"]
@@ -94,10 +97,17 @@
     ];
 }
 
-- (IBAction)textFieldDidEditChanged:(UITextField *)textField
+- (void)toggleFormStatus:(BOOL)status
 {
-//    self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
-    [buttonTableViewCell setButtonState:[self isComplete]];
+    if (status) {
+        [self.activityIndicator stopAnimating];
+        [buttonTableViewCell.button setTitle:nil forState:UIControlStateDisabled];
+    } else {
+        [self.activityIndicator startAnimating];
+        [buttonTableViewCell.button setTitle:@"Saving..." forState:UIControlStateDisabled];
+    }
+    self.emailAddressField.enabled = status;
+    [buttonTableViewCell setButtonState:status];
 }
 
 #pragma mark - table view datasource
@@ -163,6 +173,12 @@
 }
 
 #pragma mark - text field delegate
+
+- (IBAction)textFieldDidEditChanged:(UITextField *)textField
+{
+    //    self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
+    [buttonTableViewCell setButtonState:[self isComplete]];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 {
