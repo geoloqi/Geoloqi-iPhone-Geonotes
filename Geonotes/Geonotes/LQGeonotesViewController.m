@@ -9,7 +9,7 @@
 #import "LQGeonotesViewController.h"
 #import "LQTableHeaderView.h"
 #import "NSString+URLEncoding.h"
-
+#import "sqlite3.h"
 #import "LQAppDelegate.h"
 
 @interface LQGeonotesViewController ()
@@ -97,6 +97,12 @@
     [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
         
         items = [[NSMutableArray alloc] init];
+        // Erase the Geonote list
+        sqlite3 *db;
+        if(sqlite3_open([[LQAppDelegate cacheDatabasePathForCategory:@"LQGeonotes"] UTF8String], &db) == SQLITE_OK) {
+            NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@'", LQGeonoteListCollectionName];
+            sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL);
+        }
         
         for(NSString *key in responseDictionary) {
             for(NSDictionary *item in [responseDictionary objectForKey:key]) {
