@@ -263,24 +263,24 @@
 
 - (void)initSetupAccountViewController
 {
-    if (self.setupAccountViewController == nil) {
-        self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
-                                                                                         bundle:[NSBundle mainBundle]];
-    } else {
-        LQSetupAccountViewController *savc = (LQSetupAccountViewController *)self.setupAccountViewController;
-        [savc resetField];
-    }
+//    if (self.setupAccountViewController == nil) {
+//        self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
+//                                                                                         bundle:[NSBundle mainBundle]];
+//        self.setupAccountViewController.settingsViewController = self;
+//    } else {
+//        [self.setupAccountViewController resetField];
+//    }
 }
 
 - (void)setupAccountCellWasTapped
 {
-    [self initSetupAccountViewController];
+//    [self initSetupAccountViewController];
     [self.navigationController pushViewController:self.setupAccountViewController animated:YES];
 }
 
 - (void)anonymousBannerWasTapped
 {
-    [self initSetupAccountViewController];
+//    [self initSetupAccountViewController];
     if (self.navigationController.topViewController != self.setupAccountViewController) {
         [self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:self.setupAccountViewController animated:NO];
@@ -289,14 +289,13 @@
 
 - (void)loginCellWasTapped
 {
-    if (self.loginViewController == nil) {
-        self.loginViewController = [[LQLoginViewController alloc] initWithNibName:@"LQLoginViewController"
-                                                                           bundle:[NSBundle mainBundle]
-                                                             andSettingsTableView:_tableView];
-    } else {
-        LQLoginViewController *lvc  = (LQLoginViewController *)self.loginViewController;
-        [lvc resetFields];
-    }
+//    if (self.loginViewController == nil) {
+//        self.loginViewController = [[LQLoginViewController alloc] initWithNibName:@"LQLoginViewController"
+//                                                                           bundle:[NSBundle mainBundle]
+//                                                             andSettingsTableView:_tableView];
+//    } else {
+//        [self.loginViewController resetFields];
+//    }
     [self.navigationController pushViewController:self.loginViewController animated:YES];
 }
 
@@ -309,11 +308,46 @@
     [self.navigationController pushViewController:self.privacyPolicyViewController animated:YES];
 }
 
+#pragma mark - getters
+
+- (LQSetupAccountViewController *)setupAccountViewController
+{
+    if (setupAccountViewController == nil) {
+        self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
+                                                                                         bundle:[NSBundle mainBundle]
+                                                                      andSettingsViewController:self];
+    } else {
+        [setupAccountViewController resetField];
+    }
+    return setupAccountViewController;
+}
+
+- (LQLoginViewController *)loginViewController
+{
+    if (loginViewController == nil) {
+        self.loginViewController = [[LQLoginViewController alloc] initWithNibName:@"LQLoginViewController"
+                                                                           bundle:[NSBundle mainBundle]
+                                                             andSettingsTableView:_tableView
+                                                        andSettingsViewController:self];
+    } else {
+        [loginViewController resetFields];
+    }
+    return loginViewController;
+}
+
 #pragma mark - IBActions
 
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender
 {
     [[LQTracker sharedTracker] setProfile:(sender.on ? LQTrackerProfileAdaptive : LQTrackerProfileOff)];
+}
+
+#pragma mark -
+
+- (void)switchFrom:(UIViewController *)from to:(UIViewController *)to
+{
+    [from.navigationController popViewControllerAnimated:NO];
+    [self.navigationController pushViewController:to animated:YES];
 }
 
 @end

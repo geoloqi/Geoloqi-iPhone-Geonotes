@@ -7,6 +7,7 @@
 //
 
 #import "LQLoginViewController.h"
+#import "LQSettingsViewController.h"
 
 @interface LQLoginViewController ()
 
@@ -14,7 +15,7 @@
 
 @implementation LQLoginViewController
 
-@synthesize tableView, settingsTableView, activityIndicator,
+@synthesize settingsViewController, tableView, settingsTableView, activityIndicator,
             emailAddressField, passwordField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,11 +27,12 @@
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsTableView:(UITableView *)_settingsTableView
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsTableView:(UITableView *)_settingsTableView andSettingsViewController:(LQSettingsViewController *)_settingsViewController
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.settingsTableView = _settingsTableView;
+        self.settingsViewController = _settingsViewController;
     }
     return self;
 }
@@ -140,7 +142,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)inTableView titleForHeaderInSection:(NSInteger)section;
@@ -158,11 +160,14 @@
         case 1:
             rows = 1;
             break;
+        case 2:
+            rows = 1;
+            break;
     }
     return rows;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
 	UITableViewCell *cell;
     if (indexPath.section == 0) {
@@ -182,8 +187,29 @@
                                                                            target:self
                                                                          selector:@selector(loginToAccount)];
         cell = buttonTableViewCell;
+    } else if (indexPath.section == 2) {
+        NSString *cellId = @"setup";
+        cell = [_tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!cell)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell.textLabel.text = NSLocalizedString(@"Tap here to setup a new account", nil);
+        cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.textLabel.font = [UIFont systemFontOfSize:12];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        cell.backgroundColor = [UIColor clearColor];
     }
 	return cell;
+}
+
+#pragma mark - table view delegate
+
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        [_tableView cellForRowAtIndexPath:indexPath].selected = NO;
+        [settingsViewController switchFrom:self to:settingsViewController.setupAccountViewController];
+    }
 }
 
 #pragma mark - text field delegate
@@ -192,9 +218,8 @@
 {
     if (textField == emailAddressField) {
         [passwordField becomeFirstResponder];
-    } else if (textField == passwordField && [self isComplete]) {
+    } else if (textField == passwordField) {
         [textField resignFirstResponder];
-        [self loginToAccount];
     }
 	return YES;
 }

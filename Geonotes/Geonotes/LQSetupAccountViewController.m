@@ -7,6 +7,7 @@
 //
 
 #import "LQSetupAccountViewController.h"
+#import "LQSettingsViewController.h"
 
 @interface LQSetupAccountViewController ()
 
@@ -14,13 +15,24 @@
 
 @implementation LQSetupAccountViewController
 
-@synthesize tableView = _tableView, emailAddressField, activityIndicator;
+@synthesize settingsViewController,
+            tableView = _tableView,
+            emailAddressField, activityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsViewController:(LQSettingsViewController *)_settingsViewController
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.settingsViewController = _settingsViewController;
     }
     return self;
 }
@@ -136,7 +148,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
@@ -167,9 +179,32 @@
                                                                              selector:@selector(setupAccount)];
             cell = buttonTableViewCell;
             break;
+            
+        case 2:
+            cellId = @"login";
+            cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+            if (!cell)
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.textLabel.text = NSLocalizedString(@"Tap here to login with an existing account", nil);
+            cell.textLabel.textAlignment = UITextAlignmentCenter;
+            cell.textLabel.font = [UIFont systemFontOfSize:12];
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+            cell.backgroundColor = [UIColor clearColor];
+            break;
     }
 
 	return cell;
+}
+
+#pragma mark - table view delegate
+
+- (IBAction)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        [tableView cellForRowAtIndexPath:indexPath].selected = NO;
+        [settingsViewController switchFrom:self to:settingsViewController.loginViewController];
+    }
 }
 
 #pragma mark - text field delegate

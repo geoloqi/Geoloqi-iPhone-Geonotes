@@ -12,18 +12,19 @@
 #import "LQLoginViewController.h"
 #import "LQPrivacyPolicyViewController.h"
 
-static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.LQDisplayName";
-
 @interface LQSettingsViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *sectionHeaders;
+    
+    LQSetupAccountViewController *setupAccountViewController;
+    LQLoginViewController *loginViewController;
 }
 
 @property (nonatomic, strong) IBOutlet UISwitch *locationTracking;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UIViewController *setupAccountViewController;
-@property (nonatomic, strong) IBOutlet UIViewController *loginViewController;
+@property (nonatomic, strong) LQSetupAccountViewController *setupAccountViewController;
+@property (nonatomic, strong) LQLoginViewController *loginViewController;
 @property (nonatomic, strong) IBOutlet UIViewController *privacyPolicyViewController;
 
 @property (nonatomic, strong) IBOutlet UITableViewCell *logoCell;
@@ -32,5 +33,8 @@ static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.LQD
 
 - (void)setupAccountCellWasTapped;
 - (void)anonymousBannerWasTapped;
+- (void)loginCellWasTapped;
+
+- (void)switchFrom:(UIViewController *)from to:(UIViewController *)to;
 
 @end

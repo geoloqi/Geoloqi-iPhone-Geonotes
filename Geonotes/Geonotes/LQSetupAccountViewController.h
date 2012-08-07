@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "LQButtonTableViewCell.h"
 
+@class LQSettingsViewController;
+
 @interface LQSetupAccountViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
     
     LQButtonTableViewCell *buttonTableViewCell;
 }
 
+@property (nonatomic, strong) LQSettingsViewController *settingsViewController;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *emailAddressField;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsViewController:(LQSettingsViewController *)settingsViewController;
 
 - (void)resetField;
 

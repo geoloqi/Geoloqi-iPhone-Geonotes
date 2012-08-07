@@ -7,21 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LQSettingsViewController.h"
 #import "LQButtonTableViewCell.h"
+
+@class LQSettingsViewController;
 
 @interface LQLoginViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     
     LQButtonTableViewCell *buttonTableViewCell;
 }
 
+@property (nonatomic, strong) LQSettingsViewController *settingsViewController;
 @property (nonatomic, strong) IBOutlet UITableView *settingsTableView;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *emailAddressField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsTableView:(UITableView *)settingsTableView;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSettingsTableView:(UITableView *)settingsTableView andSettingsViewController:(LQSettingsViewController *)settingsViewController;
 
 - (void)resetFields;
 
