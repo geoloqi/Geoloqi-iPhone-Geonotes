@@ -261,26 +261,13 @@
     [tableView cellForRowAtIndexPath:indexPath].selected = NO;
 }
 
-- (void)initSetupAccountViewController
-{
-//    if (self.setupAccountViewController == nil) {
-//        self.setupAccountViewController = [[LQSetupAccountViewController alloc] initWithNibName:@"LQSetupAccountViewController"
-//                                                                                         bundle:[NSBundle mainBundle]];
-//        self.setupAccountViewController.settingsViewController = self;
-//    } else {
-//        [self.setupAccountViewController resetField];
-//    }
-}
-
 - (void)setupAccountCellWasTapped
 {
-//    [self initSetupAccountViewController];
     [self.navigationController pushViewController:self.setupAccountViewController animated:YES];
 }
 
 - (void)anonymousBannerWasTapped
 {
-//    [self initSetupAccountViewController];
     if (self.navigationController.topViewController != self.setupAccountViewController) {
         [self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:self.setupAccountViewController animated:NO];
@@ -289,13 +276,6 @@
 
 - (void)loginCellWasTapped
 {
-//    if (self.loginViewController == nil) {
-//        self.loginViewController = [[LQLoginViewController alloc] initWithNibName:@"LQLoginViewController"
-//                                                                           bundle:[NSBundle mainBundle]
-//                                                             andSettingsTableView:_tableView];
-//    } else {
-//        [self.loginViewController resetFields];
-//    }
     [self.navigationController pushViewController:self.loginViewController animated:YES];
 }
 

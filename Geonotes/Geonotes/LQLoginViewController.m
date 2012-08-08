@@ -40,11 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Login", nil)
-//																			  style:UIBarButtonItemStyleDone 
-//																			 target:self 
-//																			 action:@selector(loginToAccount)];
-//	self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
 }
 
 - (void)viewDidUnload
@@ -120,7 +115,6 @@
 
 - (IBAction)textFieldDidEditChanged:(UITextField *)textField
 {
-//    self.navigationItem.rightBarButtonItem.enabled = [self isComplete];
     [buttonTableViewCell setButtonState:[self isComplete]];
 }
 

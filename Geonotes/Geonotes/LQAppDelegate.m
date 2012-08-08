@@ -76,6 +76,7 @@
     settingsNavController.navigationBar.tintColor = [UIColor blackColor];
     
     self.tabBarController = [[LQTabBarController alloc] init];
+    self.tabBarController.delegate = self;
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
                                                 activityNavController, 
                                                 geonotesNavController,
@@ -99,13 +100,11 @@
 				
 				[[LQTracker sharedTracker] setSession:session]; // This saves the session so it will be restored on next app launch
 				[[LQTracker sharedTracker] setProfile:LQTrackerProfileAdaptive]; // This will cause the location prompt to appear the first time
-//                [self initUserDefaults];
 			} else {
 				NSLog(@"Error creating an anonymous user: %@", error);
 			}
 		}];
     } else {
-//        [self initUserDefaults];
         NSLog(@"%@", [LQSession savedSession].accessToken);
     }
 
@@ -225,23 +224,6 @@
     [LQSession handlePush:userInfo];
 }
 
-
-- (void)initUserDefaults {
-    /*
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults objectForKey:LQAllowPublicGeonotesUserDefaultsKey]) {
-        LQSession *session = [LQSession savedSession];
-        [session runAPIRequest:[session requestWithMethod:@"GET" path:@"/account/privacy" payload:nil]
-                    completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
-                        [defaults setObject:[responseDictionary objectForKey:@"public_geonotes"] forKey:LQAllowPublicGeonotesUserDefaultsKey];
-                    }
-         ];
-    }
-    [defaults setValue:[LQSession savedSession].username forKey:@"LQUsername"];
-    [defaults synchronize];
-    */
-}
-
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category
 {
 	NSString *caches = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -262,10 +244,6 @@
     CGRect _tvf = tableView.frame;
     CGRect tvf = CGRectMake(_tvf.origin.x, (_tvf.origin.y + kLQUsingAnonymouslyBannerHeight), _tvf.size.width, (_tvf.size.height - kLQUsingAnonymouslyBannerHeight));
     CGRect bannerFrame = CGRectMake(_tvf.origin.x, _tvf.origin.y, _tvf.size.width, kLQUsingAnonymouslyBannerHeight);
-//    CGRect bannerFrame = CGRectMake(kLQUsingAnonymouslyBannerOriginX,
-//                                    kLQUsingAnonymouslyBannerOriginY,
-//                                    kLQUsingAnonymouslyBannerWidth,
-//                                    kLQUsingAnonymouslyBannerHeight);
     UIButton *anonymousBanner = [UIButton buttonWithType:UIButtonTypeCustom];
     anonymousBanner.frame = bannerFrame;
     anonymousBanner.backgroundColor = [UIColor colorWithRed:kLQAnonymousBannerBackgroundRed
@@ -282,6 +260,14 @@
     
     tableView.frame = tvf;
     [view addSubview:anonymousBanner];
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"should select %@", viewController);
+    return YES;
 }
 
 @end
