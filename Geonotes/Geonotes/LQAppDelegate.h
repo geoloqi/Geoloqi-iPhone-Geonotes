@@ -53,4 +53,6 @@ static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
 
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category;
 
++ (void)registerForPushNotificationsIfNotYetRegistered;
+
 @end

@@ -15,37 +15,24 @@
 
 #import "LQTabBarController.h"
 
-@interface LQAppDelegate ()
-
-- (void)registerForPushNotifications:(void (^)())onSuccess;
-- (void)registerForPushNotificationsIfNotYetRegistered;
-
-@end
-
 @implementation LQAppDelegate
 
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 
-- (void)registerForPushNotifications:(void (^)())onSuccess {
-    [LQSession registerForPushNotificationsWithCallback:^(NSData *deviceToken, NSError *error) {
-        if(error){
-            NSLog(@"Failed to register for push tokens: %@", error);
-        } else {
-            NSLog(@"Got a push token! %@", deviceToken);
-            onSuccess();
-        }
-    }];
-}
-
 // This method is called by the Geonotes and Layers tabs when a new geonote is created or when a layer is subscribed to.
 // The goal is to not prompt the user for push notifications until absolutely needed to avoid the double-popup problem on first launch.
 // If the app has never launched before, then show the prompt.
-- (void)registerForPushNotificationsIfNotYetRegistered {
++ (void)registerForPushNotificationsIfNotYetRegistered {
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasRegisteredForPushNotifications"]){
-        [self registerForPushNotifications: ^{
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasRegisteredForPushNotifications"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+        [LQSession registerForPushNotificationsWithCallback:^(NSData *deviceToken, NSError *error) {
+            if(error){
+                NSLog(@"Failed to register for push tokens: %@", error);
+            } else {
+                NSLog(@"Got a push token! %@", deviceToken);
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasRegisteredForPushNotifications"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
         }];
 	}
 }
@@ -160,7 +147,7 @@
 - (IBAction)newGeonoteButtonWasTapped:(UIButton *)sender
 {
     NSLog(@"New geonote");
-    [self registerForPushNotificationsIfNotYetRegistered];
+    [LQAppDelegate registerForPushNotificationsIfNotYetRegistered];
     
     if (newGeonoteNavController == nil) {
         LQNewGeonoteViewController *newGeonoteController = [[LQNewGeonoteViewController alloc] init];

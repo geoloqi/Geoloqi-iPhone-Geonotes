@@ -123,6 +123,8 @@
         path = @"unsubscribe";
     }
     
+    [LQAppDelegate registerForPushNotificationsIfNotYetRegistered];
+    
     NSDictionary *item = [items objectAtIndex:sender.tag];
     NSMutableURLRequest *request = [[LQSession savedSession] requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/layer/%@/%@", path, [item objectForKey:@"layer_id"]] payload:nil];
     
