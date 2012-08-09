@@ -28,6 +28,38 @@
 		0F8DB26C15B76AEC00681B69 /* defaultLayerIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */; };
 		0F8DB27A15B780CE00681B69 /* LQNewGeonoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */; };
 		0F8DB27B15B780CE00681B69 /* LQNewGeonoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */; };
+		0FA6E00F15D4817100F83365 /* beep_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFEF15D4817100F83365 /* beep_1.caf */; };
+		0FA6E01015D4817100F83365 /* beep_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF015D4817100F83365 /* beep_2.caf */; };
+		0FA6E01115D4817100F83365 /* bell_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF115D4817100F83365 /* bell_1.caf */; };
+		0FA6E01215D4817100F83365 /* bell_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF215D4817100F83365 /* bell_2.caf */; };
+		0FA6E01315D4817100F83365 /* button_click.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF315D4817100F83365 /* button_click.caf */; };
+		0FA6E01415D4817100F83365 /* button_pop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF415D4817100F83365 /* button_pop.caf */; };
+		0FA6E01515D4817100F83365 /* buzz_up.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF515D4817100F83365 /* buzz_up.caf */; };
+		0FA6E01615D4817100F83365 /* contact_off.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF615D4817100F83365 /* contact_off.caf */; };
+		0FA6E01715D4817100F83365 /* contact_on.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF715D4817100F83365 /* contact_on.caf */; };
+		0FA6E01815D4817100F83365 /* dj_scratch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF815D4817100F83365 /* dj_scratch.caf */; };
+		0FA6E01915D4817100F83365 /* electronic_signal.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFF915D4817100F83365 /* electronic_signal.caf */; };
+		0FA6E01A15D4817100F83365 /* geonote.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFFA15D4817100F83365 /* geonote.caf */; };
+		0FA6E01B15D4817100F83365 /* laser.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFFB15D4817100F83365 /* laser.caf */; };
+		0FA6E01C15D4817100F83365 /* menu_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFFC15D4817100F83365 /* menu_1.caf */; };
+		0FA6E01D15D4817100F83365 /* menu_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFFD15D4817100F83365 /* menu_2.caf */; };
+		0FA6E01E15D4817100F83365 /* menu_4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFFE15D4817100F83365 /* menu_4.caf */; };
+		0FA6E01F15D4817100F83365 /* message_received.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6DFFF15D4817100F83365 /* message_received.caf */; };
+		0FA6E02015D4817100F83365 /* message_sent.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00015D4817100F83365 /* message_sent.caf */; };
+		0FA6E02115D4817100F83365 /* new_message.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00115D4817100F83365 /* new_message.caf */; };
+		0FA6E02215D4817100F83365 /* pinball_ding.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00215D4817100F83365 /* pinball_ding.caf */; };
+		0FA6E02315D4817100F83365 /* pinball_flipper.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00315D4817100F83365 /* pinball_flipper.caf */; };
+		0FA6E02415D4817100F83365 /* pinball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00415D4817100F83365 /* pinball.caf */; };
+		0FA6E02515D4817100F83365 /* pop_6.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00515D4817100F83365 /* pop_6.caf */; };
+		0FA6E02615D4817100F83365 /* pop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00615D4817100F83365 /* pop.caf */; };
+		0FA6E02715D4817100F83365 /* sonar.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00715D4817100F83365 /* sonar.caf */; };
+		0FA6E02815D4817100F83365 /* stoof.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00815D4817100F83365 /* stoof.caf */; };
+		0FA6E02915D4817100F83365 /* twiddle_down.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00915D4817100F83365 /* twiddle_down.caf */; };
+		0FA6E02A15D4817100F83365 /* weather.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00A15D4817100F83365 /* weather.caf */; };
+		0FA6E02B15D4817100F83365 /* wheel_click.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00B15D4817100F83365 /* wheel_click.caf */; };
+		0FA6E02C15D4817100F83365 /* whip_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00C15D4817100F83365 /* whip_2.caf */; };
+		0FA6E02D15D4817100F83365 /* whip.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00D15D4817100F83365 /* whip.caf */; };
+		0FA6E02E15D4817100F83365 /* wikipedia.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0FA6E00E15D4817100F83365 /* wikipedia.caf */; };
 		0FDE2A4915A8C27000FB78A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4815A8C27000FB78A7 /* UIKit.framework */; };
 		0FDE2A4B15A8C27000FB78A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */; };
 		0FDE2A4D15A8C27000FB78A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDE2A4C15A8C27000FB78A7 /* CoreGraphics.framework */; };
@@ -166,6 +198,38 @@
 		0F8DB27715B780CE00681B69 /* LQNewGeonoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQNewGeonoteViewController.h; sourceTree = "<group>"; };
 		0F8DB27815B780CE00681B69 /* LQNewGeonoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQNewGeonoteViewController.m; sourceTree = "<group>"; };
 		0F8DB27915B780CE00681B69 /* LQNewGeonoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQNewGeonoteViewController.xib; sourceTree = "<group>"; };
+		0FA6DFEF15D4817100F83365 /* beep_1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = beep_1.caf; path = Sounds/beep_1.caf; sourceTree = "<group>"; };
+		0FA6DFF015D4817100F83365 /* beep_2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = beep_2.caf; path = Sounds/beep_2.caf; sourceTree = "<group>"; };
+		0FA6DFF115D4817100F83365 /* bell_1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bell_1.caf; path = Sounds/bell_1.caf; sourceTree = "<group>"; };
+		0FA6DFF215D4817100F83365 /* bell_2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bell_2.caf; path = Sounds/bell_2.caf; sourceTree = "<group>"; };
+		0FA6DFF315D4817100F83365 /* button_click.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = button_click.caf; path = Sounds/button_click.caf; sourceTree = "<group>"; };
+		0FA6DFF415D4817100F83365 /* button_pop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = button_pop.caf; path = Sounds/button_pop.caf; sourceTree = "<group>"; };
+		0FA6DFF515D4817100F83365 /* buzz_up.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = buzz_up.caf; path = Sounds/buzz_up.caf; sourceTree = "<group>"; };
+		0FA6DFF615D4817100F83365 /* contact_off.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = contact_off.caf; path = Sounds/contact_off.caf; sourceTree = "<group>"; };
+		0FA6DFF715D4817100F83365 /* contact_on.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = contact_on.caf; path = Sounds/contact_on.caf; sourceTree = "<group>"; };
+		0FA6DFF815D4817100F83365 /* dj_scratch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = dj_scratch.caf; path = Sounds/dj_scratch.caf; sourceTree = "<group>"; };
+		0FA6DFF915D4817100F83365 /* electronic_signal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = electronic_signal.caf; path = Sounds/electronic_signal.caf; sourceTree = "<group>"; };
+		0FA6DFFA15D4817100F83365 /* geonote.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = geonote.caf; path = Sounds/geonote.caf; sourceTree = "<group>"; };
+		0FA6DFFB15D4817100F83365 /* laser.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = laser.caf; path = Sounds/laser.caf; sourceTree = "<group>"; };
+		0FA6DFFC15D4817100F83365 /* menu_1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = menu_1.caf; path = Sounds/menu_1.caf; sourceTree = "<group>"; };
+		0FA6DFFD15D4817100F83365 /* menu_2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = menu_2.caf; path = Sounds/menu_2.caf; sourceTree = "<group>"; };
+		0FA6DFFE15D4817100F83365 /* menu_4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = menu_4.caf; path = Sounds/menu_4.caf; sourceTree = "<group>"; };
+		0FA6DFFF15D4817100F83365 /* message_received.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = message_received.caf; path = Sounds/message_received.caf; sourceTree = "<group>"; };
+		0FA6E00015D4817100F83365 /* message_sent.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = message_sent.caf; path = Sounds/message_sent.caf; sourceTree = "<group>"; };
+		0FA6E00115D4817100F83365 /* new_message.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = new_message.caf; path = Sounds/new_message.caf; sourceTree = "<group>"; };
+		0FA6E00215D4817100F83365 /* pinball_ding.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pinball_ding.caf; path = Sounds/pinball_ding.caf; sourceTree = "<group>"; };
+		0FA6E00315D4817100F83365 /* pinball_flipper.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pinball_flipper.caf; path = Sounds/pinball_flipper.caf; sourceTree = "<group>"; };
+		0FA6E00415D4817100F83365 /* pinball.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pinball.caf; path = Sounds/pinball.caf; sourceTree = "<group>"; };
+		0FA6E00515D4817100F83365 /* pop_6.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pop_6.caf; path = Sounds/pop_6.caf; sourceTree = "<group>"; };
+		0FA6E00615D4817100F83365 /* pop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = pop.caf; path = Sounds/pop.caf; sourceTree = "<group>"; };
+		0FA6E00715D4817100F83365 /* sonar.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sonar.caf; path = Sounds/sonar.caf; sourceTree = "<group>"; };
+		0FA6E00815D4817100F83365 /* stoof.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = stoof.caf; path = Sounds/stoof.caf; sourceTree = "<group>"; };
+		0FA6E00915D4817100F83365 /* twiddle_down.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = twiddle_down.caf; path = Sounds/twiddle_down.caf; sourceTree = "<group>"; };
+		0FA6E00A15D4817100F83365 /* weather.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = weather.caf; path = Sounds/weather.caf; sourceTree = "<group>"; };
+		0FA6E00B15D4817100F83365 /* wheel_click.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = wheel_click.caf; path = Sounds/wheel_click.caf; sourceTree = "<group>"; };
+		0FA6E00C15D4817100F83365 /* whip_2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = whip_2.caf; path = Sounds/whip_2.caf; sourceTree = "<group>"; };
+		0FA6E00D15D4817100F83365 /* whip.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = whip.caf; path = Sounds/whip.caf; sourceTree = "<group>"; };
+		0FA6E00E15D4817100F83365 /* wikipedia.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = wikipedia.caf; path = Sounds/wikipedia.caf; sourceTree = "<group>"; };
 		0FDE2A4415A8C27000FB78A7 /* Geonotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FDE2A4815A8C27000FB78A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0FDE2A4A15A8C27000FB78A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -331,6 +395,45 @@
 			name = "New Geonote";
 			sourceTree = "<group>";
 		};
+		0FA6DFEE15D47AD800F83365 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				0FA6DFEF15D4817100F83365 /* beep_1.caf */,
+				0FA6DFF015D4817100F83365 /* beep_2.caf */,
+				0FA6DFF115D4817100F83365 /* bell_1.caf */,
+				0FA6DFF215D4817100F83365 /* bell_2.caf */,
+				0FA6DFF315D4817100F83365 /* button_click.caf */,
+				0FA6DFF415D4817100F83365 /* button_pop.caf */,
+				0FA6DFF515D4817100F83365 /* buzz_up.caf */,
+				0FA6DFF615D4817100F83365 /* contact_off.caf */,
+				0FA6DFF715D4817100F83365 /* contact_on.caf */,
+				0FA6DFF815D4817100F83365 /* dj_scratch.caf */,
+				0FA6DFF915D4817100F83365 /* electronic_signal.caf */,
+				0FA6DFFA15D4817100F83365 /* geonote.caf */,
+				0FA6DFFB15D4817100F83365 /* laser.caf */,
+				0FA6DFFC15D4817100F83365 /* menu_1.caf */,
+				0FA6DFFD15D4817100F83365 /* menu_2.caf */,
+				0FA6DFFE15D4817100F83365 /* menu_4.caf */,
+				0FA6DFFF15D4817100F83365 /* message_received.caf */,
+				0FA6E00015D4817100F83365 /* message_sent.caf */,
+				0FA6E00115D4817100F83365 /* new_message.caf */,
+				0FA6E00215D4817100F83365 /* pinball_ding.caf */,
+				0FA6E00315D4817100F83365 /* pinball_flipper.caf */,
+				0FA6E00415D4817100F83365 /* pinball.caf */,
+				0FA6E00515D4817100F83365 /* pop_6.caf */,
+				0FA6E00615D4817100F83365 /* pop.caf */,
+				0FA6E00715D4817100F83365 /* sonar.caf */,
+				0FA6E00815D4817100F83365 /* stoof.caf */,
+				0FA6E00915D4817100F83365 /* twiddle_down.caf */,
+				0FA6E00A15D4817100F83365 /* weather.caf */,
+				0FA6E00B15D4817100F83365 /* wheel_click.caf */,
+				0FA6E00C15D4817100F83365 /* whip_2.caf */,
+				0FA6E00D15D4817100F83365 /* whip.caf */,
+				0FA6E00E15D4817100F83365 /* wikipedia.caf */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		0FDE2A3915A8C27000FB78A7 = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +479,7 @@
 				0FDE2A7915A8C45600FB78A7 /* Tabs */,
 				0FDE2A7F15A8C56800FB78A7 /* Classes */,
 				0FDE2A7315A8C34400FB78A7 /* Graphics */,
+				0FA6DFEE15D47AD800F83365 /* Sounds */,
 				0FDE2A4F15A8C27000FB78A7 /* Supporting Files */,
 			);
 			path = Geonotes;
@@ -742,6 +846,38 @@
 				BE9CB8F215CC91C900ED1526 /* button.png in Resources */,
 				BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */,
 				BE601D2B15D06D830032B6FA /* LQButtonTableViewCell.xib in Resources */,
+				0FA6E00F15D4817100F83365 /* beep_1.caf in Resources */,
+				0FA6E01015D4817100F83365 /* beep_2.caf in Resources */,
+				0FA6E01115D4817100F83365 /* bell_1.caf in Resources */,
+				0FA6E01215D4817100F83365 /* bell_2.caf in Resources */,
+				0FA6E01315D4817100F83365 /* button_click.caf in Resources */,
+				0FA6E01415D4817100F83365 /* button_pop.caf in Resources */,
+				0FA6E01515D4817100F83365 /* buzz_up.caf in Resources */,
+				0FA6E01615D4817100F83365 /* contact_off.caf in Resources */,
+				0FA6E01715D4817100F83365 /* contact_on.caf in Resources */,
+				0FA6E01815D4817100F83365 /* dj_scratch.caf in Resources */,
+				0FA6E01915D4817100F83365 /* electronic_signal.caf in Resources */,
+				0FA6E01A15D4817100F83365 /* geonote.caf in Resources */,
+				0FA6E01B15D4817100F83365 /* laser.caf in Resources */,
+				0FA6E01C15D4817100F83365 /* menu_1.caf in Resources */,
+				0FA6E01D15D4817100F83365 /* menu_2.caf in Resources */,
+				0FA6E01E15D4817100F83365 /* menu_4.caf in Resources */,
+				0FA6E01F15D4817100F83365 /* message_received.caf in Resources */,
+				0FA6E02015D4817100F83365 /* message_sent.caf in Resources */,
+				0FA6E02115D4817100F83365 /* new_message.caf in Resources */,
+				0FA6E02215D4817100F83365 /* pinball_ding.caf in Resources */,
+				0FA6E02315D4817100F83365 /* pinball_flipper.caf in Resources */,
+				0FA6E02415D4817100F83365 /* pinball.caf in Resources */,
+				0FA6E02515D4817100F83365 /* pop_6.caf in Resources */,
+				0FA6E02615D4817100F83365 /* pop.caf in Resources */,
+				0FA6E02715D4817100F83365 /* sonar.caf in Resources */,
+				0FA6E02815D4817100F83365 /* stoof.caf in Resources */,
+				0FA6E02915D4817100F83365 /* twiddle_down.caf in Resources */,
+				0FA6E02A15D4817100F83365 /* weather.caf in Resources */,
+				0FA6E02B15D4817100F83365 /* wheel_click.caf in Resources */,
+				0FA6E02C15D4817100F83365 /* whip_2.caf in Resources */,
+				0FA6E02D15D4817100F83365 /* whip.caf in Resources */,
+				0FA6E02E15D4817100F83365 /* wikipedia.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,10 +1039,12 @@
 		0FDE2A7215A8C27000FB78A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Geonotes/Geonotes-Prefix.pch";
 				INFOPLIST_FILE = "Geonotes/Geonotes-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
