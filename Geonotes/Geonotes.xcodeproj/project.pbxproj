@@ -93,6 +93,7 @@
 		BE9CB8F215CC91C900ED1526 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8EC15CC91C900ED1526 /* button.png */; };
 		BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8ED15CC91C900ED1526 /* button@2x.png */; };
 		BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC597BD15C7429B00684667 /* LQGeonote.m */; };
+		BECB830315D4545C005F7421 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECB830215D4545C005F7421 /* QuartzCore.framework */; };
 		BED232E915CB2A7B001EE0A5 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E015CB2A7B001EE0A5 /* activity.png */; };
 		BED232EA15CB2A7B001EE0A5 /* geonote.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E115CB2A7B001EE0A5 /* geonote.png */; };
 		BED232EB15CB2A7B001EE0A5 /* layers.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E215CB2A7B001EE0A5 /* layers.png */; };
@@ -267,6 +268,7 @@
 		BE9CB8ED15CC91C900ED1526 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button@2x.png"; path = "Graphics/button@2x.png"; sourceTree = "<group>"; };
 		BEC597BC15C7429B00684667 /* LQGeonote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonote.h; sourceTree = "<group>"; };
 		BEC597BD15C7429B00684667 /* LQGeonote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonote.m; sourceTree = "<group>"; };
+		BECB830215D4545C005F7421 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BED232E015CB2A7B001EE0A5 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Graphics/activity.png; sourceTree = "<group>"; };
 		BED232E115CB2A7B001EE0A5 /* geonote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = geonote.png; path = Graphics/geonote.png; sourceTree = "<group>"; };
 		BED232E215CB2A7B001EE0A5 /* layers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = layers.png; path = Graphics/layers.png; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BECB830315D4545C005F7421 /* QuartzCore.framework in Frameworks */,
 				0F83DF2215AB70EF00E07D16 /* MapKit.framework in Frameworks */,
 				BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */,
 				0F83DF1B15AB491A00E07D16 /* ImageIO.framework in Frameworks */,
@@ -328,6 +331,7 @@
 		0FDE2A3915A8C27000FB78A7 = {
 			isa = PBXGroup;
 			children = (
+				BECB830215D4545C005F7421 /* QuartzCore.framework */,
 				BE03B1E115C9E69C00FE023E /* Icon@2x.png */,
 				BE03B1DF15C9E69000FE023E /* Icon.png */,
 				0F83DF0815AB48DE00E07D16 /* SDWebImage.xcodeproj */,

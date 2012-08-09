@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface LQActivityItemViewController : UIViewController
+@interface LQActivityItemViewController : UIViewController {
+    NSString *sourceURL;
+}
 
 @property IBOutlet UIScrollView *scrollView;
 @property IBOutlet UIView *detailContainerView;
 @property IBOutlet UITextView *titleTextView;
 @property IBOutlet UILabel *linkLabel;
+@property IBOutlet UILabel *urlLabel;
 @property IBOutlet UITextView *bodyTextView;
 @property IBOutlet MKMapView *mapView;
 @property IBOutlet UIImageView *imageView;
@@ -23,5 +26,6 @@
 - (void)loadStory:(NSDictionary *)storyData;
 
 - (void)setMapLocation:(CLLocationCoordinate2D)center radius:(CGFloat)radius;
+- (IBAction)urlLabelWasTapped:(UILabel *)urlLabel;
 
 @end

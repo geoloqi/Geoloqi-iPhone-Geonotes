@@ -7,9 +7,11 @@
 //
 
 #import "LQActivityItemViewController.h"
-#import "LQBasicAnnotation.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
+
+#define BORDER_COLOR [[UIColor colorWithHue:0 saturation:0 brightness:0.67 alpha:1.0] CGColor]
+#define BORDER_WIDTH 1.0
 
 @interface LQActivityItemViewController () {
     NSDictionary *storyData;
@@ -18,7 +20,7 @@
 
 @implementation LQActivityItemViewController
 
-@synthesize scrollView, detailContainerView, titleTextView, linkLabel, mapView, bodyTextView, imageView, detailView;
+@synthesize scrollView, detailContainerView, titleTextView, linkLabel, urlLabel, mapView, bodyTextView, imageView, detailView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,25 +38,36 @@
     CGFloat originY = 0.0;
 
     if([storyData objectForKey:@"location"]) {
+        CALayer *topMapBorder = [CALayer layer];
+        topMapBorder.frame = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width, BORDER_WIDTH);
+        topMapBorder.backgroundColor = BORDER_COLOR;
+        [self.scrollView.layer addSublayer:topMapBorder];
+        
+        CALayer *bottomMapBorder = [CALayer layer];
+        bottomMapBorder.frame = CGRectMake(0.0, 130.0, self.scrollView.frame.size.width, BORDER_WIDTH);
+        bottomMapBorder.backgroundColor = BORDER_COLOR;
+        [self.scrollView.layer addSublayer:bottomMapBorder];
+        
         // Center the map on the location and add a marker
         CLLocationCoordinate2D center = CLLocationCoordinate2DMake([[[storyData objectForKey:@"location"] objectForKey:@"latitude"] floatValue], [[[storyData objectForKey:@"location"] objectForKey:@"longitude"] floatValue]);
         [self setMapLocation:center radius:[[[storyData objectForKey:@"location"] objectForKey:@"radius"] floatValue]];
-        [mapView addAnnotation:[[LQBasicAnnotation alloc] initWithTitle:[[storyData objectForKey:@"location"] objectForKey:@"displayName"] andCoordinate:center]];
-
-//        detailView.frame = CGRectMake(0.0, 130.0, self.scrollView.frame.size.width, detailView.frame.size.height);
         originY = 130.0;
-    }// else {
-        // Hide the map
-//        detailView.frame = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width, detailView.frame.size.height);
-//    }
+    } else {
+        [self.mapView removeFromSuperview];
+    }
     
     self.titleTextView.text = [storyData objectForKey:@"title"];
     self.bodyTextView.text = [[storyData objectForKey:@"object"] objectForKey:@"summary"];
-    NSString *sourceURL = [[storyData objectForKey:@"object"] objectForKey:@"sourceURL"];
-    if (![sourceURL isEqualToString:@""])
-        self.linkLabel.text = [NSString stringWithFormat:@"Link: %@", sourceURL];
-    else
+    sourceURL = [[storyData objectForKey:@"object"] objectForKey:@"sourceURL"];
+    if (sourceURL && ![sourceURL isEqualToString:@""]) {
+        self.urlLabel.text = sourceURL;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(urlLabelWasTapped:)];
+        urlLabel.userInteractionEnabled = YES;
+        [urlLabel addGestureRecognizer:tap];
+    } else {
         [self.linkLabel removeFromSuperview];
+        [self.urlLabel removeFromSuperview];
+    }
 
     NSString *imageURL;
     if(![[[[storyData objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"] isEqualToString:@""]) {
@@ -68,8 +81,8 @@
     
     self.detailContainerView.layer.cornerRadius = 10.0;
     self.detailContainerView.layer.masksToBounds = YES;
-    self.detailContainerView.layer.borderWidth = 1.0;
-    self.detailContainerView.layer.borderColor = [[UIColor colorWithHue:0 saturation:0 brightness:0.67 alpha:1.0] CGColor];
+    self.detailContainerView.layer.borderWidth = BORDER_WIDTH;
+    self.detailContainerView.layer.borderColor = BORDER_COLOR;
 
     [self.scrollView addSubview:detailView];
     
@@ -96,10 +109,14 @@
     frame.size.height += yToAddToFrameHeight;
     self.detailContainerView.frame = frame;
     
-    if (![sourceURL isEqualToString:@""]) {
+    if (sourceURL && ![sourceURL isEqualToString:@""]) {
         frame = self.linkLabel.frame;
         frame.origin.y += yToAddToFrameHeight;
         self.linkLabel.frame = frame;
+        
+        frame = self.urlLabel.frame;
+        frame.origin.y += yToAddToFrameHeight;
+        self.urlLabel.frame = frame;
     }
     
     detailView.frame = CGRectMake(0.0, originY, self.scrollView.frame.size.width, (self.scrollView.frame.size.height + yToAddToFrameHeight));
@@ -129,6 +146,11 @@
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(center, radius, radius);
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
     [self.mapView setRegion:adjustedRegion animated:YES];
+}
+
+- (IBAction)urlLabelWasTapped:(UILabel *)urlLabel
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:sourceURL]];
 }
 
 @end
