@@ -11,12 +11,13 @@
 
 @interface LQActivityItemViewController : UIViewController
 
-@property IBOutlet UILabel *titleLabel;
-@property IBOutlet UILabel *dateLabel;
-@property IBOutlet UITextView *textView;
+@property IBOutlet UIScrollView *scrollView;
+@property IBOutlet UIView *detailContainerView;
+@property IBOutlet UITextView *titleTextView;
+@property IBOutlet UILabel *linkLabel;
+@property IBOutlet UITextView *bodyTextView;
 @property IBOutlet MKMapView *mapView;
 @property IBOutlet UIImageView *imageView;
-
 @property IBOutlet UIView *detailView;
 
 - (void)loadStory:(NSDictionary *)storyData;
