@@ -120,6 +120,7 @@
 - (void)liftGeonotePin
 {
     if (!pinUp) {
+        self.geonoteTarget.hidden = NO;
         [UIView beginAnimations:@"" context:NULL];
         self.geonotePin.center = (CGPoint) {
             self.geonotePin.center.x,
@@ -139,6 +140,7 @@
 - (void)dropGeonotePin
 {
     if (pinUp) {
+        self.geonoteTarget.hidden = YES;
         [UIView beginAnimations:@"" context:NULL];
         self.geonotePin.center = (CGPoint) {
             self.geonotePin.center.x,
