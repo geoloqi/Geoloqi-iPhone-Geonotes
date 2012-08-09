@@ -94,6 +94,7 @@
 		BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8ED15CC91C900ED1526 /* button@2x.png */; };
 		BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC597BD15C7429B00684667 /* LQGeonote.m */; };
 		BECB830315D4545C005F7421 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECB830215D4545C005F7421 /* QuartzCore.framework */; };
+		BECB830715D45A48005F7421 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BECB830615D45A48005F7421 /* TTTTimeIntervalFormatter.m */; };
 		BED232E915CB2A7B001EE0A5 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E015CB2A7B001EE0A5 /* activity.png */; };
 		BED232EA15CB2A7B001EE0A5 /* geonote.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E115CB2A7B001EE0A5 /* geonote.png */; };
 		BED232EB15CB2A7B001EE0A5 /* layers.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E215CB2A7B001EE0A5 /* layers.png */; };
@@ -269,6 +270,8 @@
 		BEC597BC15C7429B00684667 /* LQGeonote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonote.h; sourceTree = "<group>"; };
 		BEC597BD15C7429B00684667 /* LQGeonote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonote.m; sourceTree = "<group>"; };
 		BECB830215D4545C005F7421 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BECB830515D45A48005F7421 /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
+		BECB830615D45A48005F7421 /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
 		BED232E015CB2A7B001EE0A5 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Graphics/activity.png; sourceTree = "<group>"; };
 		BED232E115CB2A7B001EE0A5 /* geonote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = geonote.png; path = Graphics/geonote.png; sourceTree = "<group>"; };
 		BED232E215CB2A7B001EE0A5 /* layers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = layers.png; path = Graphics/layers.png; sourceTree = "<group>"; };
@@ -446,6 +449,7 @@
 		0FDE2A7F15A8C56800FB78A7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BECB830415D45A48005F7421 /* TTTTimeIntervalFormatter */,
 				BE2F882F15C999140041F9C9 /* MBProgressHUD */,
 				BE40342215C35AD60093EFF8 /* MTLocation */,
 				0F83DF3315AB827300E07D16 /* LQBasicAnnotation.h */,
@@ -593,6 +597,15 @@
 				BE4ACC4915B8BE1E000D6EDD /* LQLoginViewController.m */,
 			);
 			name = Account;
+			sourceTree = "<group>";
+		};
+		BECB830415D45A48005F7421 /* TTTTimeIntervalFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				BECB830515D45A48005F7421 /* TTTTimeIntervalFormatter.h */,
+				BECB830615D45A48005F7421 /* TTTTimeIntervalFormatter.m */,
+			);
+			path = TTTTimeIntervalFormatter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -775,6 +788,7 @@
 				BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */,
 				BE9CB8E515CC8B1100ED1526 /* LQLogoCell.m in Sources */,
 				BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */,
+				BECB830715D45A48005F7421 /* TTTTimeIntervalFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

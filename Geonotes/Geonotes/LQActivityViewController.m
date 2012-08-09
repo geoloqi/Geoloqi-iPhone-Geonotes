@@ -14,6 +14,7 @@
 #import "LQAppDelegate.h"
 
 #import "NSString+URLEncoding.h"
+#import "TTTTimeIntervalFormatter/TTTTimeIntervalFormatter.h"
 
 @implementation LQActivityViewController
 
@@ -278,7 +279,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 74.0;
+    return 78.5;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -303,8 +304,13 @@
             cell.secondaryText.text = [[item objectForKey:@"object"] objectForKey:@"summary"];
 
             if([item objectForKey:@"published_ts"]) {
-                NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[item objectForKey:@"published_ts"] doubleValue]];
-                cell.dateText.text = [dateFormatter stringFromDate:date];
+                NSTimeInterval dateUnix = [[item objectForKey:@"published_ts"] floatValue];
+                NSTimeInterval since = [[NSDate date] timeIntervalSince1970] - dateUnix;
+                if (since < (86400*3)) {
+                    cell.dateText.text = [[[TTTTimeIntervalFormatter alloc] init] stringForTimeInterval:(since * -1)];
+                } else {
+                    cell.dateText.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:dateUnix]];
+                }
             } else {
                 cell.dateText.text = [item objectForKey:@"displayDate"];
             }
