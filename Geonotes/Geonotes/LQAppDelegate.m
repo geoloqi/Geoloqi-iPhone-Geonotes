@@ -223,30 +223,11 @@
     [settingsViewController anonymousBannerWasTapped];
 }
 
-
-#pragma mark -
-
-- (void)addUsingAnonymouslyBannerToView:(UIView *)view withTableView:(UITableView *)tableView
+- (void)removeAnonymousBanners
 {
-    CGRect _tvf = tableView.frame;
-    CGRect tvf = CGRectMake(_tvf.origin.x, (_tvf.origin.y + kLQUsingAnonymouslyBannerHeight), _tvf.size.width, (_tvf.size.height - kLQUsingAnonymouslyBannerHeight));
-    CGRect bannerFrame = CGRectMake(_tvf.origin.x, _tvf.origin.y, _tvf.size.width, kLQUsingAnonymouslyBannerHeight);
-    UIButton *anonymousBanner = [UIButton buttonWithType:UIButtonTypeCustom];
-    anonymousBanner.frame = bannerFrame;
-    anonymousBanner.backgroundColor = [UIColor colorWithRed:kLQAnonymousBannerBackgroundRed
-                                                      green:kLQAnonymousBannerBackgroundGreen
-                                                       blue:kLQAnonymousBannerBackgroundBlue
-                                                      alpha:kLQAnonymousBannerBackgroundAlpha];
-    [anonymousBanner setTitle:@"You are using Geonotes anonymously" forState:UIControlStateNormal];
-    [anonymousBanner setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    anonymousBanner.titleLabel.font = [UIFont systemFontOfSize:12];
-    [anonymousBanner setUserInteractionEnabled:YES];
-    [anonymousBanner addTarget:self
-                        action:@selector(selectSetupAccountView)
-              forControlEvents:UIControlEventTouchUpInside];
-    
-    tableView.frame = tvf;
-    [view addSubview:anonymousBanner];
+    [activityViewController removeAnonymousBanner];
+    [geonotesViewController removeAnonymousBanner];
+    [layersViewController removeAnonymousBanner];
 }
 
 #pragma mark - UITabBarControllerDelegate

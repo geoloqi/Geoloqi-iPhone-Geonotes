@@ -9,6 +9,7 @@
 #import "LQActivityItemViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
+#import "LQBasicAnnotation.h"
 
 #define BORDER_COLOR [[UIColor colorWithHue:0 saturation:0 brightness:0.67 alpha:1.0] CGColor]
 #define BORDER_WIDTH 1.0
@@ -51,6 +52,9 @@
         // Center the map on the location and add a marker
         CLLocationCoordinate2D center = CLLocationCoordinate2DMake([[[storyData objectForKey:@"location"] objectForKey:@"latitude"] floatValue], [[[storyData objectForKey:@"location"] objectForKey:@"longitude"] floatValue]);
         [self setMapLocation:center radius:[[[storyData objectForKey:@"location"] objectForKey:@"radius"] floatValue]];
+
+        [mapView addAnnotation:[[LQBasicAnnotation alloc] initWithTitle:[[storyData objectForKey:@"location"] objectForKey:@"displayName"] andCoordinate:center]];
+
         originY = 130.0;
     } else {
         [self.mapView removeFromSuperview];
@@ -151,6 +155,20 @@
 - (IBAction)urlLabelWasTapped:(UILabel *)urlLabel
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:sourceURL]];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    static NSString *viewId = @"MKPinAnnotationView";
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)
+    [self.mapView dequeueReusableAnnotationViewWithIdentifier:viewId];
+    if (annotationView == nil) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:viewId];
+    }
+    annotationView.image = [UIImage imageNamed:@"map-marker.png"];
+    return annotationView;
 }
 
 @end

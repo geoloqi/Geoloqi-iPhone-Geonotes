@@ -8,6 +8,7 @@
 
 #import "LQLoginViewController.h"
 #import "LQSettingsViewController.h"
+#import "LQAppDelegate.h"
 
 @interface LQLoginViewController ()
 
@@ -96,7 +97,9 @@
                                            [self.settingsTableView reloadData];
                                            [self toggleFormStatus:YES];
                                            [self.navigationController popViewControllerAnimated:YES];
-                                           [[[UIApplication sharedApplication] delegate] performSelector:@selector(refreshAllSubTableViews)];
+                                           LQAppDelegate *appDelegate = (LQAppDelegate *)[[UIApplication sharedApplication] delegate];
+                                           [appDelegate refreshAllSubTableViews];
+                                           [appDelegate removeAnonymousBanners];
                                        }];
                                    }
                                }];

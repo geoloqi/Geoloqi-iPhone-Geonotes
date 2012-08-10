@@ -29,9 +29,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    if ([[LQSession savedSession] isAnonymous]) {
-        [(LQAppDelegate *)[[UIApplication sharedApplication] delegate] addUsingAnonymouslyBannerToView:self.view
-                                                                                         withTableView:self.tableView];
+    LQSession *session = [LQSession savedSession];
+    if (!session || [session isAnonymous]) {
+        [self addAnonymousBanner];
     }
 }
 
@@ -44,6 +44,46 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+
+- (void)addAnonymousBanner
+{
+    CGRect _tvf = self.tableView.frame;
+    CGRect tvf = CGRectMake(_tvf.origin.x,
+                            (_tvf.origin.y + kLQAnonymousBannerHeight),
+                            _tvf.size.width,
+                            (_tvf.size.height - kLQAnonymousBannerHeight));
+    CGRect bannerFrame = CGRectMake(_tvf.origin.x, _tvf.origin.y, _tvf.size.width, kLQAnonymousBannerHeight);
+    anonymousBanner = [UIButton buttonWithType:UIButtonTypeCustom];
+    anonymousBanner.frame = bannerFrame;
+    anonymousBanner.backgroundColor = [UIColor colorWithRed:kLQAnonymousBannerBackgroundRed
+                                                      green:kLQAnonymousBannerBackgroundGreen
+                                                       blue:kLQAnonymousBannerBackgroundBlue
+                                                      alpha:kLQAnonymousBannerBackgroundAlpha];
+    [anonymousBanner setTitle:@"You are using Geonotes anonymously" forState:UIControlStateNormal];
+    [anonymousBanner setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    anonymousBanner.titleLabel.font = [UIFont systemFontOfSize:12];
+    [anonymousBanner setUserInteractionEnabled:YES];
+    [anonymousBanner addTarget:[[UIApplication sharedApplication] delegate]
+                        action:@selector(selectSetupAccountView)
+              forControlEvents:UIControlEventTouchUpInside];
+    
+    self.tableView.frame = tvf;
+    [self.view addSubview:anonymousBanner];
+}
+
+- (void)removeAnonymousBanner
+{
+    if (anonymousBanner) {
+        [anonymousBanner removeFromSuperview];
+        CGRect frame = self.tableView.frame;
+        frame.origin.y -= kLQAnonymousBannerHeight;
+        frame.size.height += kLQAnonymousBannerHeight;
+        self.tableView.frame = frame;
+        anonymousBanner = nil;
+    }
 }
 
 @end

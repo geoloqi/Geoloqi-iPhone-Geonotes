@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface LQActivityItemViewController : UIViewController {
+@interface LQActivityItemViewController : UIViewController <MKMapViewDelegate> {
     NSString *sourceURL;
 }
 

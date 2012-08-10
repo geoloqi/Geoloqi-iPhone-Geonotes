@@ -14,17 +14,6 @@
 #import "LQLayersViewController.h"
 #import "LQSettingsViewController.h"
 
-//#define kLQUsingAnonymouslyBannerOriginX  10
-//#define kLQUsingAnonymouslyBannerOriginY  10
-#define kLQUsingAnonymouslyBannerHeight   44
-//#define kLQUsingAnonymouslyBannerWidth    300
-
-#define kLQAnonymousBannerBackgroundRed   (232.0 / 255.0)
-#define kLQAnonymousBannerBackgroundGreen (136.0 / 255.0)
-#define kLQAnonymousBannerBackgroundBlue  ( 70.0 / 255.0)
-
-#define kLQAnonymousBannerBackgroundAlpha 1.0
-
 static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
 static NSString *LQLayerListCollectionName = @"LQLayerListCollection";
 static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
@@ -49,7 +38,7 @@ static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
 - (void)refreshAllSubTableViews;
 
 - (void)selectSetupAccountView;
-- (void)addUsingAnonymouslyBannerToView:(UIView *)view withTableView:(UITableView *)tableView;
+- (void)removeAnonymousBanners;
 
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category;
 
