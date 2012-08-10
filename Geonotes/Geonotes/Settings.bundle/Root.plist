@@ -38,7 +38,7 @@
 			<key>DefaultValue</key>
 			<false/>
 			<key>Title</key>
-			<string>Reset Database</string>
+			<string>Clear Local Cache</string>
 			<key>Key</key>
 			<string>com.geoloqi.geonotes.clearLocalDatabase</string>
 		</dict>

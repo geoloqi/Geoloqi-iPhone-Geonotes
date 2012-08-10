@@ -74,10 +74,6 @@
     [(LQTabBarController *)self.tabBarController addCenterButtonTarget:self action:@selector(newGeonoteButtonWasTapped:)];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
-    
-    // In the Settings panel for this app, you can enter an access token. If set, this function
-    // re-initializes the LQSession with that account.
-    [self reInitializeSessionFromSettingsPanel];
 
     if(![LQSession savedSession]) {
 		[LQSession createAnonymousUserAccountWithUserInfo:nil completion:^(LQSession *session, NSError *error) {
@@ -101,8 +97,9 @@
     return YES;
 }
 
-- (void)reInitializeSessionFromSettingsPanel
+- (BOOL)reInitializeSessionFromSettingsPanel
 {
+    BOOL didSomething = NO;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     if([defaults boolForKey:@"com.geoloqi.geonotes.clearLocalDatabase"]) {
@@ -125,16 +122,20 @@
         }
 
         [defaults removeObjectForKey:@"com.geoloqi.geonotes.clearLocalDatabase"];
+        didSomething = YES;
     }
 
     if([defaults valueForKey:@"com.geoloqi.geonotes.newAccessToken"]) {
         NSString *newAccessToken = [defaults valueForKey:@"com.geoloqi.geonotes.newAccessToken"];
         [defaults removeObjectForKey:@"com.geoloqi.geonotes.newAccessToken"];
+        didSomething = YES;
         [LQSession setSavedSession:nil];
         LQSession *newSession = [LQSession sessionWithAccessToken:newAccessToken];
         [LQSession setSavedSession:newSession];
         NSLog(@"Re-initialized session!");
     }
+    
+    return didSomething;
 }
 
 - (void)refreshAllSubTableViews
@@ -183,6 +184,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    // In the Settings panel for this app, you can enter an access token. If set, this function
+    // re-initializes the LQSession with that account.
+    if ([self reInitializeSessionFromSettingsPanel])
+        [self refreshAllSubTableViews];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -209,6 +215,7 @@
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [LQSession handlePush:userInfo];
+    // TODO get story id out of push data, prepend story to items and cache, show activity detail view
 }
 
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category
