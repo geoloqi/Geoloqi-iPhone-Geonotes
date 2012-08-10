@@ -177,7 +177,7 @@
 - (UITableViewCell *)setupAccountCell
 {
     UITableViewCell *cell = [self getCellForId:@"setupAccountCell"];
-    cell.textLabel.text = @"Setup account";
+    cell.textLabel.text = @"Set up account";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -185,7 +185,7 @@
 - (UITableViewCell *)loginCell
 {
     UITableViewCell *cell = [self getCellForId:@"loginCell"];
-    cell.textLabel.text = [NSString stringWithFormat:@"Login to %@ account", ([LQSession savedSession].isAnonymous ? @"existing" : @"different")];
+    cell.textLabel.text = [NSString stringWithFormat:@"Log in to %@ account", ([LQSession savedSession].isAnonymous ? @"existing" : @"different")];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

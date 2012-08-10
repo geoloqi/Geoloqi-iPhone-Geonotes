@@ -14,7 +14,6 @@
 #import "LQAppDelegate.h"
 
 #import "NSString+URLEncoding.h"
-#import "TTTTimeIntervalFormatter/TTTTimeIntervalFormatter.h"
 
 @implementation LQActivityViewController
 
@@ -303,17 +302,7 @@
             cell.headerText.text = [item objectForKey:@"title"];
             cell.secondaryText.text = [[item objectForKey:@"object"] objectForKey:@"summary"];
 
-            if([item objectForKey:@"published_ts"]) {
-                NSTimeInterval dateUnix = [[item objectForKey:@"published_ts"] floatValue];
-                NSTimeInterval since = [[NSDate date] timeIntervalSince1970] - dateUnix;
-                if (since < (86400*3)) {
-                    cell.dateText.text = [[[TTTTimeIntervalFormatter alloc] init] stringForTimeInterval:(since * -1)];
-                } else {
-                    cell.dateText.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:dateUnix]];
-                }
-            } else {
-                cell.dateText.text = [item objectForKey:@"displayDate"];
-            }
+            cell.dateText.text = [item objectForKey:@"displayDate"];
             
             NSString *imageURL;
             if(![[[[item objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"] isEqualToString:@""]) {

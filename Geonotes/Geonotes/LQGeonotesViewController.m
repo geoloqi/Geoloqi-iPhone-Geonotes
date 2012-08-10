@@ -11,7 +11,6 @@
 #import "NSString+URLEncoding.h"
 #import "sqlite3.h"
 #import "LQAppDelegate.h"
-#import "TTTTimeIntervalFormatter/TTTTimeIntervalFormatter.h"
 
 @interface LQGeonotesViewController ()
 
@@ -216,12 +215,7 @@
         cell.secondaryText.text = [item objectForKey:@"text"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone; // TODO: Remove this to enable selecting rows again
         
-        NSTimeInterval dateUnix = [[item objectForKey:@"date_created_ts"] floatValue];
-        NSTimeInterval since = [[NSDate date] timeIntervalSince1970] - dateUnix;
-        if (since < (86400*3))
-            cell.dateText.text = [[[TTTTimeIntervalFormatter alloc] init] stringForTimeInterval:(since * -1)];
-        else
-            cell.dateText.text = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:dateUnix]];
+        cell.dateText.text = [item objectForKey:@"display_date"];
     }
     return cell;
 }
