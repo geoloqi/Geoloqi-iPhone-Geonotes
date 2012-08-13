@@ -87,6 +87,8 @@
 		0FDE2ADB15A8DEE300FB78A7 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */; };
 		BE03B1E015C9E69000FE023E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03B1DF15C9E69000FE023E /* Icon.png */; };
 		BE03B1E215C9E69C00FE023E /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE03B1E115C9E69C00FE023E /* Icon@2x.png */; };
+		BE2BD81D15D9BCB400CCB8F8 /* LQCreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2BD81B15D9BCB400CCB8F8 /* LQCreditsViewController.m */; };
+		BE2BD81E15D9BCB400CCB8F8 /* LQCreditsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2BD81C15D9BCB400CCB8F8 /* LQCreditsViewController.xib */; };
 		BE2F883215C999250041F9C9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F883115C999250041F9C9 /* MBProgressHUD.m */; };
 		BE4033FB15C337590093EFF8 /* LQNewGeonoteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4033F915C337590093EFF8 /* LQNewGeonoteMapViewController.m */; };
 		BE4033FC15C337590093EFF8 /* LQNewGeonoteMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4033FA15C337590093EFF8 /* LQNewGeonoteMapViewController.xib */; };
@@ -272,6 +274,9 @@
 		0FDE2AD715A8DEE300FB78A7 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "Graphics/settings@2x.png"; sourceTree = "<group>"; };
 		BE03B1DF15C9E69000FE023E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BE03B1E115C9E69C00FE023E /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		BE2BD81A15D9BCB400CCB8F8 /* LQCreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQCreditsViewController.h; sourceTree = "<group>"; };
+		BE2BD81B15D9BCB400CCB8F8 /* LQCreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQCreditsViewController.m; sourceTree = "<group>"; };
+		BE2BD81C15D9BCB400CCB8F8 /* LQCreditsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQCreditsViewController.xib; sourceTree = "<group>"; };
 		BE2F883015C999250041F9C9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BE2F883115C999250041F9C9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		BE32091B15C8F9A500B8B535 /* LQGeonoteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonoteDelegate.h; sourceTree = "<group>"; };
@@ -434,7 +439,6 @@
 		0FDE2A3915A8C27000FB78A7 = {
 			isa = PBXGroup;
 			children = (
-				BECB830215D4545C005F7421 /* QuartzCore.framework */,
 				BE03B1E115C9E69C00FE023E /* Icon@2x.png */,
 				BE03B1DF15C9E69000FE023E /* Icon.png */,
 				0F83DF0815AB48DE00E07D16 /* SDWebImage.xcodeproj */,
@@ -455,6 +459,7 @@
 		0FDE2A4715A8C27000FB78A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BECB830215D4545C005F7421 /* QuartzCore.framework */,
 				BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */,
 				0F83DF1A15AB491A00E07D16 /* ImageIO.framework */,
 				0FDE2A4815A8C27000FB78A7 /* UIKit.framework */,
@@ -617,6 +622,9 @@
 				BE9CB8E315CC8B1100ED1526 /* LQLogoCell.h */,
 				BE9CB8E415CC8B1100ED1526 /* LQLogoCell.m */,
 				BE9CB8E615CC8B2100ED1526 /* LQLogoCell.xib */,
+				BE2BD81A15D9BCB400CCB8F8 /* LQCreditsViewController.h */,
+				BE2BD81B15D9BCB400CCB8F8 /* LQCreditsViewController.m */,
+				BE2BD81C15D9BCB400CCB8F8 /* LQCreditsViewController.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -865,6 +873,7 @@
 				0FA6E02C15D4817100F83365 /* whip_2.caf in Resources */,
 				0FA6E02D15D4817100F83365 /* whip.caf in Resources */,
 				0FA6E02E15D4817100F83365 /* wikipedia.caf in Resources */,
+				BE2BD81E15D9BCB400CCB8F8 /* LQCreditsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,6 +920,7 @@
 				BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */,
 				BE9CB8E515CC8B1100ED1526 /* LQLogoCell.m in Sources */,
 				BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */,
+				BE2BD81D15D9BCB400CCB8F8 /* LQCreditsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

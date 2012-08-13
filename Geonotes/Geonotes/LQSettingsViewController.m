@@ -7,8 +7,15 @@
 //
 
 #import "LQSettingsViewController.h"
+#import "LQPrivacyPolicyViewController.h"
+#import "LQCreditsViewController.h"
 
-@implementation LQSettingsViewController
+@implementation LQSettingsViewController {
+    NSArray *sectionHeaders;
+    LQSetupAccountViewController *setupAccountViewController;
+    LQLoginViewController *loginViewController;
+    LQCreditsViewController *creditsViewController;
+}
 
 @synthesize locationTracking, navigationBar, tableView = _tableView,
             setupAccountViewController, loginViewController, privacyPolicyViewController,
@@ -59,7 +66,7 @@
             break;
             
         case 2:
-            rows = 3;
+            rows = 4;
             break;
             
         case 3:
@@ -106,6 +113,9 @@
                     break;
                 case 2:
                     cell = [self sdkVersionCell];
+                    break;
+                case 3:
+                    cell = [self creditsCell];
                     break;
             }
             break;
@@ -227,6 +237,14 @@
     return cell;
 }
 
+- (UITableViewCell *)creditsCell
+{
+    UITableViewCell *cell = [self getCellForId:@"creditsCell"];
+    cell.textLabel.text = @"Credits";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
 - (UITableViewCell *)getCellForId:(NSString *)cellIdentifier
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -254,8 +272,14 @@
             }
             break;
         case 2:
-            if (indexPath.row == 0)
-                [self privacyPolicyCellWasTapped];
+            switch (indexPath.row) {
+                case 0:
+                    [self privacyPolicyCellWasTapped];
+                    break;
+                case 3:
+                    [self creditsCellWasTapped];
+                    break;
+            }
             break;
     }
     [tableView cellForRowAtIndexPath:indexPath].selected = NO;
@@ -281,11 +305,16 @@
 
 - (void)privacyPolicyCellWasTapped
 {
-    if (self.privacyPolicyViewController == nil) {
-        self.privacyPolicyViewController = [[LQPrivacyPolicyViewController alloc] initWithNibName:@"LQPrivacyPolicyViewController"
-                                                                                  bundle:[NSBundle mainBundle]];
-    }
+    if (self.privacyPolicyViewController == nil)
+        self.privacyPolicyViewController = [LQPrivacyPolicyViewController new];
     [self.navigationController pushViewController:self.privacyPolicyViewController animated:YES];
+}
+
+- (void)creditsCellWasTapped
+{
+    if (creditsViewController == nil)
+        creditsViewController = [LQCreditsViewController new];
+    [self.navigationController pushViewController:creditsViewController animated:YES];
 }
 
 #pragma mark - getters
