@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef enum {
 	LQPushNotificationModeLive = 0,
@@ -160,5 +161,19 @@ typedef enum {
 + (void)setDeviceIdentifier:(NSData *)deviceIdentifier;
 
 + (NSString *)deviceIdentifierHexString;
+
+@end
+
+/*  add support for logging to a file that can be retrieved from the device
+ *  (currently, by emailing off) for development purposes.
+ */
+@interface LQSession(LQSession_Logging) <MFMailComposeViewControllerDelegate>
+
+- (BOOL)fileLogging;
+- (void)setFileLogging:(BOOL)enable;
+- (void)viewControllerDidRequestLogEmail:(UIViewController *)viewController;
+- (NSString *)logContents;
+- (void)log:(NSString *)message;
+- (void)clearLog;
 
 @end

@@ -27,6 +27,8 @@
     if (self) {
         self.title = NSLocalizedString(@"Settings", @"Settings");
         self.tabBarItem.image = [UIImage imageNamed:@"settings"];
+        NSLog(@"Settings init");
+        [[LQSession savedSession] log:@"Settings init"];
     }
     return self;
 }
@@ -35,7 +37,8 @@
 {    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"Settings View Loaded");
+    NSLog(@"Settings viewDidLoad");
+    [[LQSession savedSession] log:@"Settings viewDidLoad"];
     
 }
 
@@ -44,6 +47,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [[LQSession savedSession] log:@"Settings viewDidUnload"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -57,19 +61,28 @@
 {
     int rows;
     switch (section) {
+        // location
         case 0:
             rows = 1;
             break;
             
+        // account
         case 1:
             rows = [LQSession savedSession].isAnonymous ? 2 : 1;
             break;
             
+        // logging
         case 2:
-            rows = 4;
+            rows = 3;
             break;
             
+        // about
         case 3:
+            rows = 4;
+            break;
+        
+        // logo
+        case 4:
             rows = 1;
             break;
     }
@@ -79,7 +92,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    
+    [[LQSession savedSession] log:[NSString stringWithFormat:@"Settings loading cell at indexPath %d x %d", indexPath.section, indexPath.row]];
     switch (indexPath.section) {
         case 0:
             switch (indexPath.row) {
@@ -106,6 +119,20 @@
         case 2:
             switch (indexPath.row) {
                 case 0:
+                    cell = [self enableLoggingCell];
+                    break;
+                case 1:
+                    cell = [self emailLogCell];
+                    break;
+                case 2:
+                    cell = [self clearLogCell];
+                    break;
+            }
+            break;
+            
+        case 3:
+            switch (indexPath.row) {
+                case 0:
                     cell = [self privacyPolicyCell];
                     break;
                 case 1:
@@ -120,7 +147,7 @@
             }
             break;
         
-        case 3:
+        case 4:
             cell = [self logoCell];
             break;
         
@@ -137,7 +164,7 @@
 - (NSArray *)sectionHeaders
 {
     if (sectionHeaders == nil)
-        sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"About", @"", nil];
+        sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"Logging", @"About", @"", nil];
     return sectionHeaders;
 }
 
@@ -148,15 +175,19 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    LQSession *session = [LQSession savedSession];
     NSString *footer;
-    if (section == 1) {
-        if (session.isAnonymous)
-            footer = @"Logged in anonymously";
-        else {
-            NSString *displayName = [[NSUserDefaults standardUserDefaults] objectForKey:LQDisplayNameUserDefaultsKey];
-            footer = [NSString stringWithFormat:@"Currently logged in as '%@'", displayName];
-        }
+    switch (section) {
+        case 1:
+            if ([LQSession savedSession].isAnonymous)
+                footer = @"Logged in anonymously";
+            else {
+                NSString *displayName = [[NSUserDefaults standardUserDefaults] objectForKey:LQDisplayNameUserDefaultsKey];
+                footer = [NSString stringWithFormat:@"Currently logged in as '%@'", displayName];
+            }
+            break;
+        case 2:
+            footer = @"Logging must be enabled to email the log";
+            break;
     }
     return footer;
 }
@@ -164,12 +195,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat f = 44.0;
-    if (indexPath.section == 3)
+    if (indexPath.section == 4)
         f = 64.0;
     return f;
 }
 
 #pragma mark - Table View - Cells
+
+- (UITableViewCell *)getCellForId:(NSString *)cellIdentifier
+{
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    return cell;
+}
+
+#pragma mark -
 
 - (UITableViewCell *)locationUpdateCell
 {
@@ -179,10 +220,14 @@
     
     UISwitch *locationSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
     cell.accessoryView = locationSwitch;
-    [locationSwitch setOn:([[LQTracker sharedTracker] profile] != LQTrackerProfileOff) animated:NO];
+    LQTracker *tracker = [LQTracker sharedTracker];
+    LQTrackerProfile profile = [tracker profile];
+    [locationSwitch setOn:(profile != LQTrackerProfileOff) animated:NO];
     [locationSwitch addTarget:self action:@selector(locationTrackingWasSwitched:) forControlEvents:UIControlEventValueChanged];
     return cell;
 }
+
+#pragma mark -
 
 - (UITableViewCell *)setupAccountCell
 {
@@ -199,6 +244,38 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+
+#pragma mark -
+
+- (UITableViewCell *)enableLoggingCell
+{
+    UITableViewCell *cell = [self getCellForId:@"enableLoggingCell"];
+    cell.textLabel.text = @"Enable logging";
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UISwitch *loggingSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
+    cell.accessoryView = loggingSwitch;
+    [loggingSwitch setOn:[[LQSession savedSession] fileLogging] animated:NO];
+    [loggingSwitch addTarget:self action:@selector(fileLoggingWasSwitched:) forControlEvents:UIControlEventValueChanged];
+    return cell;
+}
+
+- (UITableViewCell *)emailLogCell
+{
+    UITableViewCell *cell = [self getCellForId:@"emailLogCell"];
+    cell.textLabel.text = @"Email log";
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (UITableViewCell *)clearLogCell
+{
+    UITableViewCell *cell = [self getCellForId:@"clearLogCell"];
+    cell.textLabel.text = @"Clear log";
+    return cell;
+}
+
+#pragma mark -
 
 - (UITableViewCell *)privacyPolicyCell
 {
@@ -224,6 +301,16 @@
     return cell;
 }
 
+- (UITableViewCell *)creditsCell
+{
+    UITableViewCell *cell = [self getCellForId:@"creditsCell"];
+    cell.textLabel.text = @"Credits";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+#pragma mark -
+
 - (UITableViewCell *)logoCell
 {
     static NSString *logoCellId = @"logoCell";
@@ -234,22 +321,6 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         cell.userInteractionEnabled = NO;
     }
-    return cell;
-}
-
-- (UITableViewCell *)creditsCell
-{
-    UITableViewCell *cell = [self getCellForId:@"creditsCell"];
-    cell.textLabel.text = @"Credits";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    return cell;
-}
-
-- (UITableViewCell *)getCellForId:(NSString *)cellIdentifier
-{
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     return cell;
 }
 
@@ -273,6 +344,17 @@
             break;
         case 2:
             switch (indexPath.row) {
+                case 1:
+                    [self emailLogCellWasTapped];
+                    break;
+                case 2:
+                    [self clearLogCellWasTapped];
+                    break;
+            }
+            break;
+
+        case 3:
+            switch (indexPath.row) {
                 case 0:
                     [self privacyPolicyCellWasTapped];
                     break;
@@ -282,7 +364,7 @@
             }
             break;
     }
-    [tableView cellForRowAtIndexPath:indexPath].selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)setupAccountCellWasTapped
@@ -317,6 +399,31 @@
     [self.navigationController pushViewController:creditsViewController animated:YES];
 }
 
+- (void)emailLogCellWasTapped
+{
+    LQSession *session = [LQSession savedSession];
+    if ([session fileLogging])
+        [session viewControllerDidRequestLogEmail:self];
+}
+
+- (void)clearLogCellWasTapped
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Clear log?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:@"Clear"
+                                                    otherButtonTitles: nil];
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.destructiveButtonIndex)
+        [[LQSession savedSession] clearLog];
+}
+
 #pragma mark - getters
 
 - (LQSetupAccountViewController *)setupAccountViewController
@@ -349,6 +456,12 @@
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender
 {
     [[LQTracker sharedTracker] setProfile:(sender.on ? LQTrackerProfileAdaptive : LQTrackerProfileOff)];
+}
+
+- (IBAction)fileLoggingWasSwitched:(UISwitch *)sender
+{
+    [[LQSession savedSession] setFileLogging:sender.on];
+    
 }
 
 #pragma mark -

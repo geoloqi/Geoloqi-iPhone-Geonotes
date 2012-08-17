@@ -11,7 +11,7 @@
 #import "LQSetupAccountViewController.h"
 #import "LQLoginViewController.h"
 
-@interface LQSettingsViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface LQSettingsViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) IBOutlet UISwitch *locationTracking;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UITableViewCell *logoCell;
 
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender;
+- (IBAction)fileLoggingWasSwitched:(UISwitch *)sender;
 
 - (void)setupAccountCellWasTapped;
 - (void)anonymousBannerWasTapped;
