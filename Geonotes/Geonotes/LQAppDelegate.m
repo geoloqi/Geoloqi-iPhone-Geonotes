@@ -22,6 +22,7 @@
 
 // This method is called by the Geonotes and Layers tabs when a new geonote is created or when a layer is subscribed to.
 // The goal is to not prompt the user for push notifications until absolutely needed to avoid the double-popup problem on first launch.
+// Also, now called during login callback. -kenichi
 // If the app has never launched before, then show the prompt.
 + (void)registerForPushNotificationsIfNotYetRegistered {
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasRegisteredForPushNotifications"]){

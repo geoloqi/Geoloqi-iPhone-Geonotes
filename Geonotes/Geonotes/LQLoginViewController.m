@@ -100,6 +100,7 @@
                                            LQAppDelegate *appDelegate = (LQAppDelegate *)[[UIApplication sharedApplication] delegate];
                                            [appDelegate refreshAllSubTableViews];
                                            [appDelegate removeAnonymousBanners];
+                                           [LQAppDelegate registerForPushNotificationsIfNotYetRegistered];
                                        }];
                                    }
                                }];
