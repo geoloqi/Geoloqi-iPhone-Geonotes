@@ -12,8 +12,7 @@
 
 @implementation LQSettingsViewController {
     NSArray *sectionHeaders;
-    LQSetupAccountViewController *setupAccountViewController;
-    LQLoginViewController *loginViewController;
+    NSArray *sectionHeadersWithLogging;
     LQCreditsViewController *creditsViewController;
 }
 
@@ -60,6 +59,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int rows;
+    BOOL showLogSettings = SHOW_LOG_SETTINGS;
     switch (section) {
         // location
         case 0:
@@ -71,29 +71,33 @@
             rows = [LQSession savedSession].isAnonymous ? 2 : 1;
             break;
             
-        // logging
+        // logging or about
         case 2:
-            rows = 3;
+            rows = showLogSettings ? 4 : 4;
             break;
-            
-        // about
+
+        // about or logo
         case 3:
-            rows = 4;
+            rows = showLogSettings ? 4 : 1;
             break;
-        
+
         // logo
         case 4:
             rows = 1;
             break;
     }
+//    [[LQSession savedSession] log:@"returning %d rows for section: %d", rows, section];
     return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    [[LQSession savedSession] log:[NSString stringWithFormat:@"Settings loading cell at indexPath %d x %d", indexPath.section, indexPath.row]];
+//    [[LQSession savedSession] log:@"Settings loading cell at indexPath %d x %d", indexPath.section, indexPath.row];
+    BOOL showLogSettings = SHOW_LOG_SETTINGS;
     switch (indexPath.section) {
+            
+        // location
         case 0:
             switch (indexPath.row) {
                 case 0:
@@ -102,6 +106,7 @@
             }
             break;
             
+        // account
         case 1:
             switch (indexPath.row) {
                 case 0:
@@ -116,43 +121,69 @@
             }
             break;
             
+        // logging or about
         case 2:
-            switch (indexPath.row) {
-                case 0:
-                    cell = [self enableLoggingCell];
-                    break;
-                case 1:
-                    cell = [self emailLogCell];
-                    break;
-                case 2:
-                    cell = [self clearLogCell];
-                    break;
-            }
+            if (showLogSettings)
+                cell = [self handleLoggingSectionCellRequest:indexPath.row];
+            else
+                cell = [self handleAboutSectionCellRequest:indexPath.row];
             break;
             
+        // about or logo
         case 3:
-            switch (indexPath.row) {
-                case 0:
-                    cell = [self privacyPolicyCell];
-                    break;
-                case 1:
-                    cell = [self appVersionCell];
-                    break;
-                case 2:
-                    cell = [self sdkVersionCell];
-                    break;
-                case 3:
-                    cell = [self creditsCell];
-                    break;
-            }
+            if (showLogSettings)
+                cell = [self handleAboutSectionCellRequest:indexPath.row];
+            else
+                cell = [self logoCell];
             break;
         
+        // logo or noop
         case 4:
             cell = [self logoCell];
             break;
         
     }
     
+    return cell;
+}
+
+- (UITableViewCell *)handleLoggingSectionCellRequest:(int)row
+{
+    UITableViewCell *cell;
+    switch (row) {
+        case 0:
+            cell = [self enableLoggingCell];
+            break;
+        case 1:
+            cell = [self emailLogCell];
+            break;
+        case 2:
+            cell = [self dumpSDKStateToLogCell];
+            break;
+        case 3:
+            cell = [self clearLogCell];
+            break;
+    }
+    return cell;
+}
+
+- (UITableViewCell *)handleAboutSectionCellRequest:(int)row
+{
+    UITableViewCell *cell;
+    switch (row) {
+        case 0:
+            cell = [self privacyPolicyCell];
+            break;
+        case 1:
+            cell = [self appVersionCell];
+            break;
+        case 2:
+            cell = [self sdkVersionCell];
+            break;
+        case 3:
+            cell = [self creditsCell];
+            break;
+    }
     return cell;
 }
 
@@ -163,9 +194,17 @@
 
 - (NSArray *)sectionHeaders
 {
-    if (sectionHeaders == nil)
-        sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"Logging", @"About", @"", nil];
-    return sectionHeaders;
+    NSArray *a;
+    if (SHOW_LOG_SETTINGS) {
+        if (sectionHeadersWithLogging == nil)
+            sectionHeadersWithLogging = [NSArray arrayWithObjects:@"Location", @"Account", @"Logging", @"About", @"", nil];
+        a = sectionHeadersWithLogging;
+    } else {
+        if (sectionHeaders == nil)
+            sectionHeaders = [NSArray arrayWithObjects:@"Location", @"Account", @"About", @"", nil];
+        a = sectionHeaders;
+    }
+    return a;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -185,9 +224,6 @@
                 footer = [NSString stringWithFormat:@"Currently logged in as '%@'", displayName];
             }
             break;
-        case 2:
-            footer = @"Logging must be enabled to email the log";
-            break;
     }
     return footer;
 }
@@ -195,7 +231,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat f = 44.0;
-    if (indexPath.section == 4)
+    int logoSection = SHOW_LOG_SETTINGS ? 4 : 3;
+    if (indexPath.section == logoSection)
         f = 64.0;
     return f;
 }
@@ -264,7 +301,13 @@
 {
     UITableViewCell *cell = [self getCellForId:@"emailLogCell"];
     cell.textLabel.text = @"Email log";
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
+}
+
+- (UITableViewCell *)dumpSDKStateToLogCell
+{
+    UITableViewCell *cell = [self getCellForId:@"dumpSDKStateToLogCell"];
+    cell.textLabel.text = @"Dump SDK state to log";
     return cell;
 }
 
@@ -328,6 +371,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    BOOL showLogSettings = SHOW_LOG_SETTINGS;
     switch (indexPath.section) {
         case 1:
             switch (indexPath.row) {
@@ -343,28 +387,47 @@
             }
             break;
         case 2:
-            switch (indexPath.row) {
-                case 1:
-                    [self emailLogCellWasTapped];
-                    break;
-                case 2:
-                    [self clearLogCellWasTapped];
-                    break;
+            if (showLogSettings) {
+                [self handleLoggingCellTaps:indexPath];
+            } else {
+                [self handleAboutCellTaps:indexPath];
             }
             break;
 
         case 3:
-            switch (indexPath.row) {
-                case 0:
-                    [self privacyPolicyCellWasTapped];
-                    break;
-                case 3:
-                    [self creditsCellWasTapped];
-                    break;
+            if (showLogSettings) {
+                [self handleAboutCellTaps:indexPath];
             }
             break;
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)handleLoggingCellTaps:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+        case 1:
+            [self emailLogCellWasTapped];
+            break;
+        case 2:
+            [self dumpSDKStateToLogCellWasTapped];
+            break;
+        case 3:
+            [self clearLogCellWasTapped];
+            break;
+    }
+}
+
+- (void)handleAboutCellTaps:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+        case 0:
+            [self privacyPolicyCellWasTapped];
+            break;
+        case 3:
+            [self creditsCellWasTapped];
+            break;
+    }
 }
 
 - (void)setupAccountCellWasTapped
@@ -401,9 +464,12 @@
 
 - (void)emailLogCellWasTapped
 {
-    LQSession *session = [LQSession savedSession];
-    if ([session fileLogging])
-        [session viewControllerDidRequestLogEmail:self];
+    [[LQSession savedSession] viewControllerDidRequestLogEmail:self];
+}
+
+- (void)dumpSDKStateToLogCellWasTapped
+{
+    [[LQSession savedSession] dumpStateToLog];
 }
 
 - (void)clearLogCellWasTapped
@@ -413,7 +479,7 @@
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:@"Clear"
                                                     otherButtonTitles: nil];
-    [actionSheet showInView:self.view];
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
 
 #pragma mark - UIActionSheetDelegate

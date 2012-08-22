@@ -42,8 +42,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
 	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
-    [[LQSession savedSession] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: %@", launchOptions]];
-    [[LQSession savedSession] log:[NSString stringWithFormat:@"monitored regions: %@", [[CLLocationManager new] monitoredRegions]]];
+    [[LQSession savedSession] log:@"didFinishLaunchingWithOptions: %@", launchOptions];
+    [[LQSession savedSession] log:@"monitored regions: %@", [[CLLocationManager new] monitoredRegions]];
 
     activityViewController = [[LQActivityViewController alloc] init];
     UINavigationController *activityNavController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
@@ -91,7 +91,6 @@
 		}];
     } else {
         NSLog(@"%@", [LQSession savedSession].accessToken);
-//        LQTrackerProfile profile = [[NSUserDefaults standardUserDefaults] integerForKey:LQTrackerCurrentProfileUserDefaultsKey];
     }
 
     // Tell the SDK the app finished launching so it can properly handle push notifications, etc
@@ -182,6 +181,12 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    LQSession *session = [LQSession savedSession];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (!SHOW_LOG_SETTINGS && [session fileLogging])
+        [session setFileLogging:NO];
+    [settingsViewController.tableView reloadData];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

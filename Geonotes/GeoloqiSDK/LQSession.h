@@ -173,7 +173,8 @@ typedef enum {
 - (void)setFileLogging:(BOOL)enable;
 - (void)viewControllerDidRequestLogEmail:(UIViewController *)viewController;
 - (NSString *)logContents;
-- (void)log:(NSString *)message;
+- (void)log:(NSString *)format,...;
 - (void)clearLog;
+- (void)dumpStateToLog;
 
 @end

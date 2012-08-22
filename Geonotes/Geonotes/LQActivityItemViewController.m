@@ -13,6 +13,7 @@
 
 #define BORDER_COLOR [[UIColor colorWithHue:0 saturation:0 brightness:0.67 alpha:1.0] CGColor]
 #define BORDER_WIDTH 1.0
+#define BODY_TEXT_DELTA_MIN -10.0
 
 @interface LQActivityItemViewController () {
     NSDictionary *storyData;
@@ -35,15 +36,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    // if there's no place, there's no map, so start the text views at the top
     CGFloat originY = 0.0;
 
     if([storyData objectForKey:@"location"]) {
+        
+        // add a border to the top of the map
         CALayer *topMapBorder = [CALayer layer];
         topMapBorder.frame = CGRectMake(0.0, 0.0, self.scrollView.frame.size.width, BORDER_WIDTH);
         topMapBorder.backgroundColor = BORDER_COLOR;
         [self.scrollView.layer addSublayer:topMapBorder];
         
+        // add a border to the bottom of the map
         CALayer *bottomMapBorder = [CALayer layer];
         bottomMapBorder.frame = CGRectMake(0.0, 130.0, self.scrollView.frame.size.width, BORDER_WIDTH);
         bottomMapBorder.backgroundColor = BORDER_COLOR;
@@ -55,11 +60,13 @@
 
         [mapView addAnnotation:[[LQBasicAnnotation alloc] initWithTitle:[[storyData objectForKey:@"location"] objectForKey:@"displayName"] andCoordinate:center]];
 
+        // otherwise, push the text views down below the map
         originY = 130.0;
     } else {
         [self.mapView removeFromSuperview];
     }
     
+    // add all the text
     self.titleTextView.text = [storyData objectForKey:@"title"];
     self.bodyTextView.text = [[storyData objectForKey:@"object"] objectForKey:@"summary"];
     sourceURL = [[storyData objectForKey:@"object"] objectForKey:@"sourceURL"];
@@ -73,6 +80,7 @@
         [self.urlLabel removeFromSuperview];
     }
 
+    // add image
     NSString *imageURL;
     if(![[[[storyData objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"] isEqualToString:@""]) {
         imageURL = [[[storyData objectForKey:@"actor"] objectForKey:@"image"] objectForKey:@"url"];
@@ -83,36 +91,52 @@
         [self.imageView setImageWithURL:[NSURL URLWithString:imageURL]];
     }
     
+    // make the nice rounded box behind the text
     self.detailContainerView.layer.cornerRadius = 10.0;
     self.detailContainerView.layer.masksToBounds = YES;
     self.detailContainerView.layer.borderWidth = BORDER_WIDTH;
     self.detailContainerView.layer.borderColor = BORDER_COLOR;
 
+    // add the nice rounded box
     [self.scrollView addSubview:detailView];
     
     // can only get contentSize after view has been added
+    // so now we can go through each text view and figure out the delta between its view frame height
+    // and the contentSize height (which should be enough to show all the text).
+    // for each text view, we'll add the delta to this:
     CGFloat yToAddToFrameHeight = 0.0;
+    
+    // these two are reused for each text view
     CGFloat delta;
     CGRect frame;
     
+    // frames of views have immutable properties, but the frame property itself is assignable...
+    // so, we grab a copy, set the heights, and reassign it back to the view.
+    
+    // figure out the height needed to add to show the title text properly (TODO: can be negative?)
     frame = self.titleTextView.frame;
     delta = self.titleTextView.contentSize.height - frame.size.height;
     yToAddToFrameHeight += delta;
     frame.size.height += delta;
     self.titleTextView.frame = frame;
 
+    // figure out the height needed to add to show the body text properly
     frame = self.bodyTextView.frame;
     frame.origin.y += yToAddToFrameHeight;
     delta = self.bodyTextView.contentSize.height - frame.size.height;
-    if (delta < -20.0) { delta += (fabs(delta + 20.0)); }
+    
+    // in this case, do not let delta drop below BODY_TEXT_DELTA_MIN
+    if (delta < BODY_TEXT_DELTA_MIN) { delta += (fabs(delta - BODY_TEXT_DELTA_MIN)); }
     yToAddToFrameHeight += delta;
     frame.size.height += delta;
     self.bodyTextView.frame = frame;
     
+    // now, add the height we need to the container view's frame
     frame = self.detailContainerView.frame;
     frame.size.height += yToAddToFrameHeight;
     self.detailContainerView.frame = frame;
     
+    // if we have a link, push it down below the text container view box
     if (sourceURL && ![sourceURL isEqualToString:@""]) {
         frame = self.linkLabel.frame;
         frame.origin.y += yToAddToFrameHeight;
@@ -123,8 +147,9 @@
         self.urlLabel.frame = frame;
     }
     
+    // now, set the detail view's frame to the whole size, so that it will scroll properly
     detailView.frame = CGRectMake(0.0, originY, self.scrollView.frame.size.width, (self.scrollView.frame.size.height + yToAddToFrameHeight));
-    
+    // same with contentSize of the scroll view
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.detailView.frame.size.height);
 }
 
