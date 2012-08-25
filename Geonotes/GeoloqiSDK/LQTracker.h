@@ -120,6 +120,9 @@ static NSString *const LQTrackerDidChangeTrackingProfileNotification = @"com.geo
 // Forces the local location buffer to be uploaded immediately
 - (void)uploadLocationQueue;
 
+// queue a location update at the current location and send to the API if necessary
+- (void)enqueueCurrentLocationUpdate;
+
 #pragma mark - Properties
 
 @property (nonatomic) LQTrackerProfile profile;

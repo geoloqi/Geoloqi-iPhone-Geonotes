@@ -126,6 +126,9 @@
             [alert show];
         } else if ([[responseDictionary objectForKey:@"result"] isEqualToString:@"ok"]) {
             [self cancelGeonote];
+            // if the geonote is close enough, we need the server to tell us about it to set up
+            // a region to monitor there; do this with a location update.
+            [[LQTracker sharedTracker] enqueueCurrentLocationUpdate];
             if (self.saveComplete) self.saveComplete();
         }
     }];
