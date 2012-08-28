@@ -88,11 +88,12 @@
                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                                        message:[[error userInfo] objectForKey:@"error_description"]
                                                                                       delegate:self
-                                                                             cancelButtonTitle:@"OK"
+                                                                             cancelButtonTitle:@"Ok"
                                                                              otherButtonTitles:nil];
                                        [alert show];
                                    } else {
-                                       [LQSession setSavedSession:session];
+                                       // Pass the new session to the tracker class so location updates get sent from the new account
+                                       [[LQTracker sharedTracker] setSession:session];
                                        [self updateDisplayName:^() {
                                            [self.settingsTableView reloadData];
                                            [self toggleFormStatus:YES];

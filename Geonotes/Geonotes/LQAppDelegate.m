@@ -91,7 +91,12 @@
 			}
 		}];
     } else {
-        NSLog(@"%@", [LQSession savedSession].accessToken);
+        NSLog(@"Access Token: %@", [LQSession savedSession].accessToken);
+
+        // TODO: If they have explicitly denied location permission, show an alert with a warning
+        
+        // Set up the tracker when the app re-launches
+        [LQTracker sharedTracker];
     }
 
     // Tell the SDK the app finished launching so it can properly handle push notifications, etc
