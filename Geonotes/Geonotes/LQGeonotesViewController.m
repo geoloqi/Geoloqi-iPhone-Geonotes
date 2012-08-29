@@ -47,7 +47,6 @@
     NSLog(@"Geonotes View Loaded");
 
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.navigationItem.leftBarButtonItem = [self editButtonItem];
     self.navigationItem.leftBarButtonItem.action = @selector(editWasTapped:);
@@ -56,6 +55,10 @@
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LQTableHeaderView" owner:self options:nil];
     LQTableHeaderView *headerView = (LQTableHeaderView *)[nib objectAtIndex:0];
     self.headerView = headerView;
+
+    // Provide an empty footer view to hide the separators between cells
+    // http://stackoverflow.com/questions/1491033/how-to-display-a-table-with-zero-rows-in-uitableview
+    self.footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
     
     // Load the list from the local database
     [self reloadDataFromDB];
