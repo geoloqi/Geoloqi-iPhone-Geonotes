@@ -47,6 +47,7 @@
     NSLog(@"Geonotes View Loaded");
 
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.navigationItem.leftBarButtonItem = [self editButtonItem];
     self.navigationItem.leftBarButtonItem.action = @selector(editWasTapped:);

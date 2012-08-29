@@ -38,6 +38,22 @@
 	}
 }
 
++ (BOOL)showLocationServicesDisabledAlertIfDisabled
+{
+    BOOL didShow = NO;
+    // If they have explicitly denied location permission, show an alert with a warning
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Location Disabled"
+                                                    message:@"Geonotes requires location services to be enabled. Please enable them using the Settings application."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+        [a show];
+        didShow = YES;
+    }
+    return didShow;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -92,9 +108,6 @@
 		}];
     } else {
         NSLog(@"Access Token: %@", [LQSession savedSession].accessToken);
-
-        // TODO: If they have explicitly denied location permission, show an alert with a warning
-        
         // Set up the tracker when the app re-launches
         [LQTracker sharedTracker];
     }
@@ -203,6 +216,8 @@
     // re-initializes the LQSession with that account.
     if ([self reInitializeSessionFromSettingsPanel])
         [self refreshAllSubTableViews];
+    
+    [LQAppDelegate showLocationServicesDisabledAlertIfDisabled];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

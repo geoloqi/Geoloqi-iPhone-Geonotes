@@ -9,6 +9,7 @@
 #import "LQSettingsViewController.h"
 #import "LQPrivacyPolicyViewController.h"
 #import "LQCreditsViewController.h"
+#import "LQAppDelegate.h"
 
 @implementation LQSettingsViewController {
     NSArray *sectionHeaders;
@@ -217,11 +218,17 @@
     NSString *footer;
     switch (section) {
         case 1:
-            if ([LQSession savedSession].isAnonymous)
-                footer = @"Logged in anonymously";
-            else {
+            if ([LQSession savedSession].isAnonymous) {
+                NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+                [d synchronize];
+                if ([d boolForKey:LQUserHasSetEmailUserDefaultsKey])
+                    footer = @"Follow the link your email to set your\nnew password, then log in";
+                else
+                    footer = @"Logged in anonymously";
+            } else {
                 NSString *displayName = [[NSUserDefaults standardUserDefaults] objectForKey:LQDisplayNameUserDefaultsKey];
                 footer = [NSString stringWithFormat:@"Currently logged in as '%@'", displayName];
+
             }
             break;
     }
@@ -259,7 +266,7 @@
     cell.accessoryView = locationSwitch;
     LQTracker *tracker = [LQTracker sharedTracker];
     LQTrackerProfile profile = [tracker profile];
-    [locationSwitch setOn:(profile != LQTrackerProfileOff) animated:NO];
+    [locationSwitch setOn:(profile != LQTrackerProfileOff && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) animated:NO];
     [locationSwitch addTarget:self action:@selector(locationTrackingWasSwitched:) forControlEvents:UIControlEventValueChanged];
     return cell;
 }
@@ -521,7 +528,10 @@
 
 - (IBAction)locationTrackingWasSwitched:(UISwitch *)sender
 {
-    [[LQTracker sharedTracker] setProfile:(sender.on ? LQTrackerProfileAdaptive : LQTrackerProfileOff)];
+    if ([LQAppDelegate showLocationServicesDisabledAlertIfDisabled])
+        [sender setOn:NO animated:YES];
+    else
+        [[LQTracker sharedTracker] setProfile:(sender.on ? LQTrackerProfileAdaptive : LQTrackerProfileOff)];
 }
 
 - (IBAction)fileLoggingWasSwitched:(UISwitch *)sender

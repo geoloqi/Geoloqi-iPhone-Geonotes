@@ -92,8 +92,15 @@
                     }
                     NSString *res = (NSString *)[responseDictionary objectForKey:@"response"];
                     if (res && [res isEqualToString:@"ok"]) {
-                        [LQSession setSavedSession:[LQSession sessionWithAccessToken:session.accessToken]];
-                        // [self cancel];
+                        
+                        // set flag that the user has gone through the setup account process at least once
+                        NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+                        [d setBool:YES forKey:LQUserHasSetEmailUserDefaultsKey];
+                        [d synchronize];
+                        
+                        // this is to append the message to the account section footer about checking email
+                        [self.settingsViewController.tableView reloadData];
+                        
                         [self.navigationController popViewControllerAnimated:YES];
                     }
                 }

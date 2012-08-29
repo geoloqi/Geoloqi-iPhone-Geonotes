@@ -18,4 +18,4 @@
 #define NSLog(args...) [[LQSession savedSession] log:args]
 #define SHOW_LOG_SETTINGS [[NSUserDefaults standardUserDefaults] boolForKey:@"com.geoloqi.geonotes.showLogSettings"]
 
-static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.LQDisplayName";
+static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.displayName";

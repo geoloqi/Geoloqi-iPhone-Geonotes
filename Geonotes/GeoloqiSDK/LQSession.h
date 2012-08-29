@@ -70,6 +70,19 @@ typedef enum {
 + (LQSession *)savedSession;
 
 /**
+ * since this factory method can potentially make an async API call, this method
+ * can now take a "on complete" block to be called with the session object when
+ * the API request finishes, or immediately after loading session data from disk.
+ */
++ (LQSession *)savedSession:(void (^)(LQSession *session))block;
+
+/**
+ * this is the instance method the factory above may call, to refresh all session
+ * data from the API. if a block is passed, it is called when the request is finished.
+ */
+- (void)reloadSessionData:(void (^)(LQSession *session))block;
+
+/**
  * Log in to an existing Geoloqi account given a username and password.
  */
 + (id)requestSessionWithUsername:(NSString *)username
