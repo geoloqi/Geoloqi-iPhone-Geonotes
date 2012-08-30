@@ -152,7 +152,7 @@
         didSomething = YES;
         [LQSession setSavedSession:nil];
         LQSession *newSession = [LQSession sessionWithAccessToken:newAccessToken];
-        [LQSession setSavedSession:newSession];
+        [[LQTracker sharedTracker] setSession:newSession];
         NSLog(@"Re-initialized session!");
     }
     
