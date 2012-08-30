@@ -14,6 +14,9 @@
 #import "LQLayersViewController.h"
 #import "LQSettingsViewController.h"
 
+// Switch to LQPushNotificationModeLive before publishing to app store!
+static LQPushNotificationMode const PushNotificationMode = LQPushNotificationModeLive;
+
 static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
 static NSString *LQLayerListCollectionName = @"LQLayerListCollection";
 static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
