@@ -15,7 +15,7 @@
 #import "LQSettingsViewController.h"
 
 // Switch to LQPushNotificationModeLive before publishing to app store!
-static LQPushNotificationMode const PushNotificationMode = LQPushNotificationModeLive;
+static LQPushNotificationMode const PushNotificationMode = LQPushNotificationModeDev;
 
 static NSString *LQActivityListCollectionName = @"LQActivityListCollection";
 static NSString *LQLayerListCollectionName = @"LQLayerListCollection";
