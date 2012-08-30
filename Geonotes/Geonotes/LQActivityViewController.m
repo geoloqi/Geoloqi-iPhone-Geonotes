@@ -45,7 +45,7 @@
     [super viewDidLoad];
     NSLog(@"Activity View Loaded");
 
-    [self.tableView setBackgroundColor:[UIColor colorWithWhite:249.0/255.0 alpha:1.0]];
+    [self.tableView setBackgroundColor:DEFAULT_TABLE_VIEW_BACKGROUND_COLOR];
 
     // set the custom view for "pull to refresh". See LQTableHeaderView.xib
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LQTableHeaderView" owner:self options:nil];
@@ -77,6 +77,11 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self addOrRemoveOverlay];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
@@ -90,6 +95,14 @@
 - (void)appendObjectFromDictionary:(NSDictionary *)item
 {
     [items insertObject:item atIndex:items.count];
+}
+
+- (void)addOrRemoveOverlay
+{
+    if (items.count == 0)
+        [self addOverlayWithTitle:@"No Activity Yet" andText:@"Try subscribing to layers or\nleave yourself a Geonote"];
+    else
+        [self removeOverlay];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +183,7 @@
 
         // Tell the table to reload
         [self.tableView reloadData];
+        [self addOrRemoveOverlay];
         
         // Call this to indicate that we have finished "refreshing".
         // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
@@ -252,7 +266,7 @@
         
         // Tell the table to reload
         [self.tableView reloadData];
-        
+
         if ([[responseDictionary objectForKey:@"paging"] objectForKey:@"next_offset"])
             self.canLoadMore = YES;
         else

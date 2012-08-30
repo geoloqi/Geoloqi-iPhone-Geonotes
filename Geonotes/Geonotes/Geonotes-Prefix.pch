@@ -17,5 +17,6 @@
 
 #define NSLog(args...) [[LQSession savedSession] log:args]
 #define SHOW_LOG_SETTINGS [[NSUserDefaults standardUserDefaults] boolForKey:@"com.geoloqi.geonotes.showLogSettings"]
+#define DEFAULT_TABLE_VIEW_BACKGROUND_COLOR [UIColor colorWithWhite:249.0/255.0 alpha:1.0]
 
 static NSString *const LQDisplayNameUserDefaultsKey = @"com.geoloqi.geonotes.displayName";

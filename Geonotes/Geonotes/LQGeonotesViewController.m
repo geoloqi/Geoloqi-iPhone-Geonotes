@@ -69,6 +69,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self addOrRemoveOverlay];
+}
+
 - (void)editWasTapped:(id)sender 
 {
     if(self.tableView.editing) {
@@ -80,6 +85,14 @@
         [self.tableView setEditing:YES animated:YES];
         self.navigationItem.leftBarButtonItem.title = @"Done";
     }
+}
+
+- (void)addOrRemoveOverlay
+{
+    if (items.count == 0)
+        [self addOverlayWithTitle:@"No Active Geonotes" andText:@"You should leave yourself a Geonote"];
+    else
+        [self removeOverlay];
 }
 
 #pragma mark - Data
@@ -174,6 +187,7 @@
     [self fetchRemoteDataWithCallback:^{
         // Tell the table to reload
         [self.tableView reloadData];
+        [self addOrRemoveOverlay];
         
         // Call this to indicate that we have finished "refreshing".
         // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
@@ -264,6 +278,8 @@
         // Animate deletion
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
+        
+        [self addOrRemoveOverlay];
     }
 }
 
