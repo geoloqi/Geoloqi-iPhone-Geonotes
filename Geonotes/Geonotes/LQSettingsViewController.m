@@ -217,20 +217,20 @@
 {
     NSString *footer;
     switch (section) {
-        case 1:
+        case 1: {
+            NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+            [d synchronize];
             if ([LQSession savedSession].isAnonymous) {
-                NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-                [d synchronize];
                 if ([d boolForKey:LQUserHasSetEmailUserDefaultsKey])
                     footer = @"Follow the link your email to set your\nnew password, then log in";
                 else
                     footer = @"Logged in anonymously";
             } else {
-                NSString *displayName = [[NSUserDefaults standardUserDefaults] objectForKey:LQDisplayNameUserDefaultsKey];
+                NSString *displayName = [d objectForKey:LQDisplayNameUserDefaultsKey];
                 footer = [NSString stringWithFormat:@"Currently logged in as '%@'", displayName];
-
             }
             break;
+        }
     }
     return footer;
 }

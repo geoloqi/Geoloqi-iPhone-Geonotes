@@ -128,10 +128,11 @@
     LQSession *session = [LQSession savedSession];
     NSURLRequest *req = [session requestWithMethod:@"GET" path:@"/account/profile" payload:nil];
     [session runAPIRequest:req completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
-                    [[NSUserDefaults standardUserDefaults] setObject:[responseDictionary objectForKey:@"display_name"]
-                                                              forKey:LQDisplayNameUserDefaultsKey];
-                    block();
-                }];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[responseDictionary objectForKey:@"display_name"] forKey:LQDisplayNameUserDefaultsKey];
+        [defaults synchronize];
+        block();
+    }];
 }
 
 #pragma mark - table view datasource
