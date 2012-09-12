@@ -158,6 +158,8 @@
     [tableView cellForRowAtIndexPath:indexPath].selected = NO;
 }
 
+#pragma mark - UITableViewDataSource
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat f = 44;
@@ -165,8 +167,6 @@
         f = 180;
     return f;
 }
-
-#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

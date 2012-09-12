@@ -9,6 +9,8 @@
 #import "LQNewGeonoteMapViewController.h"
 #import "MTLocation/MTLocateMeBarButtonItem.h"
 
+#define MINIMUM_GEONOTE_RADIUS 150.0
+
 @interface LQNewGeonoteMapViewController ()
 
 @end
@@ -82,7 +84,7 @@
 	CGFloat desiredRadius = 111.0 * 1000 * currentSpan.latitudeDelta * 0.2;
     self.geonote.location = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude
                                                        longitude:mapView.centerCoordinate.longitude];
-	self.geonote.radius = desiredRadius;
+	self.geonote.radius = desiredRadius < MINIMUM_GEONOTE_RADIUS ? MINIMUM_GEONOTE_RADIUS : desiredRadius;
 }
 
 #pragma mark -
