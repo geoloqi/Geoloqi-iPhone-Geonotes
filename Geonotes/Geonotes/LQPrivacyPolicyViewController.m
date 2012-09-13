@@ -8,6 +8,8 @@
 
 #import "LQPrivacyPolicyViewController.h"
 
+static NSString *const kLQPrivacyPolicyURL = @"https://geoloqi.com/privacy";
+
 @interface LQPrivacyPolicyViewController ()
 
 @end

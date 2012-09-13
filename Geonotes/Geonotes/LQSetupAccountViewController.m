@@ -95,7 +95,7 @@
                         
                         // set flag that the user has gone through the setup account process at least once
                         NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-                        [d setBool:YES forKey:LQUserHasSetEmailUserDefaultsKey];
+                        [d setBool:YES forKey:kLQUserHasSetEmailUserDefaultsKey];
                         [d synchronize];
                         
                         // this is to append the message to the account section footer about checking email

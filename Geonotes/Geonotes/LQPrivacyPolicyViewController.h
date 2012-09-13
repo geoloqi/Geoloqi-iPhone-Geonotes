@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define kLQPrivacyPolicyURL @"https://geoloqi.com/privacy"
-
 @interface LQPrivacyPolicyViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIWebView *webView;

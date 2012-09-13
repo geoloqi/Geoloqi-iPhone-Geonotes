@@ -11,7 +11,7 @@
 #import "LQSetupAccountViewController.h"
 #import "LQLoginViewController.h"
 
-static NSString *const LQUserHasSetEmailUserDefaultsKey = @"com.geoloqi.geonotes.userHasSetEmail";
+static NSString *const kLQUserHasSetEmailUserDefaultsKey = @"com.geoloqi.geonotes.userHasSetEmail";
 
 @interface LQSettingsViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 

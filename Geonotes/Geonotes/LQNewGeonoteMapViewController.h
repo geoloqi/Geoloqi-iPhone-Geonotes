@@ -10,11 +10,6 @@
 #import <MapKit/MapKit.h>
 #import "LQGeonote.h"
 
-#define kLQGeonotePinYDelta            30
-#define kLQGeonotePinShadowXDelta      10
-#define kLQGeonotePinShadowYDelta      20
-#define kLQGeonotePinAnimationDuration 0.2
-
 @class LQNewGeonoteMapViewController;
 
 @interface LQNewGeonoteMapViewController : UIViewController {

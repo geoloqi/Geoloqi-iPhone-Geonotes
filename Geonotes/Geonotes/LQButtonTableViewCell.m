@@ -8,9 +8,9 @@
 
 #import "LQButtonTableViewCell.h"
 
-#define kLQDisabledColor        (194.0/255.0)
-#define kLQDisabledShadowOffset CGSizeMake(0.0, 0.0)
-#define kLQEnabledShadowOffset  CGSizeMake(0.0, -1.0)
+#define DISABLED_COLOR         (194.0/255.0)
+#define DISABLED_SHADOW_OFFSET CGSizeMake(0.0, 0.0)
+#define ENABLED_SHADOW_OFFSET  CGSizeMake(0.0, -1.0)
 
 @implementation LQButtonTableViewCell
 
@@ -36,10 +36,10 @@
     self.button.enabled = enabled;
     if (enabled) {
         self.button.titleLabel.shadowColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.0 alpha:0.4];
-        self.button.titleLabel.shadowOffset = kLQEnabledShadowOffset;
+        self.button.titleLabel.shadowOffset = ENABLED_SHADOW_OFFSET;
     } else {
         self.button.titleLabel.shadowColor = nil;
-        self.button.titleLabel.shadowOffset = kLQDisabledShadowOffset;
+        self.button.titleLabel.shadowOffset = DISABLED_SHADOW_OFFSET;
     }
 }
 
@@ -52,9 +52,9 @@
 
     [btvc.button setTitle:title forState:UIControlStateNormal];
     [btvc.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btvc.button setTitleColor:[UIColor colorWithRed:kLQDisabledColor
-                                               green:kLQDisabledColor
-                                                blue:kLQDisabledColor
+    [btvc.button setTitleColor:[UIColor colorWithRed:DISABLED_COLOR
+                                               green:DISABLED_COLOR
+                                                blue:DISABLED_COLOR
                                                alpha:1.0] forState:UIControlStateDisabled];
     
     btvc.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];

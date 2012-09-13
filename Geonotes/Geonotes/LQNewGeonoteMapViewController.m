@@ -11,6 +11,11 @@
 
 #define MINIMUM_GEONOTE_RADIUS 150.0
 
+#define PIN_Y_DELTA            30
+#define PIN_SHADOW_X_DELTA     10
+#define PIN_SHADOW_Y_DELTA     20
+#define PIN_ANIMATION_DURATION 0.2
+
 @interface LQNewGeonoteMapViewController ()
 
 @end
@@ -126,13 +131,13 @@
         [UIView beginAnimations:@"" context:NULL];
         self.geonotePin.center = (CGPoint) {
             self.geonotePin.center.x,
-            (self.geonotePin.center.y - kLQGeonotePinYDelta)
+            (self.geonotePin.center.y - PIN_Y_DELTA)
         };
         self.geonotePinShadow.center = (CGPoint) {
-            (self.geonotePinShadow.center.x + kLQGeonotePinShadowXDelta),
-            (self.geonotePinShadow.center.y - kLQGeonotePinShadowYDelta)
+            (self.geonotePinShadow.center.x + PIN_SHADOW_X_DELTA),
+            (self.geonotePinShadow.center.y - PIN_SHADOW_Y_DELTA)
         };
-        [UIView setAnimationDuration:kLQGeonotePinAnimationDuration];
+        [UIView setAnimationDuration:PIN_ANIMATION_DURATION];
         [UIView setAnimationDelay:UIViewAnimationCurveEaseOut];
         [UIView commitAnimations];
         pinUp = YES;
@@ -146,13 +151,13 @@
         [UIView beginAnimations:@"" context:NULL];
         self.geonotePin.center = (CGPoint) {
             self.geonotePin.center.x,
-            (self.geonotePin.center.y + kLQGeonotePinYDelta)
+            (self.geonotePin.center.y + PIN_Y_DELTA)
         };
         self.geonotePinShadow.center = (CGPoint) {
-            (self.geonotePinShadow.center.x - kLQGeonotePinShadowXDelta),
-            (self.geonotePinShadow.center.y + kLQGeonotePinShadowYDelta)
+            (self.geonotePinShadow.center.x - PIN_SHADOW_X_DELTA),
+            (self.geonotePinShadow.center.y + PIN_SHADOW_Y_DELTA)
         };
-        [UIView setAnimationDuration:kLQGeonotePinAnimationDuration];
+        [UIView setAnimationDuration:PIN_ANIMATION_DURATION];
         [UIView setAnimationDelay:UIViewAnimationCurveEaseIn];
         [UIView commitAnimations];
         

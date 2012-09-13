@@ -129,7 +129,7 @@
     NSURLRequest *req = [session requestWithMethod:@"GET" path:@"/account/profile" payload:nil];
     [session runAPIRequest:req completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:[responseDictionary objectForKey:@"display_name"] forKey:LQDisplayNameUserDefaultsKey];
+        [defaults setObject:[responseDictionary objectForKey:@"display_name"] forKey:kLQDisplayNameUserDefaultsKey];
         [defaults synchronize];
         block();
     }];
