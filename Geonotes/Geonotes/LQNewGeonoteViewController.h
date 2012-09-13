@@ -13,7 +13,7 @@
 #import "LQNewGeonoteMapViewController.h"
 #import "LQButtonTableViewCell.h"
 
-#define kLQGeonoteTotalCharacterCount 140
+#define TOTAL_CHARACTER_COUNT 140
 
 typedef void(^CompletionCallback)(void);
 

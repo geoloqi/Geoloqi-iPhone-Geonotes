@@ -201,7 +201,7 @@
             CGRect characterCountRect = CGRectMake(270, 160, 20, 18);
             characterCount = [[UILabel alloc] initWithFrame:characterCountRect];
             
-            NSInteger chars = kLQGeonoteTotalCharacterCount - geonoteTextView.text.length;
+            NSInteger chars = TOTAL_CHARACTER_COUNT - geonoteTextView.text.length;
             characterCount.text = [NSString stringWithFormat:@"%d", chars];
             characterCount.textColor = (chars < 0) ? [UIColor redColor] : [UIColor darkTextColor];
             
@@ -237,7 +237,7 @@
         {
             buttonTableViewCell = [LQButtonTableViewCell buttonTableViewCellWithTitle:@"Create"
                                                                                 owner:self
-                                                                              enabled:[self.geonote isSaveable:kLQGeonoteTotalCharacterCount]
+                                                                              enabled:[self.geonote isSaveable:TOTAL_CHARACTER_COUNT]
                                                                                target:self
                                                                              selector:@selector(saveButtonWasTapped:)];
             cell = buttonTableViewCell;
@@ -269,11 +269,11 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSInteger chars = kLQGeonoteTotalCharacterCount - geonoteTextView.text.length;
+    NSInteger chars = TOTAL_CHARACTER_COUNT - geonoteTextView.text.length;
     characterCount.textColor = (chars < 0) ? [UIColor redColor] : [UIColor darkTextColor];
     characterCount.text = [NSString stringWithFormat:@"%d", chars];
     self.geonote.text = textView.text;
-    [buttonTableViewCell setButtonState:[self.geonote isSaveable:kLQGeonoteTotalCharacterCount]];
+    [buttonTableViewCell setButtonState:[self.geonote isSaveable:TOTAL_CHARACTER_COUNT]];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -291,7 +291,7 @@
 
 - (void)geonote:(LQGeonote *)_geonote locationDidChange:(CLLocation *)newLocation
 {
-    [buttonTableViewCell setButtonState:[_geonote isSaveable:kLQGeonoteTotalCharacterCount]];
+    [buttonTableViewCell setButtonState:[_geonote isSaveable:TOTAL_CHARACTER_COUNT]];
     [self.tableView reloadData];
 }
 
