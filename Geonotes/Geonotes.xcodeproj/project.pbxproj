@@ -126,6 +126,7 @@
 		BE9CB8F115CC91C900ED1526 /* button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8EB15CC91C900ED1526 /* button_pressed@2x.png */; };
 		BE9CB8F215CC91C900ED1526 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8EC15CC91C900ED1526 /* button.png */; };
 		BE9CB8F315CC91C900ED1526 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8ED15CC91C900ED1526 /* button@2x.png */; };
+		BEA10A451602881400F44DB9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA10A441602881400F44DB9 /* Default-568h@2x.png */; };
 		BEC597BE15C7429B00684667 /* LQGeonote.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC597BD15C7429B00684667 /* LQGeonote.m */; };
 		BECB830315D4545C005F7421 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECB830215D4545C005F7421 /* QuartzCore.framework */; };
 		BED232E915CB2A7B001EE0A5 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = BED232E015CB2A7B001EE0A5 /* activity.png */; };
@@ -335,6 +336,7 @@
 		BE9CB8EB15CC91C900ED1526 /* button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_pressed@2x.png"; path = "Graphics/button_pressed@2x.png"; sourceTree = "<group>"; };
 		BE9CB8EC15CC91C900ED1526 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = Graphics/button.png; sourceTree = "<group>"; };
 		BE9CB8ED15CC91C900ED1526 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button@2x.png"; path = "Graphics/button@2x.png"; sourceTree = "<group>"; };
+		BEA10A441602881400F44DB9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Graphics/Default-568h@2x.png"; sourceTree = "<group>"; };
 		BEC597BC15C7429B00684667 /* LQGeonote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonote.h; sourceTree = "<group>"; };
 		BEC597BD15C7429B00684667 /* LQGeonote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonote.m; sourceTree = "<group>"; };
 		BECB830215D4545C005F7421 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -532,6 +534,7 @@
 				0F8DB26A15B76AEC00681B69 /* defaultLayerIcon@2x.png */,
 				0FDE2AC815A8DB3900FB78A7 /* Default.png */,
 				0FDE2AC915A8DB3900FB78A7 /* Default@2x.png */,
+				BEA10A441602881400F44DB9 /* Default-568h@2x.png */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -874,6 +877,7 @@
 				0FA6E02D15D4817100F83365 /* whip.caf in Resources */,
 				0FA6E02E15D4817100F83365 /* wikipedia.caf in Resources */,
 				BE2BD81E15D9BCB400CCB8F8 /* LQCreditsViewController.xib in Resources */,
+				BEA10A451602881400F44DB9 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
