@@ -222,7 +222,7 @@
             [d synchronize];
             if ([LQSession savedSession].isAnonymous) {
                 if ([d boolForKey:kLQUserHasSetEmailUserDefaultsKey])
-                    footer = @"Follow the link your email to set your\nnew password, then log in";
+                    footer = @"Follow the link that we emailed to you\nto set your new password, then log in";
                 else
                     footer = @"Logged in anonymously";
             } else {

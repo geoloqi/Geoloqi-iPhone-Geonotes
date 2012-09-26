@@ -253,6 +253,16 @@
 	return [caches stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.lol.sqlite", category]];
 }
 
+// clears all rows from a table in a database
++ (void)deleteFromTable:(NSString *)collectionName forCategory:(NSString *)category
+{
+    sqlite3 *db;
+    if(sqlite3_open([[LQAppDelegate cacheDatabasePathForCategory:category] UTF8String], &db) == SQLITE_OK) {
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@'", collectionName];
+        sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL);
+    }
+}
+
 - (void)selectSetupAccountView
 {
     self.tabBarController.selectedViewController = settingsNavController;

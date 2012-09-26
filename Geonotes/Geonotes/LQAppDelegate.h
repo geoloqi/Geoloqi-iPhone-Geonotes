@@ -44,6 +44,7 @@ static NSString *LQGeonoteListCollectionName = @"LQGeonoteListCollection";
 - (void)removeAnonymousBanners;
 
 + (NSString *)cacheDatabasePathForCategory:(NSString *)category;
++ (void)deleteFromTable:(NSString *)collectionName forCategory:(NSString *)category;
 
 + (void)registerForPushNotificationsIfNotYetRegistered;
 + (BOOL)showLocationServicesDisabledAlertIfDisabled;
