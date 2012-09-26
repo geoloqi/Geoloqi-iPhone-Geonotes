@@ -13,14 +13,7 @@
 #import "LOLDatabase.h"
 
 @interface LQActivityViewController : LQSTableViewController {
-    NSMutableArray *items;
-	LOLDatabase *_itemDB;
     IBOutlet LQActivityItemCellView *tableCellView;
-    NSDateFormatter *dateFormatter;
 }
-
-- (void)prependObjectFromDictionary:(NSDictionary *)item;
-- (void)appendObjectFromDictionary:(NSDictionary *)item;
-- (void)reloadDataFromDB;
 
 @end

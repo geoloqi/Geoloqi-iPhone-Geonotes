@@ -10,12 +10,14 @@
 #import "LQActivityItemViewController.h"
 #import "LQTableHeaderView.h"
 #import "LQTableFooterView.h"
-
+#import "LQActivityManager.h"
 #import "LQAppDelegate.h"
 
 #import "NSString+URLEncoding.h"
 
-@implementation LQActivityViewController
+@implementation LQActivityViewController {
+    LQActivityManager *activityManager;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,17 +27,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"activity"];
     }
     
-	_itemDB = [[LOLDatabase alloc] initWithPath:[LQAppDelegate cacheDatabasePathForCategory:@"LQActivity"]];
-	_itemDB.serializer = ^(id object){
-		return [LQSDKUtils dataWithJSONObject:object error:NULL];
-	};
-	_itemDB.deserializer = ^(NSData *data) {
-		return [LQSDKUtils objectFromJSONData:data error:NULL];
-	};
-    
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    activityManager = [LQActivityManager sharedManager];
     
     return self;
 }
@@ -58,17 +50,7 @@
     self.footerView = footerView;
     
     // Load the stored notes from the local database
-    [self reloadDataFromDB];
-}
-
-- (void)reloadDataFromDB
-{
-    items = [[NSMutableArray alloc] init];
-    [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
-        [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
-            [self prependObjectFromDictionary:object];
-        }];
-    }];
+    [activityManager reloadActivityFromDB];
 }
 
 - (void)viewDidUnload
@@ -88,19 +70,9 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)prependObjectFromDictionary:(NSDictionary *)item
-{
-    [items insertObject:item atIndex:0];
-}
-
-- (void)appendObjectFromDictionary:(NSDictionary *)item
-{
-    [items insertObject:item atIndex:items.count];
-}
-
 - (void)addOrRemoveOverlay
 {
-    if (items.count == 0)
+    if (activityManager.activityCount == 0)
         [self addOverlayWithTitle:@"No Activity Yet" andText:@"Try subscribing to layers or\nleave yourself a Geonote"];
     else
         [self removeOverlay];
@@ -153,35 +125,8 @@
     if (![super refresh])
         return NO;
     
-    NSString *date;
-    if(items.count == 0) {
-        date = @"";
-    } else {
-        NSDictionary *item = [items objectAtIndex:0];
-        if(item && [item objectForKey:@"published"]) {
-            NSLog(@"Newest entry is: %@", item);
-            date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
-        } else {
-            date = @"";
-        }
-    }
-    
-    
-    // Do your async call here
-    NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/timeline/messages?after=%@", date] payload:nil];
-    [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
-        NSLog(@"Got API Response: %d items", [[responseDictionary objectForKey:@"items"] count]);
-        NSLog(@"%@", responseDictionary);
-
-        for(NSDictionary *item in [[responseDictionary objectForKey:@"items"] reverseObjectEnumerator]) {
-            [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
-                // Store in the database
-                [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
-                // Also add to the top of the local array
-                [self prependObjectFromDictionary:item];
-            }];
-        }
-
+    [activityManager reloadActivityFromAPI:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+        
         // Tell the table to reload
         [self.tableView reloadData];
         [self addOrRemoveOverlay];
@@ -189,6 +134,7 @@
         // Call this to indicate that we have finished "refreshing".
         // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
         [self refreshCompleted];
+
     }];
 
     return YES;
@@ -205,8 +151,10 @@
 //
 - (void) willBeginLoadingMore
 {
-    LQTableFooterView *fv = (LQTableFooterView *)self.footerView;
-    [fv.activityIndicator startAnimating];
+    if (activityManager.canLoadMore) {
+        LQTableFooterView *fv = (LQTableFooterView *)self.footerView;
+        [fv.activityIndicator startAnimating];
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,7 +169,8 @@
     LQTableFooterView *fv = (LQTableFooterView *)self.footerView;
     [fv.activityIndicator stopAnimating];
     
-    if (!self.canLoadMore) {
+    if (!activityManager.canLoadMore) {
+
         // Do something if there are no more items to load
         
         // We can hide the footerView by: [self setFooterViewVisibility:NO];
@@ -237,42 +186,16 @@
     if (![super loadMore])
         return NO;
     
-    if(items.count == 0) {
+    if (activityManager.activityCount == 0) {
         [self loadMoreCompleted];
         return YES;
     }
     
-    NSDictionary *item = [items objectAtIndex:items.count-1];
-    NSLog(@"Oldest entry is: %@", item);
-    NSString *date;
-    if(item && [item objectForKey:@"published"])
-        date = [[item objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
-    else
-        date = @"";
-    
-    // Do your async call here
-    NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:[NSString stringWithFormat:@"/timeline/messages?before=%@", date] payload:nil];
-    [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
-        NSLog(@"Got API Response: %d items", [[responseDictionary objectForKey:@"items"] count]);
-        NSLog(@"%@", responseDictionary);
-        
-        for(NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
-            [_itemDB accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
-                // Store in the database
-                [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
-                // Also add to the bottom of the local array
-                [self appendObjectFromDictionary:item];
-            }];
-        }
-        
+    [activityManager loadMoreActivityFromAPI:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+
         // Tell the table to reload
         [self.tableView reloadData];
 
-        if ([[responseDictionary objectForKey:@"paging"] objectForKey:@"next_offset"])
-            self.canLoadMore = YES;
-        else
-            self.canLoadMore = NO; // signal that there won't be any more items to load
-        
         // Inform STableViewController that we have finished loading more items
         [self loadMoreCompleted];
     }];
@@ -288,7 +211,7 @@
     NSLog(@"Selected row: %d", indexPath.row);
     
     LQActivityItemViewController *itemViewController = [[LQActivityItemViewController alloc] init];
-    [itemViewController loadStory:[items objectAtIndex:indexPath.row]];
+    [itemViewController loadStory:[activityManager.activity objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:itemViewController animated:YES];
 }
 
@@ -298,7 +221,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return items.count;
+    return activityManager.activityCount;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -311,8 +234,8 @@
 		cell = tableCellView;
 	}
     
-    id item = [items objectAtIndex:indexPath.row];
-    if(item) {
+    id item = [activityManager.activity objectAtIndex:indexPath.row];
+    if (item) {
         if([item respondsToSelector:@selector(objectForKey:)]) {
             cell.headerText.text = [item objectForKey:@"title"];
             cell.secondaryText.text = [[item objectForKey:@"object"] objectForKey:@"summary"];

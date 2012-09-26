@@ -22,6 +22,10 @@
 //
 - (NSArray *)activity;
 
+// returns count of messages in the activity list
+//
+- (NSInteger)activityCount;
+
 // reloads the activity list from API
 //
 - (void)reloadActivityFromAPI:(void (^)(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error))completion;

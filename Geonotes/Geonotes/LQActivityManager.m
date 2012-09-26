@@ -18,7 +18,6 @@
 @implementation LQActivityManager {
     NSMutableArray *activities;
     LOLDatabase *db;
-    NSDateFormatter *dateFormatter;
 }
 
 @synthesize canLoadMore;
@@ -52,10 +51,6 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
             return [LQSDKUtils objectFromJSONData:data error:NULL];
         };
         
-        dateFormatter = [NSDateFormatter new];
-        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"]; // ISO 8601
-        
         self.canLoadMore = YES;
     }
     return self;
@@ -64,6 +59,11 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
 - (NSArray *)activity
 {
     return [NSArray arrayWithArray:activities];
+}
+
+- (NSInteger)activityCount
+{
+    return activities.count;
 }
 
 #pragma mark -
@@ -94,10 +94,7 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
     NSMutableArray *_activities = [NSMutableArray new];
     [LQAppDelegate deleteFromTable:kLQActivityCollectionName forCategory:kLQActivityCategoryName];
     
-    NSDate *aWeekAgo = [[NSDate alloc] initWithTimeIntervalSinceNow:(60*60*24*7*-1)];
-    NSString *path = [NSString stringWithFormat:@"/timeline/messages?after=%@", [dateFormatter stringFromDate:aWeekAgo]];
-    
-    [self reloadActivityFromAPI:path onSuccess:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
+    [self reloadActivityFromAPI:@"/timeline/messages" onSuccess:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
         for (NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
             [db accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
                 [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
@@ -106,7 +103,12 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
         }
         
         activities = _activities;
-        self.canLoadMore = YES;
+        
+        if ([[responseDictionary objectForKey:@"paging"] objectForKey:@"next_offset"])
+            self.canLoadMore = YES;
+        else
+            self.canLoadMore = NO;
+        
         if (completion) completion(response, responseDictionary, error);
     }];
 }
@@ -140,9 +142,6 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
     activities = [NSMutableArray new];
     [db accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
-            
-            // TODO possible prepend?
-            
             [activities insertObject:object atIndex:[activities count]];
         }];
     }];

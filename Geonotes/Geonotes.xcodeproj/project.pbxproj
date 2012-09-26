@@ -113,6 +113,7 @@
 		BE4ACC5015B8C829000D6EDD /* LQPrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */; };
 		BE4ACC5115B8C829000D6EDD /* LQPrivacyPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */; };
 		BE4AEBBC15B4E0EF008BAD2E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */; };
+		BE577464160D22AB00E3ECB8 /* LQActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE577463160D22AB00E3ECB8 /* LQActivityManager.m */; };
 		BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */; };
 		BE601D2B15D06D830032B6FA /* LQButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */; };
 		BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */; };
@@ -320,6 +321,8 @@
 		BE4ACC4E15B8C829000D6EDD /* LQPrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQPrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		BE4ACC4F15B8C829000D6EDD /* LQPrivacyPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQPrivacyPolicyViewController.xib; sourceTree = "<group>"; };
 		BE4AEBBB15B4E0EF008BAD2E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		BE577462160D22AB00E3ECB8 /* LQActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQActivityManager.h; sourceTree = "<group>"; };
+		BE577463160D22AB00E3ECB8 /* LQActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQActivityManager.m; sourceTree = "<group>"; };
 		BE601D2515D05F6F0032B6FA /* LQButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQButtonTableViewCell.h; sourceTree = "<group>"; };
 		BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQButtonTableViewCell.m; sourceTree = "<group>"; };
 		BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQButtonTableViewCell.xib; sourceTree = "<group>"; };
@@ -584,6 +587,8 @@
 				0F83DF1C15AB6A1700E07D16 /* LQActivityItemViewController.h */,
 				0F83DF1D15AB6A1700E07D16 /* LQActivityItemViewController.m */,
 				0F83DF1E15AB6A1700E07D16 /* LQActivityItemViewController.xib */,
+				BE577462160D22AB00E3ECB8 /* LQActivityManager.h */,
+				BE577463160D22AB00E3ECB8 /* LQActivityManager.m */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -925,6 +930,7 @@
 				BE9CB8E515CC8B1100ED1526 /* LQLogoCell.m in Sources */,
 				BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */,
 				BE2BD81D15D9BCB400CCB8F8 /* LQCreditsViewController.m in Sources */,
+				BE577464160D22AB00E3ECB8 /* LQActivityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
