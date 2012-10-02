@@ -142,7 +142,7 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
     activities = [NSMutableArray new];
     [db accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
-            [activities insertObject:object atIndex:[activities count]];
+            [activities addObject:object];
         }];
     }];
 }
