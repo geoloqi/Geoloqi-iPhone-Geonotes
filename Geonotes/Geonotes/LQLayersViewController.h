@@ -9,17 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LQSTableViewController.h"
 #import "LQLayerItemCellView.h"
-#import "LOLDatabase.h"
 
 @interface LQLayersViewController : LQSTableViewController {
-    NSMutableArray *items;
-	LOLDatabase *_itemDB;
     IBOutlet LQLayerItemCellView *tableCellView;
     UIImage *placeholderImage;
 }
-
-- (void)appendObjectFromDictionary:(NSDictionary *)item;
-- (void)reloadDataFromDB;
-- (void)fetchRemoteDataWithCallback:(void(^)(void))block;
 
 @end

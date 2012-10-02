@@ -117,6 +117,7 @@
 		BE601D2715D05F6F0032B6FA /* LQButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE601D2615D05F6F0032B6FA /* LQButtonTableViewCell.m */; };
 		BE601D2B15D06D830032B6FA /* LQButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */; };
 		BE9945441613BDB800D0EF9D /* LQGeonoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9945431613BDB800D0EF9D /* LQGeonoteManager.m */; };
+		BE994561161B6E1800D0EF9D /* LQLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE994560161B6E1800D0EF9D /* LQLayerManager.m */; };
 		BE9CB8D915CC668600ED1526 /* LQSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */; };
 		BE9CB8DC15CC83D700ED1526 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8DA15CC83D700ED1526 /* logo.png */; };
 		BE9CB8DD15CC83D700ED1526 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9CB8DB15CC83D700ED1526 /* logo@2x.png */; };
@@ -329,6 +330,8 @@
 		BE601D2A15D06D830032B6FA /* LQButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LQButtonTableViewCell.xib; sourceTree = "<group>"; };
 		BE9945421613BDB800D0EF9D /* LQGeonoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQGeonoteManager.h; sourceTree = "<group>"; };
 		BE9945431613BDB800D0EF9D /* LQGeonoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQGeonoteManager.m; sourceTree = "<group>"; };
+		BE99455F161B6E1800D0EF9D /* LQLayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQLayerManager.h; sourceTree = "<group>"; };
+		BE994560161B6E1800D0EF9D /* LQLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQLayerManager.m; sourceTree = "<group>"; };
 		BE9CB8D715CC668600ED1526 /* LQSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQSTableViewController.h; sourceTree = "<group>"; };
 		BE9CB8D815CC668600ED1526 /* LQSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQSTableViewController.m; sourceTree = "<group>"; };
 		BE9CB8DA15CC83D700ED1526 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Graphics/logo.png; sourceTree = "<group>"; };
@@ -618,6 +621,8 @@
 				0F8DB25915B742F100681B69 /* LQLayerItemCellView.h */,
 				0F8DB25A15B742F100681B69 /* LQLayerItemCellView.m */,
 				0F8DB25C15B7430700681B69 /* LQLayerItemCellView.xib */,
+				BE99455F161B6E1800D0EF9D /* LQLayerManager.h */,
+				BE994560161B6E1800D0EF9D /* LQLayerManager.m */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -937,6 +942,7 @@
 				BE2BD81D15D9BCB400CCB8F8 /* LQCreditsViewController.m in Sources */,
 				BE577464160D22AB00E3ECB8 /* LQActivityManager.m in Sources */,
 				BE9945441613BDB800D0EF9D /* LQGeonoteManager.m in Sources */,
+				BE994561161B6E1800D0EF9D /* LQLayerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,15 +8,12 @@
 
 #import "LQLayersViewController.h"
 #import "LQTableHeaderView.h"
-#import "NSString+URLEncoding.h"
-
+#import "LQLayerManager.h"
 #import "LQAppDelegate.h"
 
-@interface LQLayersViewController ()
-
-@end
-
-@implementation LQLayersViewController
+@implementation LQLayersViewController {
+    LQLayerManager *layerManager;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,15 +24,8 @@
     }
 
     placeholderImage = [UIImage imageNamed:@"defaultLayerIcon"];
+    layerManager = [LQLayerManager sharedManager];
     
-    _itemDB = [[LOLDatabase alloc] initWithPath:[LQAppDelegate cacheDatabasePathForCategory:@"LQLayer"]];
-	_itemDB.serializer = ^(id object){
-		return [LQSDKUtils dataWithJSONObject:object error:NULL];
-	};
-	_itemDB.deserializer = ^(NSData *data) {
-		return [LQSDKUtils objectFromJSONData:data error:NULL];
-	};
-
     return self;
 }
 
@@ -52,89 +42,17 @@
     self.headerView = headerView;
 
     // Load the list from the local database
-    [self reloadDataFromDB];
+    [layerManager reloadLayersFromDB];
     
     // If there are no layers, then force an API call
-    if(items.count == 0) {
+    if (layerManager.layerCount == 0) {
         [self refresh];
     }
 }
 
-#pragma mark - Data
-
-- (void)reloadDataFromDB
-{
-    items = [[NSMutableArray alloc] init];
-    [_itemDB accessCollection:LQLayerListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
-        [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
-            [self appendObjectFromDictionary:object];
-        }];
-    }];
-
-    [self sortItemArrayAlphabetically];
-}
-
-- (void)fetchRemoteDataWithCallback:(void(^)(void))block
-{
-    NSURLRequest *request = [[LQSession savedSession] requestWithMethod:@"GET" path:@"/layer/app_list" payload:nil];
-    [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
-        
-        items = [[NSMutableArray alloc] init];
-        
-        for(NSString *key in responseDictionary) {
-            for(NSDictionary *item in [responseDictionary objectForKey:key]) {
-                [_itemDB accessCollection:LQLayerListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
-                    // Store in the database
-                    [accessor setDictionary:item forKey:[item objectForKey:@"layer_id"]];
-                    // Also add to the local array
-                    [self appendObjectFromDictionary:item];
-                }];
-            }
-        }
-        
-        [self sortItemArrayAlphabetically];
-        
-        if(block) {
-            block();
-        }
-    }];
-}
-
-- (void)appendObjectFromDictionary:(NSDictionary *)item
-{
-    [items insertObject:item atIndex:items.count];
-}
-
-- (void)sortItemArrayAlphabetically {
-    // Sort the items in the array by title
-    [items sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSString *title1 = [obj1 objectForKey:@"name"];
-        NSString *title2 = [obj2 objectForKey:@"name"];
-        return [title1 localizedCaseInsensitiveCompare:title2];
-    }];
-}
-
 - (void)subscribeWasTapped:(UISwitch *)sender
 {
-    NSString *path;
-    if(sender.on) {
-        path = @"subscribe";
-    } else {
-        path = @"unsubscribe";
-    }
-    
-    [LQAppDelegate registerForPushNotificationsIfNotYetRegistered];
-    
-    NSDictionary *item = [items objectAtIndex:sender.tag];
-    NSMutableURLRequest *request = [[LQSession savedSession] requestWithMethod:@"POST" path:[NSString stringWithFormat:@"/layer/%@/%@", path, [item objectForKey:@"layer_id"]] payload:nil];
-    
-    [[LQSession savedSession] runAPIRequest:request completion:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error){
-        
-        // Update the local cache
-        [self fetchRemoteDataWithCallback:^{
-            [self.tableView reloadData];
-        }];
-    }];
+    [layerManager manageSubscriptionForLayerAtIndex:sender.tag subscribe:sender.on];
 }
 
 #pragma mark - Pull to Refresh
@@ -171,13 +89,8 @@
     if (![super refresh])
         return NO;
     
-    // Do your async call here
-    [self fetchRemoteDataWithCallback:^{
-        // Tell the table to reload
+    [layerManager reloadLayersFromAPI:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
         [self.tableView reloadData];
-        
-        // Call this to indicate that we have finished "refreshing".
-        // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
         [self refreshCompleted];
     }];
     
@@ -192,7 +105,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return items.count;
+    return layerManager.layerCount;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -205,7 +118,7 @@
 		cell = tableCellView;
 	}
     
-    id item = [items objectAtIndex:indexPath.row];
+    id item = [[layerManager layers] objectAtIndex:indexPath.row];
     if(item) {
         cell.layerID = [item objectForKey:@"layer_id"];
         cell.titleText.text = [item objectForKey:@"name"];
