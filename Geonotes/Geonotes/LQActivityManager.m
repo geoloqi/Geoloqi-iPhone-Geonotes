@@ -10,6 +10,7 @@
 #import "LOLDatabase.h"
 #import "LQAppDelegate.h"
 #import "LQSDKUtils.h"
+#import "NSString+URLEncoding.h"
 
 @interface LQActivityManager ()
 - (void)reloadActivityFromAPI:(NSString *)path onSuccess:(void (^)(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error))success;
@@ -116,7 +117,7 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
 - (void)loadMoreActivityFromAPI:(void (^)(NSHTTPURLResponse *, NSDictionary *, NSError *))completion
 {
     if (self.canLoadMore) {
-        NSString *lastItemDate = [[activities objectAtIndex:(activities.count - 1)] objectForKey:@"published"];
+        NSString *lastItemDate = [[[activities objectAtIndex:(activities.count - 1)] objectForKey:@"published"] urlEncodeUsingEncoding:NSUTF8StringEncoding];
         NSString *path = [NSString stringWithFormat:@"/timeline/messages?before=%@", lastItemDate];
         
         [self reloadActivityFromAPI:path onSuccess:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
@@ -144,6 +145,13 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
             [activities addObject:object];
         }];
+    }];
+    
+    // TODO rip out LOLDatabase, this is ridiculous
+    [activities sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        NSString *pub1 = [obj1 objectForKey:@"published"];
+        NSString *pub2 = [obj2 objectForKey:@"published"];
+        return [pub2 localizedCaseInsensitiveCompare:pub1];
     }];
 }
 

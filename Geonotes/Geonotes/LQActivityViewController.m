@@ -134,6 +134,9 @@
         // Call this to indicate that we have finished "refreshing".
         // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
         [self refreshCompleted];
+        
+        // apparently need to recall loadMoreCompleted to reset the loadMore state
+        [self loadMoreCompleted];
 
     }];
 
@@ -177,6 +180,8 @@
         
         // Just show a textual info that there are no more items to load
         fv.infoLabel.hidden = NO;
+    } else {
+        fv.infoLabel.hidden = YES;
     }
 }
 
