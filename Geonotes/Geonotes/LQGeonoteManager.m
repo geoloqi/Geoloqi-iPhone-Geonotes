@@ -104,10 +104,17 @@ static NSString *const kLQGeonoteDeletePath = @"/trigger/delete";
 - (void)reloadGeonotesFromDB
 {
     geonotes = [NSMutableArray new];
-    [db accessCollection:LQGeonoteListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
+    [db accessCollection:kLQGeonoteCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
-            [geonotes insertObject:object atIndex:[geonotes count]];
+            [geonotes addObject:object];
         }];
+    }];
+    
+    // TODO rip out LOLDatabase, this is ridiculous
+    [geonotes sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        int dcts1 = (int)[obj1 objectForKey:@"date_created_ts"];
+        int dcts2 = (int)[obj2 objectForKey:@"date_created_ts"];
+        return dcts1 > dcts2;
     }];
 }
 

@@ -7,10 +7,14 @@
 //
 
 #import "LQAppDelegate.h"
-#import "LOLDatabase.h"
+//#import "LOLDatabase.h"
 #import "sqlite3.h"
 #import "Geoloqi.h"
 #import "LQTabBarController.h"
+
+#import "LQActivityManager.h"
+#import "LQGeonoteManager.h"
+#import "LQLayerManager.h"
 
 @implementation LQAppDelegate
 
@@ -122,17 +126,13 @@
 
     if([defaults boolForKey:@"com.geoloqi.geonotes.clearLocalDatabase"]) {
 
-        // Erase the local cache databases
-        sqlite3 *db;
-        
         // Erase and reload the activity feed
         [activityViewController refresh];
 
-        // Erase the layer list
-        if(sqlite3_open([[LQAppDelegate cacheDatabasePathForCategory:@"LQLayer"] UTF8String], &db) == SQLITE_OK) {
-            NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@'", LQLayerListCollectionName];
-            sqlite3_exec(db, [sql UTF8String], NULL, NULL, NULL);
-        }
+        // tell all managers to reloadFromAPI, this clears the local database as well
+        [[LQActivityManager sharedManager] reloadActivityFromAPI:nil];
+        [[LQGeonoteManager sharedManager] reloadGeonotesFromAPI:nil];
+        [[LQLayerManager sharedManager] reloadLayersFromAPI:nil];
 
         [defaults removeObjectForKey:@"com.geoloqi.geonotes.clearLocalDatabase"];
         didSomething = YES;

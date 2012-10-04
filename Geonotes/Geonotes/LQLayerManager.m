@@ -102,7 +102,7 @@ static NSString *const kLQLayerIDKey = @"layer_id";
                         
                         for (NSString *key in responseDictionary) {
                             for (NSDictionary *item in [responseDictionary objectForKey:key]) {
-                                [db accessCollection:LQLayerListCollectionName
+                                [db accessCollection:kLQLayerCollectionName
                                            withBlock:^(id<LOLDatabaseAccessor> accessor) {
                                                [accessor setDictionary:item forKey:[item objectForKey:kLQLayerIDKey]];
                                                [_layers addObject:item];

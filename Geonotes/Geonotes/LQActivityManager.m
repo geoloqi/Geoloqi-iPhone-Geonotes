@@ -97,7 +97,7 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
     
     [self reloadActivityFromAPI:@"/timeline/messages" onSuccess:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
         for (NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
-            [db accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
+            [db accessCollection:kLQActivityCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
                 [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
                 [_activities addObject:item];
             }];
@@ -122,7 +122,7 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
         
         [self reloadActivityFromAPI:path onSuccess:^(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error) {
             for (NSDictionary *item in [responseDictionary objectForKey:@"items"]) {
-                [db accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
+                [db accessCollection:kLQActivityCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
                     [accessor setDictionary:item forKey:[item objectForKey:@"published"]];
                     [activities addObject:item];
                 }];
@@ -141,7 +141,7 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
 - (void)reloadActivityFromDB
 {
     activities = [NSMutableArray new];
-    [db accessCollection:LQActivityListCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
+    [db accessCollection:kLQActivityCollectionName withBlock:^(id<LOLDatabaseAccessor> accessor) {
         [accessor enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *object, BOOL *stop) {
             [activities addObject:object];
         }];
