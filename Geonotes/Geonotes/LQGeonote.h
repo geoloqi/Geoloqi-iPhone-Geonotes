@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LQGeonoteDelegate.h"
+
+@protocol LQGeonoteDelegate;
 
 @interface LQGeonote : NSObject {
     int maxTextLength;
@@ -23,5 +24,16 @@
 - (BOOL)isSaveable:(int)maxTextLength;
 - (BOOL)isSaveable;
 - (void)save:(void (^)(NSHTTPURLResponse *response, NSDictionary *responseDictionary, NSError *error))complete;
+
+@end
+
+@protocol LQGeonoteDelegate <NSObject>
+
+@required
+- (void)geonote:(LQGeonote *)geonote locationDidChange:(CLLocation *)newLocation;
+
+@optional
+- (void)geonote:(LQGeonote *)geonote radiusDidChange:(CGFloat)newRadius;
+- (void)geonote:(LQGeonote *)geonote textDidChange:(NSString *)newText;
 
 @end

@@ -7,23 +7,42 @@
 //
 
 #import "LQNewGeonoteMapViewController.h"
-#import "MTLocation/MTLocateMeBarButtonItem.h"
 
-#define MINIMUM_GEONOTE_RADIUS 150.0
+// which esri tiles to load into the map
+#define BASEMAP_URL @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"
 
-#define PIN_Y_DELTA            30
-#define PIN_SHADOW_X_DELTA     10
-#define PIN_SHADOW_Y_DELTA     20
-#define PIN_ANIMATION_DURATION 0.2
+@implementation LQNewGeonoteMapViewController {
+    BOOL pinUp;
+}
 
-@interface LQNewGeonoteMapViewController ()
+#pragma mark - consts
 
-@end
+// floor of geonote radius as determined by visiable map area
+const float LQMinimumGeonoteRadius = 150.0;
 
-@implementation LQNewGeonoteMapViewController
+// how far the pin travels vertically
+const float LQPinYDelta = 30;
 
-@synthesize mapView, toolbar, locateMeButton,
-            geonotePin, geonotePinShadow, geonoteTarget;
+// how far the pin's shadow travels diagonally
+const float LQPinShadowXDelta = 10;
+const float LQPinShadowYDelta = 20;
+
+// how long the animation of the pin & its shadow takes
+const float LQPinAnimationDuration = 0.2;
+
+// how many degrees of buffer around the center location to show on the map intially
+const float LQZoomSpanDegreesDelta = 0.025;
+
+// key to watch on the AGSMapView object for pinUp animations
+static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
+
+#pragma mark - initializers / notification handlers
+
+@synthesize toolbar;
+@synthesize locateMeBarButtonItem = _locateMeBarButtonItem;
+@synthesize geonotePin;
+@synthesize geonotePinShadow;
+@synthesize geonoteTarget;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,10 +58,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.locateMeButton = [[MTLocateMeBarButtonItem alloc] initWithMapView:mapView];
-    [self.toolbar setItems:[NSArray arrayWithObjects:self.locateMeButton, nil] animated:NO];
+    
+    LQLocateMeButtonState buttonState = self.agsMapView.gps.enabled ? LQLocateMeButtonStateTracking : LQLocateMeButtonStateIdle;
+    LQLocateMeButton *locateMeButton = [[LQLocateMeButton alloc] initWithButtonState:buttonState];
+    locateMeButton.delegate = self;
+    self.locateMeBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:locateMeButton];
+    
+    [self.toolbar setItems:[NSArray arrayWithObjects:self.locateMeBarButtonItem, nil] animated:NO];
+
+    self.agsMapView.wrapAround = YES;
+    AGSTiledMapServiceLayer *tiledLayer = [AGSTiledMapServiceLayer tiledMapServiceLayerWithURL:[NSURL URLWithString:BASEMAP_URL]];
+    [self.agsMapView addMapLayer:tiledLayer withName:@"Tiled Layer"];
+    
     [self zoomMapToLocation:[[[CLLocationManager alloc] init] location]];
+    
+    [self addObserver:self forKeyPath:LQPinUpObserverKeyPath options:NSKeyValueObservingOptionNew context:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropGeonotePin) name:@"MapDidEndPanning" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropGeonotePin) name:@"MapDidEndZooming" object:nil];
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:LQPinUpObserverKeyPath];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:LQPinUpObserverKeyPath]) {
+        [self liftGeonotePin];
+    }
 }
 
 - (void)viewDidUnload
@@ -57,42 +100,39 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-}
-
-#pragma mark -
+#pragma mark - helpers
 
 - (void)zoomMapToLocation:(CLLocation *)_location
 {
     if (_location) {
-        MKCoordinateSpan span;
-        span.latitudeDelta  = 0.05;
-        span.longitudeDelta = 0.05;
+        double xmin = _location.coordinate.longitude - LQZoomSpanDegreesDelta;
+        double ymin = _location.coordinate.latitude - LQZoomSpanDegreesDelta;
+        double xmax = _location.coordinate.longitude + LQZoomSpanDegreesDelta;
+        double ymax = _location.coordinate.latitude + LQZoomSpanDegreesDelta;
+
+        AGSEnvelope *envelope = [AGSEnvelope envelopeWithXmin:xmin
+                                                         ymin:ymin
+                                                         xmax:xmax
+                                                         ymax:ymax
+                                             spatialReference:[AGSSpatialReference wgs84SpatialReference]];
         
-        MKCoordinateRegion region;
-        
-        [mapView setCenterCoordinate:_location.coordinate animated:YES];
-        
-        region.center = _location.coordinate;
-        region.span   = span;
-        
-        [mapView setRegion:region animated:YES];
+        [self.agsMapView zoomToEnvelope:envelope animated:YES];
     }
 }
 
 - (void)setGeonotePositionFromMapCenter
 {
-	MKCoordinateSpan currentSpan = mapView.region.span;
-	// 111.0 km/degree of latitude * 1000 m/km * current delta * 20% of the half-screen width
-	CGFloat desiredRadius = 111.0 * 1000 * currentSpan.latitudeDelta * 0.2;
-    self.geonote.location = [[CLLocation alloc] initWithLatitude:mapView.centerCoordinate.latitude
-                                                       longitude:mapView.centerCoordinate.longitude];
-	self.geonote.radius = desiredRadius < MINIMUM_GEONOTE_RADIUS ? MINIMUM_GEONOTE_RADIUS : desiredRadius;
+    AGSEnvelope *visibleEnvelope = self.agsMapView.visibleArea.envelope;
+    float latitudeDelta = fabs(visibleEnvelope.ymax - visibleEnvelope.ymin);
+    // 111.0 km/degree of latitude * 1000 m/km * current delta * 20% of the half-screen width
+    CGFloat desiredRadius = 111.0 * 1000 * latitudeDelta * 0.2;
+    self.geonote.radius = desiredRadius < LQMinimumGeonoteRadius ? LQMinimumGeonoteRadius : desiredRadius;
+    
+    AGSPoint *center = [self.agsMapView toMapPoint:self.agsMapView.center];
+    self.geonote.location = [[CLLocation alloc] initWithLatitude:center.y longitude:center.x];
 }
 
-#pragma mark -
+#pragma mark - ui element creators
 
 - (UIBarButtonItem *)pickButton
 {
@@ -104,7 +144,7 @@
     return pick;
 }
 
-#pragma mark -
+#pragma mark - ui actions
 
 - (IBAction)pickButtonWasTapped:(UIBarButtonItem *)pickButton
 {
@@ -112,17 +152,24 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - MKMapViewDelegate
+#pragma mark - LQLocateMeButtonDelegate
 
-- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+- (void)locateMeButton:(LQLocateMeButton *)locateMeButton didChangeFromState:(LQLocateMeButtonState)fromState toState:(LQLocateMeButtonState)toState
 {
-    [self liftGeonotePin];
+    AGSGPS *gps = self.agsMapView.gps;
+    switch (toState) {
+        case LQLocateMeButtonStateIdle:
+            [gps stop];
+            gps.autoPanMode = NO;
+            break;
+        case LQLocateMeButtonStateTracking:
+            gps.autoPanMode = YES;
+            [gps start];
+            break;
+    }
 }
 
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
-    [self dropGeonotePin];
-}
+#pragma mark - animations
 
 - (void)liftGeonotePin
 {
@@ -131,13 +178,13 @@
         [UIView beginAnimations:@"" context:NULL];
         self.geonotePin.center = (CGPoint) {
             self.geonotePin.center.x,
-            (self.geonotePin.center.y - PIN_Y_DELTA)
+            (self.geonotePin.center.y - LQPinYDelta)
         };
         self.geonotePinShadow.center = (CGPoint) {
-            (self.geonotePinShadow.center.x + PIN_SHADOW_X_DELTA),
-            (self.geonotePinShadow.center.y - PIN_SHADOW_Y_DELTA)
+            (self.geonotePinShadow.center.x + LQPinShadowXDelta),
+            (self.geonotePinShadow.center.y - LQPinShadowYDelta)
         };
-        [UIView setAnimationDuration:PIN_ANIMATION_DURATION];
+        [UIView setAnimationDuration:LQPinAnimationDuration];
         [UIView setAnimationDelay:UIViewAnimationCurveEaseOut];
         [UIView commitAnimations];
         pinUp = YES;
@@ -151,13 +198,13 @@
         [UIView beginAnimations:@"" context:NULL];
         self.geonotePin.center = (CGPoint) {
             self.geonotePin.center.x,
-            (self.geonotePin.center.y + PIN_Y_DELTA)
+            (self.geonotePin.center.y + LQPinYDelta)
         };
         self.geonotePinShadow.center = (CGPoint) {
-            (self.geonotePinShadow.center.x - PIN_SHADOW_X_DELTA),
-            (self.geonotePinShadow.center.y + PIN_SHADOW_Y_DELTA)
+            (self.geonotePinShadow.center.x - LQPinShadowXDelta),
+            (self.geonotePinShadow.center.y + LQPinShadowYDelta)
         };
-        [UIView setAnimationDuration:PIN_ANIMATION_DURATION];
+        [UIView setAnimationDuration:LQPinAnimationDuration];
         [UIView setAnimationDelay:UIViewAnimationCurveEaseIn];
         [UIView commitAnimations];
         

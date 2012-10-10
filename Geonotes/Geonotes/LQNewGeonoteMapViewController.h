@@ -9,18 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "LQGeonote.h"
+#import <ArcGIS/ArcGIS.h>
+#import "LQLocateMeButton.h"
 
 @class LQNewGeonoteMapViewController;
 
-@interface LQNewGeonoteMapViewController : UIViewController {
-    BOOL pinUp;
-}
+@interface LQNewGeonoteMapViewController : UIViewController <LQLocateMeButtonDelegate>
 
 @property (nonatomic, strong) LQGeonote *geonote;
-@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet AGSMapView *agsMapView;
 
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *locateMeButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *locateMeBarButtonItem;
 
 @property (nonatomic, strong) IBOutlet UIImageView *geonotePin;
 @property (nonatomic, strong) IBOutlet UIImageView *geonotePinShadow;
