@@ -79,6 +79,10 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropGeonotePin) name:@"MapDidEndPanning" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropGeonotePin) name:@"MapDidEndZooming" object:nil];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self centerMapMarker];
 }
 
@@ -142,6 +146,7 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
 
 - (void)centerMapMarker
 {
+//    NSLog(@"mapview height: %f", self.agsMapView.frame.size.height);
     CGRect mapXFrame = CGRectMake(((self.agsMapView.frame.size.width / 2) - (self.mapX.frame.size.width / 2)),
                                   ((self.agsMapView.frame.size.height / 2) - (self.mapX.frame.size.height / 2)),
                                   self.mapX.frame.size.width, self.mapX.frame.size.height);
@@ -162,9 +167,9 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
 
 - (void)setFrame:(CGRect)frame forView:(UIView *)view
 {
-    NSLog(@"old frame = %f x %f", view.frame.origin.x, view.frame.origin.y);
+//    NSLog(@"old frame = %f x %f", view.frame.origin.x, view.frame.origin.y);
     view.frame = frame;
-    NSLog(@"new frame = %f x %f", view.frame.origin.x, view.frame.origin.y);
+//    NSLog(@"new frame = %f x %f", view.frame.origin.x, view.frame.origin.y);
 }
 
 #pragma mark - ui element creators
