@@ -9,7 +9,7 @@
 #import "LQNewGeonoteMapViewController.h"
 
 // which esri tiles to load into the map
-#define BASEMAP_URL @"http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"
+#define BASEMAP_URL @"http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
 
 @implementation LQNewGeonoteMapViewController {
     BOOL pinUp;
@@ -31,7 +31,7 @@ const float LQPinShadowYDelta = 20;
 const float LQPinAnimationDuration = 0.2;
 
 // how many degrees of buffer around the center location to show on the map intially
-const float LQZoomSpanDegreesDelta = 0.025;
+const float LQZoomSpanDegreesDelta = 0.01;
 
 // key to watch on the AGSMapView object for pinUp animations
 static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
@@ -43,6 +43,9 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
 @synthesize geonotePin;
 @synthesize geonotePinShadow;
 @synthesize geonoteTarget;
+@synthesize mapMarker;
+@synthesize mapMarkerShadow;
+@synthesize mapX;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,6 +78,8 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
     [self addObserver:self forKeyPath:LQPinUpObserverKeyPath options:NSKeyValueObservingOptionNew context:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropGeonotePin) name:@"MapDidEndPanning" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropGeonotePin) name:@"MapDidEndZooming" object:nil];
+    
+    [self centerMapMarker];
 }
 
 - (void)dealloc {
@@ -90,6 +95,9 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
 
 - (void)viewDidUnload
 {
+    [self setMapMarker:nil];
+    [self setMapMarkerShadow:nil];
+    [self setMapX:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -102,13 +110,13 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
 
 #pragma mark - helpers
 
-- (void)zoomMapToLocation:(CLLocation *)_location
+- (void)zoomMapToLocation:(CLLocation *)location
 {
-    if (_location) {
-        double xmin = _location.coordinate.longitude - LQZoomSpanDegreesDelta;
-        double ymin = _location.coordinate.latitude - LQZoomSpanDegreesDelta;
-        double xmax = _location.coordinate.longitude + LQZoomSpanDegreesDelta;
-        double ymax = _location.coordinate.latitude + LQZoomSpanDegreesDelta;
+    if (location) {
+        double xmin = location.coordinate.longitude - LQZoomSpanDegreesDelta;
+        double ymin = location.coordinate.latitude - LQZoomSpanDegreesDelta;
+        double xmax = location.coordinate.longitude + LQZoomSpanDegreesDelta;
+        double ymax = location.coordinate.latitude + LQZoomSpanDegreesDelta;
 
         AGSEnvelope *envelope = [AGSEnvelope envelopeWithXmin:xmin
                                                          ymin:ymin
@@ -130,6 +138,33 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
     
     AGSPoint *center = [self.agsMapView toMapPoint:self.agsMapView.center];
     self.geonote.location = [[CLLocation alloc] initWithLatitude:center.y longitude:center.x];
+}
+
+- (void)centerMapMarker
+{
+    CGRect mapXFrame = CGRectMake(((self.agsMapView.frame.size.width / 2) - (self.mapX.frame.size.width / 2)),
+                                  ((self.agsMapView.frame.size.height / 2) - (self.mapX.frame.size.height / 2)),
+                                  self.mapX.frame.size.width, self.mapX.frame.size.height);
+    
+    CGPoint mapMarkerOrigin = CGPointMake(((self.agsMapView.frame.size.width / 2) - (self.mapMarker.frame.size.width / 2)),
+                                          ((self.agsMapView.frame.size.height / 2) - self.mapMarker.frame.size.height));
+
+    CGRect mapMarkerFrame = CGRectMake(mapMarkerOrigin.x, mapMarkerOrigin.y,
+                                       self.mapMarker.frame.size.width, self.mapMarker.frame.size.height);
+
+    CGRect mapMarkerShadowFrame = CGRectMake(mapMarkerOrigin.x + 1, mapMarkerOrigin.y + 3,
+                                             self.mapMarkerShadow.frame.size.width, self.mapMarkerShadow.frame.size.height);
+    
+    [self setFrame:mapXFrame forView:self.mapX];
+    [self setFrame:mapMarkerFrame forView:self.mapMarker];
+    [self setFrame:mapMarkerShadowFrame forView:self.mapMarkerShadow];
+}
+
+- (void)setFrame:(CGRect)frame forView:(UIView *)view
+{
+    NSLog(@"old frame = %f x %f", view.frame.origin.x, view.frame.origin.y);
+    view.frame = frame;
+    NSLog(@"new frame = %f x %f", view.frame.origin.x, view.frame.origin.y);
 }
 
 #pragma mark - ui element creators

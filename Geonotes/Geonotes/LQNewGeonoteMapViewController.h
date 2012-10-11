@@ -26,6 +26,9 @@
 @property (nonatomic, strong) IBOutlet UIImageView *geonotePinShadow;
 @property (nonatomic, strong) IBOutlet UIImageView *geonoteTarget;
 
+@property (strong, nonatomic) IBOutlet UIImageView *mapMarker;
+@property (strong, nonatomic) IBOutlet UIImageView *mapMarkerShadow;
+@property (strong, nonatomic) IBOutlet UIImageView *mapX;
 - (IBAction)pickButtonWasTapped:(UIBarButtonItem *)pickButton;
 
 @end

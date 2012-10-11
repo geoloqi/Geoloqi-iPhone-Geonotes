@@ -1055,6 +1055,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8AFF28DB-732A-4927-AFE5-02BB16AFFD18";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8AFF28DB-732A-4927-AFE5-02BB16AFFD18";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1075,6 +1076,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
