@@ -200,10 +200,11 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
     switch (toState) {
         case LQLocateMeButtonStateIdle:
             [gps stop];
-            gps.autoPanMode = NO;
+            gps.autoPanMode = AGSGPSAutoPanModeOff;
             break;
         case LQLocateMeButtonStateTracking:
-            gps.autoPanMode = YES;
+            gps.wanderExtentFactor = 0.0;
+            gps.autoPanMode = AGSGPSAutoPanModeDefault;
             [gps start];
             break;
     }
