@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol LQActivityManagerDelegate;
+
 @interface LQActivityManager : NSObject
 
 // based off the paging response, true if more messages are available, false otherwise
 //
-@property BOOL canLoadMore;
+@property (atomic) BOOL canLoadMore;
+
+// delegate to inform of canLoadMore changes
+//
+@property (nonatomic) id<LQActivityManagerDelegate> delegate;
 
 // returns the singleton manager instance
 //
@@ -37,5 +43,12 @@
 // reloads the activity list from DB
 //
 - (void)reloadActivityFromDB;
+
+@end
+
+@protocol LQActivityManagerDelegate
+
+@required
+- (void)activityManager:(LQActivityManager *)activityManager didSetCanLoadMore:(BOOL)canLoadMore;
 
 @end

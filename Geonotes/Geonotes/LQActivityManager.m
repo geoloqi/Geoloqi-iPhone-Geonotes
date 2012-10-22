@@ -19,9 +19,10 @@
 @implementation LQActivityManager {
     NSMutableArray *activities;
     LOLDatabase *db;
+    BOOL _canLoadMore;
 }
 
-@synthesize canLoadMore;
+@synthesize delegate;
 
 static LQActivityManager *activityManager;
 static NSString *const kLQActivityCategoryName = @"LQActivity";
@@ -55,6 +56,17 @@ static NSString *const kLQActivityCollectionName = @"LQActivities";
         self.canLoadMore = YES;
     }
     return self;
+}
+
+- (BOOL)canLoadMore
+{
+    return _canLoadMore;
+}
+
+- (void)setCanLoadMore:(BOOL)canLoadMore
+{
+    _canLoadMore = canLoadMore;
+    [self.delegate activityManager:self didSetCanLoadMore:self.canLoadMore];
 }
 
 - (NSArray *)activity

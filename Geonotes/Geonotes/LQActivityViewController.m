@@ -10,7 +10,6 @@
 #import "LQActivityItemViewController.h"
 #import "LQTableHeaderView.h"
 #import "LQTableFooterView.h"
-#import "LQActivityManager.h"
 #import "LQAppDelegate.h"
 
 #import "NSString+URLEncoding.h"
@@ -28,6 +27,7 @@
     }
     
     activityManager = [LQActivityManager sharedManager];
+    activityManager.delegate = self;
     
     return self;
 }
@@ -120,7 +120,7 @@
 // refresh the list. Do your async calls here.
 // Retrieve newer entries for the top of the list
 //
-- (BOOL) refresh
+- (BOOL)refresh
 {
     if (![super refresh])
         return NO;
@@ -134,10 +134,12 @@
         // Call this to indicate that we have finished "refreshing".
         // This will then result in the headerView being unpinned (-unpinHeaderView will be called).
         [self refreshCompleted];
-        
-        // apparently need to recall loadMoreCompleted to reset the loadMore state
-        [self loadMoreCompleted];
 
+        // set the "No more items to load" view hidden if there are no activities,
+        // so that the overlay looks alright.
+//        LQTableFooterView *fv = (LQTableFooterView *)self.footerView;
+//        NSLog(@"refresh setting infoLabel.hidden to %d", activityManager.activityCount == 0);
+//        fv.infoLabel.hidden = activityManager.activityCount == 0;
     }];
 
     return YES;
@@ -172,7 +174,7 @@
     LQTableFooterView *fv = (LQTableFooterView *)self.footerView;
     [fv.activityIndicator stopAnimating];
     
-    if (!activityManager.canLoadMore) {
+    if (!self.canLoadMore) {
 
         // Do something if there are no more items to load
         
@@ -224,12 +226,12 @@
     return 78.5;
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return activityManager.activityCount;
 }
 
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
@@ -261,6 +263,18 @@
         }
     }
     return cell;
+}
+
+#pragma mark - LQActivityManagerDelegate
+
+- (void)activityManager:(LQActivityManager *)_activityManager didSetCanLoadMore:(BOOL)canLoadMore
+{
+    self.canLoadMore = canLoadMore;
+    LQTableFooterView *fv = (LQTableFooterView *)self.footerView;
+    if (activityManager.activityCount == 0)
+        fv.infoLabel.hidden = YES;
+    else
+        fv.infoLabel.hidden = canLoadMore;
 }
 
 @end

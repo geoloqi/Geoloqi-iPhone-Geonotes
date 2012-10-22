@@ -29,7 +29,6 @@
         // Custom initialization
         self.navigationItem.title = @"New Geonote";
         self.navigationItem.leftBarButtonItem = [self createCancelButton];
-//        self.navigationItem.rightBarButtonItem = [self createSaveButton];
     }
     return self;
 }
@@ -64,18 +63,6 @@
     self.cancelButton = cancel;
     return cancel;
 }
-
-//- (UIBarButtonItem *)createSaveButton
-//{
-//    UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithTitle:@"Save"
-//                                                             style:UIBarButtonItemStyleDone
-//                                                            target:self
-//                                                            action:@selector(saveButtonWasTapped:)];
-//    save.tintColor = [UIColor blueColor];
-//    save.enabled = NO;
-//    self.saveButton = save;
-//    return save;
-//}
 
 #pragma mark - IBActions & utils
 
@@ -127,8 +114,8 @@
         } else if ([[responseDictionary objectForKey:@"result"] isEqualToString:@"ok"]) {
             [self cancelGeonote];
             // if the geonote is close enough, we need the server to tell us about it to set up
-            // a region to monitor there; do this with a location update.
-            [[LQTracker sharedTracker] enqueueCurrentLocationUpdate];
+            // a region to monitor there; do this with a single location update.
+            [[LQTracker sharedTracker] enqueueSingleLocationUpdate];
             if (self.saveComplete) self.saveComplete();
         }
     }];

@@ -31,7 +31,7 @@ typedef enum {
 /**
  * Call this method first in your application delegate to set up Geoloqi api.
  */
-+ (void)setAPIKey:(NSString *)APIKey secret:(NSString *)APISecret;
++ (void)setAPIKey:(NSString *)APIKey;
 
 /** 
  * Pass off the applicationDidFinishLaunching call to the SDK
@@ -99,6 +99,21 @@ typedef enum {
 								  completion:(void (^)(LQSession *session, NSError *error))block;
 
 /**
+ * Create a new anonymous user account with the specified `key` parameter and
+ * automatically subscribe the new user to the specified layers and join the
+ * specified groups.
+ * This is functionally equivalent to the above, but adds the extra parameters
+ * needed to accomplish the subscription, join, and de-duping if provided.
+ *
+ * See https://developers.geoloqi.com/api/user/create_anon
+ */
++ (id)createAnonymousUserAccountWithUserInfo:(NSDictionary *)extraData
+                                         key:(NSString *)key
+                                    layerIds:(NSArray *)layerIds
+                                 groupTokens:(NSArray *)groupTokens
+								  completion:(void (^)(LQSession *session, NSError *error))block;
+
+/**
  * Create a new Geoloqi account with the requested username and password.
  * The Geoloqi API will return an error if there is already a user with the
  * requested username.
@@ -106,6 +121,19 @@ typedef enum {
 + (id)createAccountWithUsername:(NSString *)username
 					   password:(NSString *)password
 						  extra:(NSDictionary *)extraData
+					 completion:(void (^)(LQSession *session, NSError *error))block;
+
+/**
+ * Create a new Geoloqi account with the requested username and password,
+ * subscribe the new user to the specified layers, and join the specified groups.
+ * The Geoloqi API will return an error if there is already a user with the
+ * requested username.
+ */
++ (id)createAccountWithUsername:(NSString *)username
+					   password:(NSString *)password
+						  extra:(NSDictionary *)extraData
+                       layerIds:(NSArray *)layerIds
+                    groupTokens:(NSArray *)groupTokens
 					 completion:(void (^)(LQSession *session, NSError *error))block;
 
 /**

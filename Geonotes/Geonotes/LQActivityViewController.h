@@ -11,8 +11,9 @@
 #import "LQActivityItemCellView.h"
 #import <LQSDKUtils.h>
 #import "LOLDatabase.h"
+#import "LQActivityManager.h"
 
-@interface LQActivityViewController : LQSTableViewController {
+@interface LQActivityViewController : LQSTableViewController <LQActivityManagerDelegate> {
     IBOutlet LQActivityItemCellView *tableCellView;
 }
 

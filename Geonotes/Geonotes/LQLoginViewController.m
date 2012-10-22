@@ -94,6 +94,7 @@
                                    } else {
                                        // Pass the new session to the tracker class so location updates get sent from the new account
                                        [[LQTracker sharedTracker] setSession:session];
+                                       [[LQTracker sharedTracker] resetTrackingProfile];
                                        [self updateDisplayName:^() {
                                            [self.settingsTableView reloadData];
                                            [self toggleFormStatus:YES];

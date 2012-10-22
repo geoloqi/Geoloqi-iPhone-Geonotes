@@ -59,7 +59,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-	[LQSession setAPIKey:LQ_APIKey secret:LQ_APISecret];
+	[LQSession setAPIKey:LQ_APIKey];
     [[LQSession savedSession] log:@"didFinishLaunchingWithOptions: %@", launchOptions];
     [[LQSession savedSession] log:@"monitored regions: %@", [[CLLocationManager new] monitoredRegions]];
 
@@ -96,7 +96,11 @@
     [self.window makeKeyAndVisible];
 
     if(![LQSession savedSession]) {
-		[LQSession createAnonymousUserAccountWithUserInfo:nil completion:^(LQSession *session, NSError *error) {
+		[LQSession createAnonymousUserAccountWithUserInfo:nil
+                                                      key:nil
+                                                 layerIds:nil
+                                              groupTokens:nil
+                                               completion:^(LQSession *session, NSError *error) {
 			//If we successfully created an anonymous session, tell the tracker to use it
 			if (session) {
 				NSLog(@"Created an anonymous user with access token: %@", session.accessToken);

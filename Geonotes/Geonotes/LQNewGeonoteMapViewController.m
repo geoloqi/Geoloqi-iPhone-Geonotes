@@ -141,6 +141,11 @@ static NSString *const LQPinUpObserverKeyPath = @"self.agsMapView.visibleArea";
     self.geonote.radius = desiredRadius < LQMinimumGeonoteRadius ? LQMinimumGeonoteRadius : desiredRadius;
     
     AGSPoint *center = [self.agsMapView toMapPoint:self.agsMapView.center];
+    if (center.spatialReference != [AGSSpatialReference wgs84SpatialReference]) {
+        NSLog(@"projecting to wgs84...");
+        AGSGeometryEngine *ge = [AGSGeometryEngine defaultGeometryEngine];
+        center = (AGSPoint *)[ge projectGeometry:center toSpatialReference:[AGSSpatialReference wgs84SpatialReference]];
+    }
     self.geonote.location = [[CLLocation alloc] initWithLatitude:center.y longitude:center.x];
 }
 

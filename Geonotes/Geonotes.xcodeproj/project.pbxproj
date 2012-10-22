@@ -1051,6 +1051,7 @@
 					"-framework",
 					ArcGIS,
 					"-lGeoloqi-Debug",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8AFF28DB-732A-4927-AFE5-02BB16AFFD18";
@@ -1069,6 +1070,7 @@
 				GCC_PREFIX_HEADER = "Geonotes/Geonotes-Prefix.pch";
 				INFOPLIST_FILE = "Geonotes/Geonotes-Info.plist";
 				OTHER_LDFLAGS = (
+					"-all_load",
 					"-ObjC",
 					"-framework",
 					ArcGIS,
