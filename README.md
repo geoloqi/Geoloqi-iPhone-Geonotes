@@ -11,7 +11,6 @@ First, open LQConfig.h from the XCode project or in your favorite text editor.
 Insert your API credentials here:
 
     static NSString *const LQ_APIKey = @"XXX";
-    static NSString *const LQ_APISecret = @"YYY";
 
 These credentials can be found on your application page [Geoloqi Applications][geoloqi-applications]
 
